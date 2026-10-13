@@ -1,6 +1,6 @@
 # 东盟约（dongShip）
 
-《卫戍协议：盟约》非官方同人**工坊包** —— 为核心盟约【东】而做。
+[《卫戍协议：盟约》](https://github.com/sganggs/Stronghold-Protocol)（网页版）非官方同人**工坊包** —— 为核心盟约【东】而做。
 
 ## 适配版本
 
@@ -87,6 +87,9 @@
 
 ## 相关链接
 
+
+- **游戏本体（卫戍协议：盟约 · 网页版）**：https://github.com/sganggs/Stronghold-Protocol
+- 游戏 Releases（整合包下载）：https://github.com/sganggs/Stronghold-Protocol/releases
 - Forge（引擎）：https://github.com/XiaMo233M/Stronghold-Protocol-Forge
 - Forge 版本下载：https://github.com/XiaMo233M/Stronghold-Protocol-Forge/releases
 - 本包实测所用 Forge 版本：https://github.com/XiaMo233M/Stronghold-Protocol-Forge/releases/tag/v0.18.3-0.2.5
