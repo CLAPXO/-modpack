@@ -1,0 +1,612 @@
+{
+  "workshop": "F:\\wsxy\\22\\_verifyroot",
+  "only": null,
+  "packs": [
+    {
+      "pack": "dongShip",
+      "name": "东盟约",
+      "files": [
+        "bonds",
+        "chess",
+        "garrisons",
+        "items"
+      ],
+      "issues": [
+        {
+          "field": "skill.bb[\"move_speed\"]",
+          "code": "BB_UNKNOWN_KEY",
+          "message": "\"move_speed\" is not read by the generic kit, so it does nothing without a hand-written kits/<chessId>.js",
+          "severity": "warning",
+          "kind": "operator",
+          "pack": "dongShip"
+        },
+        {
+          "field": "skill.bb[\"dot\"]",
+          "code": "BB_UNKNOWN_KEY",
+          "message": "\"dot\" is not read by the generic kit, so it does nothing without a hand-written kits/<chessId>.js",
+          "severity": "warning",
+          "kind": "operator",
+          "pack": "dongShip"
+        },
+        {
+          "field": "skill.bb[\"move_speed\"]",
+          "code": "BB_UNKNOWN_KEY",
+          "message": "\"move_speed\" is not read by the generic kit, so it does nothing without a hand-written kits/<chessId>.js",
+          "severity": "warning",
+          "kind": "operator",
+          "pack": "dongShip"
+        },
+        {
+          "field": "skill.bb[\"dot\"]",
+          "code": "BB_UNKNOWN_KEY",
+          "message": "\"dot\" is not read by the generic kit, so it does nothing without a hand-written kits/<chessId>.js",
+          "severity": "warning",
+          "kind": "operator",
+          "pack": "dongShip"
+        },
+        {
+          "field": "skill.bb[\"haruka_s_2[first].atk\"]",
+          "code": "BB_UNKNOWN_KEY",
+          "message": "\"haruka_s_2[first].atk\" is not read by the generic kit, so it does nothing without a hand-written kits/<chessId>.js",
+          "severity": "warning",
+          "kind": "operator",
+          "pack": "dongShip"
+        },
+        {
+          "field": "skill.bb[\"attack@max_target_heal_add\"]",
+          "code": "BB_UNKNOWN_KEY",
+          "message": "\"attack@max_target_heal_add\" is not read by the generic kit, so it does nothing without a hand-written kits/<chessId>.js",
+          "severity": "warning",
+          "kind": "operator",
+          "pack": "dongShip"
+        },
+        {
+          "field": "skill.bb[\"max_target_shield_add\"]",
+          "code": "BB_UNKNOWN_KEY",
+          "message": "\"max_target_shield_add\" is not read by the generic kit, so it does nothing without a hand-written kits/<chessId>.js",
+          "severity": "warning",
+          "kind": "operator",
+          "pack": "dongShip"
+        },
+        {
+          "field": "skill.bb[\"ability_range_radius\"]",
+          "code": "BB_UNKNOWN_KEY",
+          "message": "\"ability_range_radius\" is not read by the generic kit, so it does nothing without a hand-written kits/<chessId>.js",
+          "severity": "warning",
+          "kind": "operator",
+          "pack": "dongShip"
+        },
+        {
+          "field": "skill.bb[\"max_target_extra\"]",
+          "code": "BB_UNKNOWN_KEY",
+          "message": "\"max_target_extra\" is not read by the generic kit, so it does nothing without a hand-written kits/<chessId>.js",
+          "severity": "warning",
+          "kind": "operator",
+          "pack": "dongShip"
+        },
+        {
+          "field": "skill.bb[\"atk_scale_extra\"]",
+          "code": "BB_UNKNOWN_KEY",
+          "message": "\"atk_scale_extra\" is not read by the generic kit, so it does nothing without a hand-written kits/<chessId>.js",
+          "severity": "warning",
+          "kind": "operator",
+          "pack": "dongShip"
+        },
+        {
+          "field": "modules[0].traitOverride.bb[\"attack@max_target_heal\"]",
+          "code": "BB_UNKNOWN_KEY",
+          "message": "\"attack@max_target_heal\" is not read by the generic kit",
+          "severity": "warning",
+          "kind": "operator",
+          "pack": "dongShip"
+        },
+        {
+          "field": "skill.bb[\"haruka_s_2[first].atk\"]",
+          "code": "BB_UNKNOWN_KEY",
+          "message": "\"haruka_s_2[first].atk\" is not read by the generic kit, so it does nothing without a hand-written kits/<chessId>.js",
+          "severity": "warning",
+          "kind": "operator",
+          "pack": "dongShip"
+        },
+        {
+          "field": "skill.bb[\"attack@max_target_heal_add\"]",
+          "code": "BB_UNKNOWN_KEY",
+          "message": "\"attack@max_target_heal_add\" is not read by the generic kit, so it does nothing without a hand-written kits/<chessId>.js",
+          "severity": "warning",
+          "kind": "operator",
+          "pack": "dongShip"
+        },
+        {
+          "field": "skill.bb[\"max_target_shield_add\"]",
+          "code": "BB_UNKNOWN_KEY",
+          "message": "\"max_target_shield_add\" is not read by the generic kit, so it does nothing without a hand-written kits/<chessId>.js",
+          "severity": "warning",
+          "kind": "operator",
+          "pack": "dongShip"
+        },
+        {
+          "field": "skill.bb[\"ability_range_radius\"]",
+          "code": "BB_UNKNOWN_KEY",
+          "message": "\"ability_range_radius\" is not read by the generic kit, so it does nothing without a hand-written kits/<chessId>.js",
+          "severity": "warning",
+          "kind": "operator",
+          "pack": "dongShip"
+        },
+        {
+          "field": "skill.bb[\"max_target_extra\"]",
+          "code": "BB_UNKNOWN_KEY",
+          "message": "\"max_target_extra\" is not read by the generic kit, so it does nothing without a hand-written kits/<chessId>.js",
+          "severity": "warning",
+          "kind": "operator",
+          "pack": "dongShip"
+        },
+        {
+          "field": "skill.bb[\"atk_scale_extra\"]",
+          "code": "BB_UNKNOWN_KEY",
+          "message": "\"atk_scale_extra\" is not read by the generic kit, so it does nothing without a hand-written kits/<chessId>.js",
+          "severity": "warning",
+          "kind": "operator",
+          "pack": "dongShip"
+        },
+        {
+          "field": "skill.bb[\"cost\"]",
+          "code": "BB_UNKNOWN_KEY",
+          "message": "\"cost\" is not read by the generic kit, so it does nothing without a hand-written kits/<chessId>.js",
+          "severity": "warning",
+          "kind": "operator",
+          "pack": "dongShip"
+        },
+        {
+          "field": "skill.bb[\"interval\"]",
+          "code": "BB_UNKNOWN_KEY",
+          "message": "\"interval\" is not read by the generic kit, so it does nothing without a hand-written kits/<chessId>.js",
+          "severity": "warning",
+          "kind": "operator",
+          "pack": "dongShip"
+        },
+        {
+          "field": "skill.bb[\"value\"]",
+          "code": "BB_UNKNOWN_KEY",
+          "message": "\"value\" is not read by the generic kit, so it does nothing without a hand-written kits/<chessId>.js",
+          "severity": "warning",
+          "kind": "operator",
+          "pack": "dongShip"
+        },
+        {
+          "field": "skill.bb[\"reveal_interval\"]",
+          "code": "BB_UNKNOWN_KEY",
+          "message": "\"reveal_interval\" is not read by the generic kit, so it does nothing without a hand-written kits/<chessId>.js",
+          "severity": "warning",
+          "kind": "operator",
+          "pack": "dongShip"
+        },
+        {
+          "field": "skill.bb[\"reveal_duration\"]",
+          "code": "BB_UNKNOWN_KEY",
+          "message": "\"reveal_duration\" is not read by the generic kit, so it does nothing without a hand-written kits/<chessId>.js",
+          "severity": "warning",
+          "kind": "operator",
+          "pack": "dongShip"
+        },
+        {
+          "field": "skill.bb[\"cost\"]",
+          "code": "BB_UNKNOWN_KEY",
+          "message": "\"cost\" is not read by the generic kit, so it does nothing without a hand-written kits/<chessId>.js",
+          "severity": "warning",
+          "kind": "operator",
+          "pack": "dongShip"
+        },
+        {
+          "field": "skill.bb[\"interval\"]",
+          "code": "BB_UNKNOWN_KEY",
+          "message": "\"interval\" is not read by the generic kit, so it does nothing without a hand-written kits/<chessId>.js",
+          "severity": "warning",
+          "kind": "operator",
+          "pack": "dongShip"
+        },
+        {
+          "field": "skill.bb[\"value\"]",
+          "code": "BB_UNKNOWN_KEY",
+          "message": "\"value\" is not read by the generic kit, so it does nothing without a hand-written kits/<chessId>.js",
+          "severity": "warning",
+          "kind": "operator",
+          "pack": "dongShip"
+        },
+        {
+          "field": "skill.bb[\"reveal_interval\"]",
+          "code": "BB_UNKNOWN_KEY",
+          "message": "\"reveal_interval\" is not read by the generic kit, so it does nothing without a hand-written kits/<chessId>.js",
+          "severity": "warning",
+          "kind": "operator",
+          "pack": "dongShip"
+        },
+        {
+          "field": "skill.bb[\"reveal_duration\"]",
+          "code": "BB_UNKNOWN_KEY",
+          "message": "\"reveal_duration\" is not read by the generic kit, so it does nothing without a hand-written kits/<chessId>.js",
+          "severity": "warning",
+          "kind": "operator",
+          "pack": "dongShip"
+        },
+        {
+          "field": "skill.bb[\"respawn_time\"]",
+          "code": "BB_UNKNOWN_KEY",
+          "message": "\"respawn_time\" is not read by the generic kit, so it does nothing without a hand-written kits/<chessId>.js",
+          "severity": "warning",
+          "kind": "operator",
+          "pack": "dongShip"
+        },
+        {
+          "field": "modules[0].traitOverride.bb[\"value\"]",
+          "code": "BB_UNKNOWN_KEY",
+          "message": "\"value\" is not read by the generic kit",
+          "severity": "warning",
+          "kind": "operator",
+          "pack": "dongShip"
+        },
+        {
+          "field": "skill.bb[\"respawn_time\"]",
+          "code": "BB_UNKNOWN_KEY",
+          "message": "\"respawn_time\" is not read by the generic kit, so it does nothing without a hand-written kits/<chessId>.js",
+          "severity": "warning",
+          "kind": "operator",
+          "pack": "dongShip"
+        },
+        {
+          "field": "modules[0].traitOverride.bb[\"talent_override_rangeid_flag\"]",
+          "code": "BB_UNKNOWN_KEY",
+          "message": "\"talent_override_rangeid_flag\" is not read by the generic kit",
+          "severity": "warning",
+          "kind": "operator",
+          "pack": "dongShip"
+        },
+        {
+          "field": "modules[0].traitOverride.bb[\"value\"]",
+          "code": "BB_UNKNOWN_KEY",
+          "message": "\"value\" is not read by the generic kit",
+          "severity": "warning",
+          "kind": "operator",
+          "pack": "dongShip"
+        },
+        {
+          "field": "skill.triggerRule",
+          "code": "TRIGGER_CUSTOM",
+          "message": "\"NEVER\" is not one of the engine's trigger rules (DEFAULT, SKILL_RANGE, TAKE_DAMAGE, SP_FULL, SEARCH, CUSTOM_RANGE): 它不会自动释放，除非有手写 kit 自己 activate",
+          "severity": "warning",
+          "kind": "operator",
+          "pack": "dongShip"
+        },
+        {
+          "field": "skill.bb[\"talent_scale\"]",
+          "code": "BB_UNKNOWN_KEY",
+          "message": "\"talent_scale\" is not read by the generic kit, so it does nothing without a hand-written kits/<chessId>.js",
+          "severity": "warning",
+          "kind": "operator",
+          "pack": "dongShip"
+        },
+        {
+          "field": "skill.bb[\"hits\"]",
+          "code": "BB_UNKNOWN_KEY",
+          "message": "\"hits\" is not read by the generic kit, so it does nothing without a hand-written kits/<chessId>.js",
+          "severity": "warning",
+          "kind": "operator",
+          "pack": "dongShip"
+        },
+        {
+          "field": "skill.bb[\"taunt\"]",
+          "code": "BB_UNKNOWN_KEY",
+          "message": "\"taunt\" is not read by the generic kit, so it does nothing without a hand-written kits/<chessId>.js",
+          "severity": "warning",
+          "kind": "operator",
+          "pack": "dongShip"
+        },
+        {
+          "field": "skill.triggerRule",
+          "code": "TRIGGER_CUSTOM",
+          "message": "\"NEVER\" is not one of the engine's trigger rules (DEFAULT, SKILL_RANGE, TAKE_DAMAGE, SP_FULL, SEARCH, CUSTOM_RANGE): 它不会自动释放，除非有手写 kit 自己 activate",
+          "severity": "warning",
+          "kind": "operator",
+          "pack": "dongShip"
+        },
+        {
+          "field": "skill.bb[\"talent_scale\"]",
+          "code": "BB_UNKNOWN_KEY",
+          "message": "\"talent_scale\" is not read by the generic kit, so it does nothing without a hand-written kits/<chessId>.js",
+          "severity": "warning",
+          "kind": "operator",
+          "pack": "dongShip"
+        },
+        {
+          "field": "skill.bb[\"hits\"]",
+          "code": "BB_UNKNOWN_KEY",
+          "message": "\"hits\" is not read by the generic kit, so it does nothing without a hand-written kits/<chessId>.js",
+          "severity": "warning",
+          "kind": "operator",
+          "pack": "dongShip"
+        },
+        {
+          "field": "skill.bb[\"taunt\"]",
+          "code": "BB_UNKNOWN_KEY",
+          "message": "\"taunt\" is not read by the generic kit, so it does nothing without a hand-written kits/<chessId>.js",
+          "severity": "warning",
+          "kind": "operator",
+          "pack": "dongShip"
+        },
+        {
+          "field": "dmgType",
+          "code": "CLASS_OVERRIDE",
+          "message": "this operator overrides the derived attack class (projectile): 职业与分支推导的是 phys/ranged，记录里写的是 phys/ranged",
+          "severity": "warning",
+          "kind": "operator",
+          "pack": "dongShip"
+        },
+        {
+          "field": "skill.bb[\"cc_duration\"]",
+          "code": "BB_UNKNOWN_KEY",
+          "message": "\"cc_duration\" is not read by the generic kit, so it does nothing without a hand-written kits/<chessId>.js",
+          "severity": "warning",
+          "kind": "operator",
+          "pack": "dongShip"
+        },
+        {
+          "field": "dmgType",
+          "code": "CLASS_OVERRIDE",
+          "message": "this operator overrides the derived attack class (projectile): 职业与分支推导的是 phys/ranged，记录里写的是 phys/ranged",
+          "severity": "warning",
+          "kind": "operator",
+          "pack": "dongShip"
+        },
+        {
+          "field": "skill.bb[\"cc_duration\"]",
+          "code": "BB_UNKNOWN_KEY",
+          "message": "\"cc_duration\" is not read by the generic kit, so it does nothing without a hand-written kits/<chessId>.js",
+          "severity": "warning",
+          "kind": "operator",
+          "pack": "dongShip"
+        },
+        {
+          "field": "dmgType",
+          "code": "CLASS_OVERRIDE",
+          "message": "this operator overrides the derived attack class (dmgType): 职业与分支推导的是 arts/melee，记录里写的是 phys/melee",
+          "severity": "warning",
+          "kind": "operator",
+          "pack": "dongShip"
+        },
+        {
+          "field": "skill.bb[\"shield_atk_scale\"]",
+          "code": "BB_UNKNOWN_KEY",
+          "message": "\"shield_atk_scale\" is not read by the generic kit, so it does nothing without a hand-written kits/<chessId>.js",
+          "severity": "warning",
+          "kind": "operator",
+          "pack": "dongShip"
+        },
+        {
+          "field": "skill.bb[\"interval\"]",
+          "code": "BB_UNKNOWN_KEY",
+          "message": "\"interval\" is not read by the generic kit, so it does nothing without a hand-written kits/<chessId>.js",
+          "severity": "warning",
+          "kind": "operator",
+          "pack": "dongShip"
+        },
+        {
+          "field": "skill.bb[\"heal_ratio\"]",
+          "code": "BB_UNKNOWN_KEY",
+          "message": "\"heal_ratio\" is not read by the generic kit, so it does nothing without a hand-written kits/<chessId>.js",
+          "severity": "warning",
+          "kind": "operator",
+          "pack": "dongShip"
+        },
+        {
+          "field": "dmgType",
+          "code": "CLASS_OVERRIDE",
+          "message": "this operator overrides the derived attack class (dmgType): 职业与分支推导的是 arts/melee，记录里写的是 phys/melee",
+          "severity": "warning",
+          "kind": "operator",
+          "pack": "dongShip"
+        },
+        {
+          "field": "skill.bb[\"shield_atk_scale\"]",
+          "code": "BB_UNKNOWN_KEY",
+          "message": "\"shield_atk_scale\" is not read by the generic kit, so it does nothing without a hand-written kits/<chessId>.js",
+          "severity": "warning",
+          "kind": "operator",
+          "pack": "dongShip"
+        },
+        {
+          "field": "skill.bb[\"interval\"]",
+          "code": "BB_UNKNOWN_KEY",
+          "message": "\"interval\" is not read by the generic kit, so it does nothing without a hand-written kits/<chessId>.js",
+          "severity": "warning",
+          "kind": "operator",
+          "pack": "dongShip"
+        },
+        {
+          "field": "skill.bb[\"heal_ratio\"]",
+          "code": "BB_UNKNOWN_KEY",
+          "message": "\"heal_ratio\" is not read by the generic kit, so it does nothing without a hand-written kits/<chessId>.js",
+          "severity": "warning",
+          "kind": "operator",
+          "pack": "dongShip"
+        }
+      ],
+      "voices": {
+        "operators": 4,
+        "lines": 56
+      },
+      "voiceLangs": {
+        "langs": [
+          "cn"
+        ],
+        "lines": 56
+      },
+      "itemIcons": 2,
+      "art": 13
+    }
+  ],
+  "checks": [
+    {
+      "kind": "voice",
+      "pack": "dongShip",
+      "views": [
+        "checks"
+      ],
+      "field": "char_118_yuki",
+      "code": "VOICE_UNKNOWN_OPERATOR",
+      "severity": "warning",
+      "message": "char_118_yuki is neither an official operator nor one this pack adds — these lines can never play",
+      "hint": "add the operator to this pack's chess.json, or ignore this if another installed pack adds it"
+    },
+    {
+      "kind": "voice",
+      "pack": "dongShip",
+      "views": [
+        "checks"
+      ],
+      "field": "char_4203_kichi",
+      "code": "VOICE_UNKNOWN_OPERATOR",
+      "severity": "warning",
+      "message": "char_4203_kichi is neither an official operator nor one this pack adds — these lines can never play",
+      "hint": "add the operator to this pack's chess.json, or ignore this if another installed pack adds it"
+    },
+    {
+      "kind": "voice",
+      "pack": "dongShip",
+      "views": [
+        "checks"
+      ],
+      "field": "char_1029_yato2",
+      "code": "VOICE_UNKNOWN_OPERATOR",
+      "severity": "warning",
+      "message": "char_1029_yato2 is neither an official operator nor one this pack adds — these lines can never play",
+      "hint": "add the operator to this pack's chess.json, or ignore this if another installed pack adds it"
+    },
+    {
+      "kind": "voice",
+      "pack": "dongShip",
+      "views": [
+        "checks"
+      ],
+      "field": "char_1030_noirc2",
+      "code": "VOICE_UNKNOWN_OPERATOR",
+      "severity": "warning",
+      "message": "char_1030_noirc2 is neither an official operator nor one this pack adds — these lines can never play",
+      "hint": "add the operator to this pack's chess.json, or ignore this if another installed pack adds it"
+    },
+    {
+      "kind": "voice",
+      "pack": "dongShip",
+      "views": [
+        "checks"
+      ],
+      "field": "cn:char_118_yuki",
+      "code": "VOICE_UNKNOWN_OPERATOR",
+      "severity": "warning",
+      "message": "char_118_yuki is neither an official operator nor one this pack adds — these lines can never play",
+      "hint": "add the operator to this pack's chess.json, or ignore this if another installed pack adds it"
+    },
+    {
+      "kind": "voice",
+      "pack": "dongShip",
+      "views": [
+        "checks"
+      ],
+      "field": "cn:char_4203_kichi",
+      "code": "VOICE_UNKNOWN_OPERATOR",
+      "severity": "warning",
+      "message": "char_4203_kichi is neither an official operator nor one this pack adds — these lines can never play",
+      "hint": "add the operator to this pack's chess.json, or ignore this if another installed pack adds it"
+    },
+    {
+      "kind": "voice",
+      "pack": "dongShip",
+      "views": [
+        "checks"
+      ],
+      "field": "cn:char_1029_yato2",
+      "code": "VOICE_UNKNOWN_OPERATOR",
+      "severity": "warning",
+      "message": "char_1029_yato2 is neither an official operator nor one this pack adds — these lines can never play",
+      "hint": "add the operator to this pack's chess.json, or ignore this if another installed pack adds it"
+    },
+    {
+      "kind": "voice",
+      "pack": "dongShip",
+      "views": [
+        "checks"
+      ],
+      "field": "cn:char_1030_noirc2",
+      "code": "VOICE_UNKNOWN_OPERATOR",
+      "severity": "warning",
+      "message": "char_1030_noirc2 is neither an official operator nor one this pack adds — these lines can never play",
+      "hint": "add the operator to this pack's chess.json, or ignore this if another installed pack adds it"
+    }
+  ],
+  "errors": 0,
+  "warnings": 60,
+  "engine": [],
+  "routes": [],
+  "foreign": [],
+  "voiceLines": 112,
+  "itemIcons": 2,
+  "art": 13,
+  "kits": {
+    "loaded": [
+      "chess_char_1_21_a",
+      "chess_char_2_noirc2_a",
+      "chess_char_3_kichi_a",
+      "chess_char_6_hsgma2_a",
+      "chess_char_9_dong1_a",
+      "chess_char_9_dong2_a",
+      "chess_char_9_yato_a"
+    ],
+    "modules": [
+      {
+        "id": "chess_char_1_21_a",
+        "pack": "dongShip",
+        "hash": "dfeee545988e20f196bd73b1959f131675563d691c27eb5e5e58fb2f21b8d902",
+        "url": "/workshop-kits/dongShip/chess_char_1_21_a.js?v=1791817056000"
+      },
+      {
+        "id": "chess_char_2_noirc2_a",
+        "pack": "dongShip",
+        "hash": "dfeee545988e20f196bd73b1959f131675563d691c27eb5e5e58fb2f21b8d902",
+        "url": "/workshop-kits/dongShip/chess_char_2_noirc2_a.js?v=1791830244000"
+      },
+      {
+        "id": "chess_char_3_kichi_a",
+        "pack": "dongShip",
+        "hash": "dfeee545988e20f196bd73b1959f131675563d691c27eb5e5e58fb2f21b8d902",
+        "url": "/workshop-kits/dongShip/chess_char_3_kichi_a.js?v=1791817056000"
+      },
+      {
+        "id": "chess_char_6_hsgma2_a",
+        "pack": "dongShip",
+        "hash": "dfeee545988e20f196bd73b1959f131675563d691c27eb5e5e58fb2f21b8d902",
+        "url": "/workshop-kits/dongShip/chess_char_6_hsgma2_a.js?v=1791817888000"
+      },
+      {
+        "id": "chess_char_9_dong1_a",
+        "pack": "dongShip",
+        "hash": "dfeee545988e20f196bd73b1959f131675563d691c27eb5e5e58fb2f21b8d902",
+        "url": "/workshop-kits/dongShip/chess_char_9_dong1_a.js?v=1791817888000"
+      },
+      {
+        "id": "chess_char_9_dong2_a",
+        "pack": "dongShip",
+        "hash": "dfeee545988e20f196bd73b1959f131675563d691c27eb5e5e58fb2f21b8d902",
+        "url": "/workshop-kits/dongShip/chess_char_9_dong2_a.js?v=1791817888000"
+      },
+      {
+        "id": "chess_char_9_yato_a",
+        "pack": "dongShip",
+        "hash": "dfeee545988e20f196bd73b1959f131675563d691c27eb5e5e58fb2f21b8d902",
+        "url": "/workshop-kits/dongShip/chess_char_9_yato_a.js?v=1791817056000"
+      }
+    ],
+    "issues": [],
+    "errors": []
+  },
+  "items": [],
+  "errorCount": 0,
+  "warningCount": 60
+}

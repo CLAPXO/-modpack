@@ -1,0 +1,13 @@
+# 别让 git 改换行 / 别把二进制当文本（包内文件按字节进仓库）
+* text=auto eol=lf
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.mp3 binary
+*.skel binary
+*.atlas binary
+*.zip binary
+
+# Windows 批处理保持 CRLF，否则 cmd 可能读不对
+*.bat -text
+*.cmd -text

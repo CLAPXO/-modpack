@@ -1,0 +1,8 @@
+引擎：F:\wsxy\22\_nf\Stronghold-Protocol-Forge-0.18.3-0.2.5-win-x64\app
+  引擎版本 0.18.3 · 模组 API 版本 1（包的 api 区间就是对它比对）
+
+── packs/（兼容完成的包 · 闸门）
+   ✓ dongShip  1.2.0  层 B · 会改战斗结果  api=>=1 <2  东盟约
+     1 个包全部装上。
+
+✓ 闸门通过（packs/ 与 demo/ 里的包全部装上）

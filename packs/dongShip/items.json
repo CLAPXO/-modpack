@@ -1,0 +1,122 @@
+{
+  "chess_item_ws_artist_ticket_a": {
+    "name": "艺人见面抽选券",
+    "itemType": "EQUIP",
+    "tier": 4,
+    "shopSortId": 0,
+    "price": 3,
+    "hideInShop": false,
+    "shopExcludedBy": null,
+    "shopExcluded": false,
+    "duration": -1,
+    "giveBondId": "dongShip",
+    "givePowerId": null,
+    "canGiveBond": false,
+    "requiresBondId": null,
+    "effectId": "eff_ws_artist_ticket",
+    "effectName": "艺人见面抽选券",
+    "desc": "<休整期结束时>使携带者已激活的盟约层数+2（精锐 +3，每回合一次）\n与【变形同构体】一同装备时，携带者视为【东】盟约成员",
+    "descRaw": "<休整期结束时>使携带者已激活的盟约层数+2（精锐 +3，每回合一次）\n与【变形同构体】一同装备时，携带者视为【东】盟约成员",
+    "buffs": [
+      {
+        "key": "custom_dong_round_layers",
+        "countType": "NONE",
+        "bb": {
+          "layer": 2,
+          "golden_layer_bonus": 1
+        },
+        "bbStr": {}
+      }
+    ],
+    "params": {
+      "layer": 2,
+      "golden_layer_bonus": 1
+    },
+    "category": "BOND",
+    "kind": null,
+    "family": null,
+    "implFormula": "At 休整期结束 (onPrepEnd): for EVERY bond the holder counts for (ctx.pieceBonds = own + 变形同构体-granted) that is ACTIVE: +layer layers (+golden_layer_bonus on the elite). Implemented by server/meta/dong.mjs (key item:chess_item_ws_artist_ticket).",
+    "note": "每回合一次：休整期结束时结算；精锐 +1 由 bb.golden_layer_bonus 提供（编辑器一个 spec 两份记录，差额只能这样写）",
+    "rangeGrid": [
+      [
+        0,
+        0
+      ]
+    ],
+    "flavor": "由演艺事务所分发，用于兑换抽选资格的票券。票券抽选的是参加某位艺人\"毕业\"告别会的资格——正式活动早已取消，它仍在粉丝间私下流转，作为对她职业生涯转折点的纪念。",
+    "trapId": "act44side_token_ticket",
+    "iconId": "act44side_token_ticket",
+    "identifier": null,
+    "workshop": {
+      "schema": 1,
+      "id": "artist_ticket"
+    },
+    "id": "chess_item_ws_artist_ticket_a",
+    "baseId": "chess_item_ws_artist_ticket_a",
+    "goldenId": "chess_item_ws_artist_ticket_b",
+    "isGolden": false,
+    "upgradeNum": 2,
+    "mergeable": true,
+    "upgradeChessId": "chess_item_ws_artist_ticket_b"
+  },
+  "chess_item_ws_artist_ticket_b": {
+    "name": "艺人见面抽选券",
+    "itemType": "EQUIP",
+    "tier": 4,
+    "shopSortId": 0,
+    "price": 3,
+    "hideInShop": false,
+    "shopExcludedBy": null,
+    "shopExcluded": false,
+    "duration": -1,
+    "giveBondId": "dongShip",
+    "givePowerId": null,
+    "canGiveBond": false,
+    "requiresBondId": null,
+    "effectId": "eff_ws_artist_ticket",
+    "effectName": "艺人见面抽选券",
+    "desc": "<休整期结束时>使携带者已激活的盟约层数+2（精锐 +3，每回合一次）\n与【变形同构体】一同装备时，携带者视为【东】盟约成员",
+    "descRaw": "<休整期结束时>使携带者已激活的盟约层数+2（精锐 +3，每回合一次）\n与【变形同构体】一同装备时，携带者视为【东】盟约成员",
+    "buffs": [
+      {
+        "key": "custom_dong_round_layers",
+        "countType": "NONE",
+        "bb": {
+          "layer": 2,
+          "golden_layer_bonus": 1
+        },
+        "bbStr": {}
+      }
+    ],
+    "params": {
+      "layer": 2,
+      "golden_layer_bonus": 1
+    },
+    "category": "BOND",
+    "kind": null,
+    "family": null,
+    "implFormula": "At 休整期结束 (onPrepEnd): for EVERY bond the holder counts for (ctx.pieceBonds = own + 变形同构体-granted) that is ACTIVE: +layer layers (+golden_layer_bonus on the elite). Implemented by server/meta/dong.mjs (key item:chess_item_ws_artist_ticket).",
+    "note": "每回合一次：休整期结束时结算；精锐 +1 由 bb.golden_layer_bonus 提供（编辑器一个 spec 两份记录，差额只能这样写）",
+    "rangeGrid": [
+      [
+        0,
+        0
+      ]
+    ],
+    "flavor": "由演艺事务所分发，用于兑换抽选资格的票券。票券抽选的是参加某位艺人\"毕业\"告别会的资格——正式活动早已取消，它仍在粉丝间私下流转，作为对她职业生涯转折点的纪念。",
+    "trapId": "act44side_token_ticket_g",
+    "iconId": "act44side_token_ticket_g",
+    "identifier": null,
+    "workshop": {
+      "schema": 1,
+      "id": "artist_ticket"
+    },
+    "id": "chess_item_ws_artist_ticket_b",
+    "baseId": "chess_item_ws_artist_ticket_a",
+    "goldenId": "chess_item_ws_artist_ticket_b",
+    "isGolden": true,
+    "upgradeNum": 2,
+    "mergeable": false,
+    "upgradeChessId": null
+  }
+}
