@@ -44,11 +44,11 @@ GPL-3.0-or-later（本包代码）；© Hypergryph / Yostar（随包素材，非
 清单**不含本文件**（它记录这个值，含进去就自指）与 `.tune-backup/**`（编辑器调数值留下的本地备份，不进发布 zip）；191 个文件）：
 
 ```
-40695193b5ee1a56642cbd2e6f80029fb669055aae475c6ac4b68cedaa73e9b9
+be476be77bc6f1b034f1df25a7e70d18d24b3a87faa8cce5c346f69d0f753d44
 ```
 
 复算：`node F:\wsxy\22\hash-pack.mjs`（同时打印**引擎身份哈希** = `loadWorkshop().packs[0].hash` —— 那一份含本文件与
-`.tune-backup/`，是房间摘要闸门用的；发布 zip 的指纹与上面的值**逐字相同**，已核对）。
+`.tune-backup/`，是房间摘要闸门用的；1.2.1 起的发布 zip 另外排除了 `README-部署说明.md`、`bond-specs/`、`item-specs/`（只给编辑器与人看、引擎装载器不读），所以 zip 的指纹与此值不同；此值按上面 191 个文件计算）。
 
 ## 5. 改了什么（原做法 → 本包做法 → 为什么）
 
