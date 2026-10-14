@@ -33,6 +33,7 @@ const GHOST_FLIGHT = 1.4;        // 弹道飞行时间（安全值）
 
 /** 天赋附加法伤的标签（递归防护） */
 const TAG_ARTS = 'talent:yato2:arts';
+const TAG_BOND = 'bond:dongShip';
 
 const __MOD = {
   chess_char_9_yato_a: (bb, chess, def) => build(bb, chess, def),
@@ -124,6 +125,7 @@ function build(bb, chess, def) {
           const d = c.dmg, e = c.target;
           if (c.source !== unit || !d || !d.isAttack || !e || e.side !== 'enemy') return;
           if (tagged(d, TAG_ARTS)) return;      // 不对本天赋自己的伤害再触发
+            if (tagged(d, TAG_BOND)) return;     // 盟约的追加攻击不吃夜刀天赋（否则伤害超模）
           talentArts(battle, unit, e, 1);
         }, { owner: unit });
       } },

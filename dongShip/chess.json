@@ -131,8 +131,8 @@
     "canHitFly": true,
     "targetPriority": null,
     "trait": {
-      "desc": "攻击造成群体物理伤害",
-      "descRaw": "攻击造成<@ba.kw>群体物理伤害</>",
+      "desc": "攻击造成群体物理伤害，可攻击空中单位",
+      "descRaw": "攻击造成<@ba.kw>群体物理伤害</>，可攻击空中单位",
       "bb": {},
       "bbStr": {},
       "rangeGrid": null
@@ -645,8 +645,8 @@
     "canHitFly": true,
     "targetPriority": null,
     "trait": {
-      "desc": "攻击造成群体物理伤害，攻击时无视敌人100点的防御力",
-      "descRaw": "攻击造成<@ba.kw>群体物理伤害</>，攻击时<@ba.kw>无视</>敌人<@ba.vup>100</>点的防御力",
+      "desc": "攻击造成群体物理伤害，攻击时无视敌人100点的防御力，可攻击空中单位",
+      "descRaw": "攻击造成<@ba.kw>群体物理伤害</>，攻击时<@ba.kw>无视</>敌人<@ba.vup>100</>点的防御力，可攻击空中单位",
       "bb": {
         "def_penetrate_fixed": 100
       },
@@ -1117,7 +1117,7 @@
     "baseId": "chess_char_9_dong1_a",
     "goldenId": "chess_char_9_dong1_b",
     "isGolden": false,
-    "tier": 5,
+    "tier": 4,
     "identifier": 272,
     "isHidden": false,
     "isDiy": false,
@@ -1148,7 +1148,7 @@
       "garrison_haruka_dong_a",
       "garrison_haruka_attr_a"
     ],
-    "price": 4,
+    "price": 3,
     "sellPrice": 1,
     "upgradeNum": 3,
     "upgradeChessId": "chess_char_9_dong1_b",
@@ -1650,7 +1650,7 @@
     "baseId": "chess_char_9_dong1_a",
     "goldenId": "chess_char_9_dong1_b",
     "isGolden": true,
-    "tier": 5,
+    "tier": 4,
     "identifier": 273,
     "isHidden": false,
     "isDiy": false,
@@ -1681,7 +1681,7 @@
       "garrison_haruka_dong_b",
       "garrison_haruka_attr_b"
     ],
-    "price": 4,
+    "price": 3,
     "sellPrice": 1,
     "upgradeNum": 3,
     "upgradeChessId": "chess_char_9_dong1_b",
@@ -6500,7 +6500,7 @@
     "baseId": "chess_char_9_yato_a",
     "goldenId": "chess_char_9_yato_b",
     "isGolden": false,
-    "tier": 4,
+    "tier": 5,
     "identifier": 276,
     "isHidden": false,
     "isDiy": false,
@@ -6525,13 +6525,14 @@
     "nationId": "higashi",
     "bonds": [
       "dongShip",
-      "raidShip"
+      "raidShip",
+      "indomShip"
     ],
     "garrisonIds": [
       "garrison_yato_dong_a"
     ],
-    "price": 3,
-    "sellPrice": 2,
+    "price": 4,
+    "sellPrice": 1,
     "upgradeNum": 3,
     "upgradeChessId": "chess_char_9_yato_b",
     "status": {
@@ -6789,7 +6790,7 @@
     "baseId": "chess_char_9_yato_a",
     "goldenId": "chess_char_9_yato_b",
     "isGolden": true,
-    "tier": 4,
+    "tier": 5,
     "identifier": 277,
     "isHidden": false,
     "isDiy": false,
@@ -6814,13 +6815,14 @@
     "nationId": "higashi",
     "bonds": [
       "dongShip",
-      "raidShip"
+      "raidShip",
+      "indomShip"
     ],
     "garrisonIds": [
       "garrison_yato_dong_b"
     ],
-    "price": 3,
-    "sellPrice": 2,
+    "price": 4,
+    "sellPrice": 1,
     "upgradeNum": 0,
     "upgradeChessId": null,
     "status": {

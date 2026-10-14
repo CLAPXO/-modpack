@@ -39,10 +39,10 @@
     ],
     "bb": {
       "base_damage_scale": 0.033,
-      "damage_scale_per_stack": 0.0032233,
+      "damage_scale_per_stack": 0.0029754,
       "power_char_cnt": 3,
       "power_bond_char_cnt": 6,
-      "neural_damage": 60
+      "neural_damage": 30
     },
     "bbStr": {
       "key": "act2autochess_bond_eff_dong"
@@ -52,10 +52,10 @@
         "key": "env_gbuff_new",
         "bb": {
           "base_damage_scale": 0.033,
-          "damage_scale_per_stack": 0.0032233,
+          "damage_scale_per_stack": 0.0029754,
           "power_char_cnt": 3,
           "power_bond_char_cnt": 6,
-          "neural_damage": 60
+          "neural_damage": 30
         },
         "bbStr": {
           "key": "act2autochess_bond_eff_dong"
@@ -1003,5 +1003,116 @@
         "targets = 3 nearest enemies in range"
       ]
     }
+  },
+  "indomShip": {
+    "bondId": "indomShip",
+    "name": "不屈",
+    "identifier": 19,
+    "isCore": false,
+    "bondType": "REGULAR",
+    "bondOrder": 2,
+    "powerIdList": [],
+    "iconId": "icon_indomShip",
+    "activeCount": 2,
+    "thresholds": [
+      2,
+      3
+    ],
+    "maxCount": null,
+    "thresholdTemplate": "count_threshold_upward",
+    "countMode": "BOARD",
+    "countsHand": false,
+    "countsGoldenOnly": false,
+    "activeType": "BATTLE",
+    "isActiveInDeck": false,
+    "noStack": false,
+    "weight": 10,
+    "maxInactiveBondCount": -1,
+    "layerMilestones": [],
+    "desc": "地面干员被击倒时，有概率立即重新部署（受层数影响）\n<在场3名不同【不屈】干员>地面干员被击倒时使场上所有干员技力+5",
+    "descRaw": "<@ba.vup>地面干员</>被击倒时，有概率立即<@ba.vup>重新部署</><@autochess.gray>（受层数影响）</>\n<在场<@autochess.dgreen>3</>名不同【不屈】干员><@ba.vup>地面干员</>被击倒时使场上所有干员<@ba.vup>技力+5</>",
+    "effectId": "bondeffect_indom",
+    "effectName": "不屈",
+    "effectDesc": "地面干员被击倒时，有{0:0%}（受层数影响）概率立刻重新部署\n<在场3名不同【不屈】干员>地面干员被击倒时使场上所有干员技力+5",
+    "effectDescRaw": "<@ba.vup>地面干员</>被击倒时，有<@ba.vup>{0:0%}</><@ba.acrem>（受层数影响）</>概率立刻重新部署\n<在场<@ba.vup>3</>名不同【不屈】干员><@ba.vup>地面干员</>被击倒时使场上所有干员技力<@ba.vup>+5</>",
+    "effectDescParams": [
+      {
+        "index": 0,
+        "format": "0%",
+        "base": "base_prob",
+        "perStack": "prob_per_stack"
+      }
+    ],
+    "bb": {
+      "base_prob": 0.18,
+      "prob_per_stack": 0.004,
+      "power_bond_stack_cnt": 0,
+      "sp": 5,
+      "power_bond_char_cnt": 3
+    },
+    "bbStr": {
+      "key": "act1autochess_bond_eff_indom"
+    },
+    "buffs": [
+      {
+        "key": "env_gbuff_new",
+        "bb": {
+          "base_prob": 0.18,
+          "prob_per_stack": 0.004,
+          "power_bond_stack_cnt": 0,
+          "sp": 5,
+          "power_bond_char_cnt": 3
+        },
+        "bbStr": {
+          "key": "act1autochess_bond_eff_indom"
+        }
+      }
+    ],
+    "baseParams": [
+      "base_prob"
+    ],
+    "perStackParams": [
+      "prob_per_stack"
+    ],
+    "members": [
+      "chess_char_1_05_a",
+      "chess_char_1_20_a",
+      "chess_char_2_03_a",
+      "chess_char_2_12_a",
+      "chess_char_3_16_a",
+      "chess_char_4_07_a",
+      "chess_char_5_06_a",
+      "chess_char_5_13_a",
+      "chess_char_6_06_a",
+      "chess_char_9_yato_a"
+    ],
+    "visibleMembers": [
+      "chess_char_1_20_a",
+      "chess_char_2_12_a",
+      "chess_char_3_16_a",
+      "chess_char_4_07_a",
+      "chess_char_5_06_a",
+      "chess_char_5_13_a",
+      "chess_char_6_06_a",
+      "chess_char_9_yato_a"
+    ],
+    "spec": {
+      "tiers": [
+        {
+          "need": "2 distinct",
+          "effect": "When a ground operator (地面干员 = melee position, on any tile) is knocked out / retreats / swaps 替身<->本体: with p = min(1, 0.18 + 0.004*L) it is redeployed at once (next deployment has 0 redeploy time and 0 cost). Also consumes a \"复活\" charge if it had one."
+        },
+        {
+          "need": "3 distinct",
+          "effect": "When a ground (melee-position) operator is knocked out: every operator on the field +5 SP."
+        }
+      ],
+      "formulas": {
+        "p": "min(1, 0.18 + 0.004*L)",
+        "reaches100%AtL": "205"
+      },
+      "layerGain": "雷蛇 休整期结束 +1; 砾 被击倒 +2; 归溟幽灵鲨 +5; 风笛 kills +2; 机变 \"风笛的盟誓\" +8."
+    },
+    "id": "indomShip"
   }
 }

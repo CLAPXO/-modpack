@@ -44,7 +44,7 @@ GPL-3.0-or-later（本包代码）；© Hypergryph / Yostar（随包素材，非
 清单**不含本文件**（它记录这个值，含进去就自指）与 `.tune-backup/**`（编辑器调数值留下的本地备份，不进发布 zip）；188 个文件）：
 
 ```
-9f663a4c1d3319d56a1b28d2f40e888d39c097946e0f8b0e2912890fc3f39098
+a7b8bb7fe59b1a7688339ce15a324ad7b53de237419b72325c7465a0510bda56
 ```
 
 复算：`node F:\wsxy\22\hash-pack.mjs`（同时打印**引擎身份哈希** = `loadWorkshop().packs[0].hash` —— 那一份含本文件与
@@ -108,6 +108,7 @@ GPL-3.0-or-later（本包代码）；© Hypergryph / Yostar（随包素材，非
 | 32 | 玩家反馈「吉星战斗中不显示能量条」 | 定位为本包 `kits/chess_char_3_kichi_a.js` 与自带数据不一致：数据里 S1「欢迎您来！」`skillType: MANUAL` / `spCost: 50` / `initSp: 30`、S2「吉星高照！」`spCost: 44` / `initSp: 22`（`INCREASE_WITH_TIME`），而 kit 的 spec 把两个技能写成 `spCost: 0, spType: 'none', trigger: 'NEVER'`。引擎 `server/sim/skills.js:93` 取 `s.spCost ?? d.spCost` ⇒ spec 覆盖数据 ⇒ `server/sim/units.js:229` 的 `spMax` 变 0 ⇒ 客户端 `public/js/render/units.js:1546` 的 `showSp = (spMax > 0 || !!ammo)` 为假 ⇒ 不画能量条；同时 kit 的 hook 都判 `unit.skill.active`、`trigger NEVER` 又永不激活 ⇒ **S1/S2 的效果此前一次都没生效**。修复 = 删掉 kit 里这两行覆盖，让两个技能照数据充能（spMax 50 / 44），`MANUAL` 技能由引擎自动施放（S1 持续 36 s、S2 持续 30 s）。另修正 `pack.json` 描述里过期的公式（0.275% → 0.4835%）。验证：校验器 0 error / VALID、16/16 回归脚本通过、新增 `audit-kit-skill-sp.mjs` 全包 36 条技能 SP 一致、服务器重启后 `/workshop-kits/dongShip/chess_char_3_kichi_a.js` 已无 `spCost: 0` | 2026-10-14 |
 | 33 | 玩家反馈「夜刀的入场动画是不是没绑」 | 是。包里 `art.chars[*].spine.*` 只声明了 `skel`/`atlas`，**没有声明 `anims` 动画角色**，而客户端 `public/js/render/spine.js:697` 的 `deploy()` 只认 `roles.deploy`（`die()` 有 `|| 'Die'` 兜底，deploy 没有）⇒ 4 名自带模型的新干员**全部没有入场动画**；顺带查了攻击/技能/死亡角色的可用性。修复：用引擎自带工具在同一份 .skel 上解析并解析角色（`tools/assets/skel.mjs` 的 parseSkel + `tools/assets/anim-roles.mjs` 的 resolveRoles，运行时 `@pixi-spine/runtime-3.8`），把 `anims` / `animations`(时长表) / `events` / `hits` / `bounds` / `pma` / `textures` 写进 `art.chars`，与官方 `data/assets.json` 条目同形；夜刀的模型没有 `Start`、只有 `Start_1/2/3`，入场显式绑 `Start_1`。同时发现 `char_118_yuki`(白雪) 的 **back 模型 .skel 已损坏**（3.8/4.0/4.1 三个解析器都在读中段时越界，29168 字节），已移除该侧的声明并删掉损坏文件（客户端 `assets.js:161` 在没有合法 `spine.back` 时回退到 front），待重新获取模型后再补。新增体检脚本 `F:\wsxy\22\audit-spine-anims.mjs`（逐模型断言 deploy/idle/attack 与贴图）| 2026-10-14 |
 | 34 | 作者要求重定【东】效果一的斜率（口径不变：界面显示值与实际结算值逐字相同） | `server/battle/dong.mjs` 的 `base_damage_scale` 保持 3.3%，`damage_scale_per_stack` 由 0.004835 改为 **0.0032233** ⇒ 300 层正好 100%（50 层 19.4% / 100 层 35.5% / 150 层 51.6% / 200 层 67.8%）；`bonds.json`、`bond-specs/dongShip.json`、公告与 `pack.json` 描述的同一组数字同步 | 2026-10-14 |
+| 35 | 作者要求的一轮强度与归属调整 | ① 麒麟R夜刀 4 本 → **5 本**（price 4 / sellPrice 1），并加入**不屈**盟约（`indomShip`，同时在 `overrides` 与 `bonds.json` 里补全该盟约的成员表，夜刀才会在界面里出现）；② 遥 5 本 → **4 本**（price 3）；③ 效果一斜率 0.0032233 → **0.0029754**（325 层正好 100%）；④ 神经损伤 60 → **30**/次；⑤ 嵯峨特质的攻击速度 1.5 → **1**（精锐 3 → **2**），攻击力/生命值不动；⑥ 白雪特性补一句「可攻击空中单位」（`canHitFly` 本就为 true，只是文本没写）| 2026-10-15 |
 
 **验证**（都是可复跑的）：
 

@@ -39,8 +39,8 @@
   },
   "garrison_kichi_a": {
     "garrisonId": "garrison_kichi_a",
-    "desc": "<休整期结束时>本回合每花费1资金，使已激活的【东】层数+1",
-    "descRaw": "<休整期结束时>本回合每花费<@ba.vup>1</>资金，使已激活的【东】层数<@ba.vup>+1</>",
+    "desc": "<休整期结束时>本回合每花费2资金，使已激活的【东】层数+1",
+    "descRaw": "<休整期结束时>本回合每花费2资金，使已激活的【东】层数+1",
     "eventType": "SERVER_PREP_FIN",
     "eventTypeDesc": "持续叠加",
     "eventTypeIcon": "icon_bond",
@@ -50,7 +50,7 @@
     "charLevel": 0,
     "bb": {
       "layer": 1,
-      "count": 1
+      "count": 2
     },
     "bbStr": {
       "bond": "dongShip",
@@ -62,8 +62,8 @@
   },
   "garrison_kichi_b": {
     "garrisonId": "garrison_kichi_b",
-    "desc": "<休整期结束时>本回合每花费1资金，使已激活的【东】层数+2",
-    "descRaw": "<休整期结束时>本回合每花费<@ba.vup>1</>资金，使已激活的【东】层数<@ba.vup>+2</>",
+    "desc": "<休整期结束时>本回合每花费1资金，使已激活的【东】层数+1",
+    "descRaw": "<休整期结束时>本回合每花费1资金，使已激活的【东】层数+1",
     "eventType": "SERVER_PREP_FIN",
     "eventTypeDesc": "持续叠加",
     "eventTypeIcon": "icon_bond",
@@ -72,7 +72,7 @@
     "battleRuneKey": null,
     "charLevel": 0,
     "bb": {
-      "layer": 2,
+      "layer": 1,
       "count": 1
     },
     "bbStr": {
@@ -252,8 +252,8 @@
   },
   "garrison_saga_dong_a": {
     "garrisonId": "garrison_saga_dong_a",
-    "desc": "【东】每叠加3层，本干员攻击力、生命值+1.5%，攻击速度+1.5",
-    "descRaw": "【东】每叠加3层，本干员攻击力、生命值<@ba.vup>+1.5%</>，攻击速度<@ba.vup>+1.5</>",
+    "desc": "【东】每叠加3层，本干员攻击力、生命值+1.5%，攻击速度+1",
+    "descRaw": "【东】每叠加3层，本干员攻击力、生命值+1.5%，攻击速度+1",
     "eventType": "IN_BATTLE",
     "eventTypeDesc": "作战能力",
     "eventTypeIcon": "icon_battle",
@@ -265,7 +265,7 @@
       "divide_num": 3,
       "atk": 0.015,
       "max_hp": 0.015,
-      "attack_speed": 1.5
+      "attack_speed": 1
     },
     "bbStr": {
       "key": "act1autochess_gar_eff_attrByBond",
@@ -277,8 +277,8 @@
   },
   "garrison_saga_dong_b": {
     "garrisonId": "garrison_saga_dong_b",
-    "desc": "【东】每叠加3层，本干员攻击力、生命值+3%，攻击速度+3",
-    "descRaw": "【东】每叠加3层，本干员攻击力、生命值<@ba.vup>+3%</>，攻击速度<@ba.vup>+3</>",
+    "desc": "【东】每叠加3层，本干员攻击力、生命值+3%，攻击速度+2",
+    "descRaw": "【东】每叠加3层，本干员攻击力、生命值+3%，攻击速度+2",
     "eventType": "IN_BATTLE",
     "eventTypeDesc": "作战能力",
     "eventTypeIcon": "icon_battle",
@@ -290,7 +290,7 @@
       "divide_num": 3,
       "atk": 0.03,
       "max_hp": 0.03,
-      "attack_speed": 3
+      "attack_speed": 2
     },
     "bbStr": {
       "key": "act1autochess_gar_eff_attrByBond",

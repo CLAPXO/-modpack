@@ -16,61 +16,52 @@
 
 ## 更新记录
 
-### 1.2.3 — 修复吉星技能充能（能量条）· 修复自带模型入场动画未绑定 · 适配 Forge 0.18.4 / 数据 0.2.6
+### 1.2.4 — 吉星能量条 / 入场动画修复 · 0.18.4 适配 · 一次性平衡调整（含削弱）
 
 **① 修复：吉星战斗中不显示能量条**
 
-本包 `kits/chess_char_3_kichi_a.js` 与它自己的数据不一致：数据里 S1「欢迎您来！」是 `MANUAL` / `spCost: 50` / `initSp: 30`、
-S2「吉星高照！」是 `MANUAL` / `spCost: 44` / `initSp: 22`（`INCREASE_WITH_TIME`），
-而 kit 的 spec 把两个技能都写成了 `spCost: 0, spType: 'none', trigger: 'NEVER'`。引擎取值顺序是 **spec 覆盖数据**：
+本包 `kits/chess_char_3_kichi_a.js` 把两个技能的 spec 写成 `spCost: 0, spType: 'none', trigger: 'NEVER'`，而数据里 S1/S2 是 `MANUAL` / `spCost 50 / 44`。引擎取值是 **spec 覆盖数据**（`server/sim/skills.js:93`）⇒ `spMax = 0`（`server/sim/units.js:229`）⇒ 客户端 `public/js/render/units.js:1546` 的 `showSp = (spMax > 0 || !!ammo)` 为假 ⇒ **不画能量条**；`trigger NEVER` 更让 kit 里所有判 `skill.active` 的钩子永不触发 ⇒ **S1/S2 此前一次都没生效**。修复：删掉这两行覆盖，技能按数据充能（spMax 50 / 44），`MANUAL` 由引擎自动施放（36 s / 30 s）。
 
-- [`server/sim/skills.js:93`](https://github.com/XiaMo233M/Stronghold-Protocol-Forge/blob/main/app/server/sim/skills.js) —— `baseSpCost = +s.spCost ?? d.spCost` ⇒ 被覆盖成 0；
-- [`server/sim/units.js:229`](https://github.com/XiaMo233M/Stronghold-Protocol-Forge/blob/main/app/server/sim/units.js) —— `get spMax() { return this.skill ? this.skill.spCost : 0 }` ⇒ `spMax = 0`；
-- [`public/js/render/units.js:1546`](https://github.com/XiaMo233M/Stronghold-Protocol-Forge/blob/main/app/public/js/render/units.js) —— `const showSp = showBars && !this.isEnemy && (this.spMax > 0 || !!ammo)` ⇒ 不画能量条。
+**② 修复：包自带模型的入场动画没绑**
 
-同一处 `trigger: 'NEVER'` 还让 kit 里所有判 `unit.skill.active` 的 hook 永不触发 ⇒ **S1/S2 的效果此前一次都没生效过**（只有天赋「好运连击！」与射手特性在工作）。
+`art.chars[*].spine.*` 只声明了 `skel`/`atlas`、没有 `anims`；客户端 `public/js/render/spine.js:697` 的 `deploy()` **只认 `roles.deploy`**（`die()` 有 `|| 'Die'` 兜底，deploy 没有）⇒ 4 名自带模型干员**全都没有入场动画**。修复：用引擎自带工具在同一份 `.skel` 上解析角色（`tools/assets/skel.mjs` + `tools/assets/anim-roles.mjs`，运行时 `@pixi-spine/runtime-3.8`），把 `anims` / `animations` / `events` / `hits` / `bounds` / `pma` / `textures` 写进 `art.chars`（与官方 `data/assets.json` 同形）。夜刀只有 `Start_1/2/3` ⇒ 入场显式绑 `Start_1`。另查出**白雪 back 模型 `.skel` 已损坏** ⇒ 移除该侧声明（客户端回退 front）。
 
-**修复**：删掉这两行覆盖，让两个技能照数据充能（`spMax` 50 / 44），`MANUAL` 技能由引擎自动施放（S1 持续 36 秒、S2 持续 30 秒）。
-⇒ 现在**有能量条**，而且 S1 的「每次攻击 +20% 攻击力、最多 4 层」与 S2 的「攻击力 +60% + 停顿→束缚→晕眩循环」**真正生效**（属修复而非数值微调）。
+**③ 修复：盟约的追加攻击会触发宴的武者特性回血**
 
+宴是**武者**，引擎 `server/sim/professions.js` 的 `installMushaHeal` 是「每次**输出伤害**回血」，并**排除** `talent` / `dot` / `periodic` 三种标签。修复：给盟约追加攻击打上 `talent` 标签（`tags: [bond:dongShip, talent]`）⇒ 不再从追加攻击回血。
 
-**② 修复：包自带模型的入场动画没绑（夜刀、白雪、吉星、火龙S黑角全部）**
+**④ 修复：夜刀的天赋会吃盟约的追加攻击（伤害超模）**
 
-本包 `art.chars[*].spine.*` 只声明了 `skel`/`atlas`，**没有声明 `anims` 动画角色**。
-而客户端 [`public/js/render/spine.js:697`](https://github.com/XiaMo233M/Stronghold-Protocol-Forge/blob/main/app/public/js/render/spine.js) 的 `deploy()` 只认 `roles.deploy`
-（同一文件的 `die()` 有 `|| 'Die'` 兜底，**deploy 没有**），`spine.js:303` 又是 `this.roles = entry.anims || {}`
-⇒ 包不写 `anims` 就**完全没有入场动画**。包格式是允许写这些字段的：`shared/workshop.js:1696` 的 `ART_SPINE_PASSTHROUGH`
-放行 `pma` / `anims` / `animations` / `events` / `hits` / `bounds`。
+`kits/chess_char_9_yato_a.js` 的天赋原本只要求 `d.isAttack`（追加攻击没有该字段），本轮再加一道显式护栏 `if (tagged(d, 'bond:dongShip')) return;` ⇒ 追加攻击**不会**再触发她的天赋法伤。
 
-**修复**：用引擎自带工具在同一份 `.skel` 上解析并解析角色（`tools/assets/skel.mjs` 的 `parseSkel` + `tools/assets/anim-roles.mjs` 的 `resolveRoles`，
-运行时 `@pixi-spine/runtime-3.8`），把 `anims` / `animations`（时长表）/ `events` / `hits` / `bounds` / `pma` / `textures` 写进 `art.chars`，与官方 `data/assets.json` 条目同形：
+**⑤ 适配：Forge 0.18.4 / 游戏数据 0.2.6**
 
-| 干员 | 侧面 | 入场 | 待机 | 攻击 | 死亡 |
-|---|---|---|---|---|---|
-| 白雪 `char_118_yuki` | front | **Start** | Idle | Attack | Die |
-| 火龙S黑角 `char_1030_noirc2` | front / back | **Start** | Idle | Attack_1 | Die / — |
-| 麒麟R夜刀 `char_1029_yato2` | front / back | **Start_1** | Idle | Attack1 | Die / — |
-| 吉星 `char_4203_kichi` | front / back | **Start** | Idle | Attack | Die / — |
+- `chess` / `bonds` / `garrisons` / `items` / `config` 五张表在 0.2.4 → 0.2.6 之间**逐字节相同** ⇒ 覆盖记录无需重同步（17 条逐条报「不变」）；模组 API 仍为 **1**；
+- 在 0.18.4 上：校验器 `0 error`（VALID）· `doctor` 正常 · `check-imports` 无错 · `sim-check` **267 场无头战斗跑通** · 16–17 个回归脚本全过；
+- 上游 0.18.4 顺带修掉了「固定干员赠礼受共享道具池限制」（`acquire.js:301` 的 `unlimitedGift`、`gamedata.js:183` 的 `_fixedGiftItems`）⇒「买了缪尔赛思不给变形同构体」消失。
 
-夜刀的模型没有 `Start`、只有 `Start_1 / Start_2 / Start_3`（三个技能各一套入场），官方解析器的 `deploy = find('Start') ?? form('Start') ?? idle` 会退成 idle，
-所以**显式绑 `Start_1`**。
+**⑥ 平衡调整（本轮一次性做完，含削弱）**
 
-同时查出一个坏文件：**白雪的 `back` 模型 `.skel` 已损坏**（3.8 / 4.0 / 4.1 三个解析器都在读中段时越界，29,168 字节）⇒ 移除该侧声明并删除损坏文件，
-客户端 [`public/js/assets.js:161`](https://github.com/XiaMo233M/Stronghold-Protocol-Forge/blob/main/app/public/js/assets.js) 在没有合法 `spine.back` 时会回退到 `front`。
-新增体检脚本 `audit-spine-anims.mjs`（逐模型断言 deploy / idle / attack 与同名贴图）。
+| 项目 | 调整前 | **调整后** |
+|---|---|---|
+| 【东】追加攻击斜率 | 0.0032233（**300 层** = 100%）| **0.0029754（325 层 = 100%）** |
+| 神经损伤积蓄 | 60 / 次 | **30 / 次** |
+| 吉星 · 专属特质（普通） | 每花费 1 资金 → +1 层 | **每花费 2 资金 → +1 层** |
+| 吉星 · 专属特质（精锐） | 每花费 1 资金 → +2 层 | **每花费 1 资金 → +1 层** |
+| 嵯峨 · 专属特质攻速 | +1.5（精锐 +3） | **+1（精锐 +2）**，攻击力/生命值不变 |
+| 麒麟R夜刀 上架本数 | 4 本 | **5 本**（price 4） |
+| 遥 上架本数 | 5 本 | **4 本** |
 
-**③ 适配：Forge 0.18.4 / 游戏数据 0.2.6**
+同时：**麒麟R夜刀 加入【不屈】盟约**（`indomShip`，含该盟约成员表补全，界面才会显示她）；**白雪特性追加「可攻击空中单位」**（炮手原本不对空，本包保留对空）。
 
-- 数据：`chess` / `bonds` / `garrisons` / `items` / `config` 五张表在 0.2.4 → 0.2.6 之间**逐字节相同** ⇒ 本包的覆盖记录**无需重同步**（17 条全部「不变」）；
-- 模组 API 仍为 **1**（`shared/constants.js` 的 `MOD_API_VERSION`）⇒ 包声明 `api: ">=1 <2"` 继续命中；
-- 验在 0.18.4 上：`tools/workshop-validate.mjs` **0 error / VALID**、`tools/doctor.mjs` 正常、`tools/check-imports.mjs` 无错、`tools/sim-check.mjs` **267 场无头战斗跑通**、16 个回归脚本 + `audit-kit-skill-sp.mjs` + `audit-spine-anims.mjs` 全过；
-- 上游在 0.18.4 里还修掉了一个我们此前记录过的引擎侧问题：**固定干员赠礼不再受共享道具池限制**
-  （[`server/match/player/acquire.js:301`](https://github.com/XiaMo233M/Stronghold-Protocol-Forge/blob/main/app/server/match/player/acquire.js) 的 `unlimitedGift` 与 [`server/match/gamedata.js:183`](https://github.com/XiaMo233M/Stronghold-Protocol-Forge/blob/main/app/server/match/gamedata.js) 的 `_fixedGiftItems`）
-  ⇒ 「买了缪尔赛思不给变形同构体」的现象已经消失（本包无需改动）。
+**⑦ 其他**
+
+- 新增自检脚本：`audit-kit-skill-sp.mjs`（全包技能 SP 一致性，36 条）· `audit-spine-anims.mjs`（逐模型断言入场/待机/攻击与贴图，7/7）；
+- `pack.json` 描述里过期的公式数值同步为现行值（描述、公告、`bond-specs` 与战斗模块一致）。
+
 ### 1.2.0 — 首次发布
 
-核心盟约【东】（12 名成员 / 24 枚棋子）、10 组专属特质（19 条记录）、1 件新装备、
-4 名新干员的语音与美术（112 个 mp3 + Spine / 立绘 / 头像 / 技能图标）、7 条官方盟约成员表补全。
+核心盟约【东】（12 名成员 / 24 枚棋子）、10 组专属特质（19 条记录）、1 件新装备「艺人见面抽选券」、4 名新干员的语音与美术（112 个 mp3 + Spine/立绘/头像/技能图标）、7 条官方盟约成员表补全。
 
 ## 本包目前有什么
 
@@ -78,8 +69,8 @@ S2「吉星高照！」是 `MANUAL` / `spCost: 44` / `initSp: 22`（`INCREASE_WI
 
 - **12 名成员 / 24 枚棋子**（每名成员都有普通与精锐两版；精锐面板更高）；入口门槛 **3 名**、强化门槛 **6 名**不同【东】干员；
 - **效果一**：成员造成伤害时追加一次攻击，按目标弱点类型结算（物理 / 法术取更痛的那一种），
-  **攻击力 × (3.3% + 0.3223% × 层数)** —— 300 层正好 100%；
-- **效果二**：在场 6 名不同【东】干员时，追加攻击同时积累目标的**神经损伤 60/次**（攒满触发官方神经爆发）。
+  **攻击力 × (3.3% + 0.2975% × 层数)** —— 325 层正好 100%；
+- **效果二**：在场 6 名不同【东】干员时，追加攻击同时积累目标的**神经损伤 30/次**（攒满触发官方神经爆发）。
 
 ### 成员（12 名）
 

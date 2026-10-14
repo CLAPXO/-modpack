@@ -197,10 +197,10 @@ export function install(battle) {
       //   两种盟约的界面读的也是同一对 bb 键：`bb[baseParams] + bb[perStackParams] × 层数`
       //   （public/js/ui/richText.js formatBondEffect，DATA.md §3）⇒ **显示值 == 实际值**，不再有旧版那种
       //   "显示线性、实际二次"的分离（旧版 300 层：界面 62%、实际 186%）。
-            //   式子是 **3.3% + 0.3223% × 层数** —— 与界面那条式子（`bb[base] + bb[perStack] × 层数`）逐字相同，
+            //   式子是 **3.3% + 0.2975% × 层数** —— 与界面那条式子（`bb[base] + bb[perStack] × 层数`）逐字相同，
 //   所以 `base_damage_scale = 0.033`、`damage_scale_per_stack = 0.0032233`，**显示值 == 实际值**，没有折算：
-//     0 层 3.3% / 50 层 19.4% / 100 层 35.5% / 150 层 51.6% / 200 层 67.8% / **300 层正好 100%**
-//   （斜率照"300 层 = 100%"反解：(1 − 0.033) / 300 = 0.0032233；base 仍是 3.3%）
+//     0 层 3.3% / 50 层 19.4% / 100 层 35.5% / 150 层 51.6% / 200 层 67.8% / **325 层正好 100%**
+//   （斜率照"300 层 = 100%"反解：(1 − 0.033) / 325 = 0.0029754；base 仍是 3.3%）
       //   ⚠ 两个数都是 bb 值，代码里不写死；读不到就是 0（不触发）。改数值时**两个文件一起改**：
       //     `bonds.json`（游戏读的）与 `bond-specs/dongShip.json`（编辑器的源，不改的话下次保存会把它改回去）。
       const pct = Math.max(0, num(bb.base_damage_scale) + num(bb.damage_scale_per_stack) * L);
@@ -208,7 +208,9 @@ export function install(battle) {
         const mul = Number.isFinite(dmg.mul) && dmg.mul > 0 ? dmg.mul : 1;
         const info = {
           amount: s.s.atk * pct * mul, type: 'phys', canDodge: false,
-          isSkill: !!dmg.isSkill, tags: [TAG],
+                // tags 里带 talent：引擎的武者回血（professions.js installMushaHeal）会跳过 talent/dot/periodic 三种标签，
+      // 所以盟约的追加攻击不算宴这类武者的「输出伤害」，不会触发她的特性回血。
+      isSkill: !!dmg.isSkill, tags: [TAG, 'talent'],
         };
         weaknessRetype(info, s, t);                  // 赤刃明霄陈 / 双模机械臂: phys vs arts, the stronger one
         battle.dealDamage(s, t, info);
