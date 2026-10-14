@@ -6,13 +6,48 @@
 
 | | |
 |---|---|
-| 引擎 | **Forge 0.18.3**（[Stronghold-Protocol-Forge](https://github.com/XiaMo233M/Stronghold-Protocol-Forge)）|
-| 游戏数据 | **0.2.5** |
-| 下载 Forge | [Forge Releases](https://github.com/XiaMo233M/Stronghold-Protocol-Forge/releases) · [本包实测所用版本 `v0.18.3-0.2.5`](https://github.com/XiaMo233M/Stronghold-Protocol-Forge/releases/tag/v0.18.3-0.2.5) |
+| 引擎 | **Forge 0.18.3 – 0.18.4**（[Stronghold-Protocol-Forge](https://github.com/XiaMo233M/Stronghold-Protocol-Forge)）|
+| 游戏数据 | **0.2.5 – 0.2.6** |
+| 下载 Forge | [Forge Releases](https://github.com/XiaMo233M/Stronghold-Protocol-Forge/releases) · 本包实测过的版本：[`v0.18.4-0.2.6`](https://github.com/XiaMo233M/Stronghold-Protocol-Forge/releases/tag/v0.18.4-0.2.6) · [`v0.18.3-0.2.5`](https://github.com/XiaMo233M/Stronghold-Protocol-Forge/releases/tag/v0.18.3-0.2.5) |
 | 包声明 | `api: ">=1 <2"`（模组 API = 1）· `game: "0.2.x"` · 层 B · **`combat: true`（会改变对局结果）** |
-| 实测 | 引擎校验器 `errors = 0`（VALID）· 仓库闸门 `check-packs.mjs` ✓ · 用 Forge 导入工具装进空工坊根通过 |
+| 实测 | 引擎校验器 `errors = 0`（VALID）· `tools/doctor.mjs` 正常 · `tools/check-imports.mjs` 无错 · `tools/sim-check.mjs` 267 场无头战斗跑通 · 16 个回归脚本全过 · 用 Forge 导入工具装进空工坊根通过 |
 
 > 引擎升级后若加载器报 `MOD_API_INCOMPATIBLE`，说明模组 API 版本变了（当前为 1）。
+
+## 更新记录
+
+### 1.2.1 — 修复吉星技能充能（能量条）· 适配 Forge 0.18.4 / 数据 0.2.6
+
+**① 修复：吉星战斗中不显示能量条**
+
+本包 `kits/chess_char_3_kichi_a.js` 与它自己的数据不一致：数据里 S1「欢迎您来！」是 `MANUAL` / `spCost: 50` / `initSp: 30`、
+S2「吉星高照！」是 `MANUAL` / `spCost: 44` / `initSp: 22`（`INCREASE_WITH_TIME`），
+而 kit 的 spec 把两个技能都写成了 `spCost: 0, spType: 'none', trigger: 'NEVER'`。引擎取值顺序是 **spec 覆盖数据**：
+
+- [`server/sim/skills.js:93`](https://github.com/XiaMo233M/Stronghold-Protocol-Forge/blob/main/app/server/sim/skills.js) —— `baseSpCost = +s.spCost ?? d.spCost` ⇒ 被覆盖成 0；
+- [`server/sim/units.js:229`](https://github.com/XiaMo233M/Stronghold-Protocol-Forge/blob/main/app/server/sim/units.js) —— `get spMax() { return this.skill ? this.skill.spCost : 0 }` ⇒ `spMax = 0`；
+- [`public/js/render/units.js:1546`](https://github.com/XiaMo233M/Stronghold-Protocol-Forge/blob/main/app/public/js/render/units.js) —— `const showSp = showBars && !this.isEnemy && (this.spMax > 0 || !!ammo)` ⇒ 不画能量条。
+
+同一处 `trigger: 'NEVER'` 还让 kit 里所有判 `unit.skill.active` 的 hook 永不触发 ⇒ **S1/S2 的效果此前一次都没生效过**（只有天赋「好运连击！」与射手特性在工作）。
+
+**修复**：删掉这两行覆盖，让两个技能照数据充能（`spMax` 50 / 44），`MANUAL` 技能由引擎自动施放（S1 持续 36 秒、S2 持续 30 秒）。
+⇒ 吉星现在**有能量条**，而且 S1 的「每次攻击 +20% 攻击力、最多 4 层」与 S2 的「攻击力 +60% + 停顿→束缚→晕眩循环」**真正生效**（这是本次的行为变化，属修复而非数值微调）。
+
+顺带修正 `pack.json` 描述里过期的公式：`0.275%` → **`0.4835%`**（现在是「攻击力 × (3.3% + 0.4835% × 层数)」，200 层正好 100%）。
+
+**② 适配：Forge 0.18.4 / 游戏数据 0.2.6**
+
+- 数据：`chess` / `bonds` / `garrisons` / `items` / `config` 五张表在 0.2.4 → 0.2.6 之间**逐字节相同** ⇒ 本包的覆盖记录**无需重同步**（17 条全部「不变」）；
+- 模组 API 仍为 **1**（`shared/constants.js` 的 `MOD_API_VERSION`）⇒ 包声明 `api: ">=1 <2"` 继续命中；
+- 验在 0.18.4 上：`tools/workshop-validate.mjs` **0 error / VALID**、`tools/doctor.mjs` 正常、`tools/check-imports.mjs` 无错、`tools/sim-check.mjs` **267 场无头战斗跑通**、16 个回归脚本全过；
+- 上游在 0.18.4 里还修掉了一个我们此前记录过的引擎侧问题：**固定干员赠礼不再受共享道具池限制**
+  （[`server/match/player/acquire.js:301`](https://github.com/XiaMo233M/Stronghold-Protocol-Forge/blob/main/app/server/match/player/acquire.js) 的 `unlimitedGift` 与 [`server/match/gamedata.js:183`](https://github.com/XiaMo233M/Stronghold-Protocol-Forge/blob/main/app/server/match/gamedata.js) 的 `_fixedGiftItems`）
+  ⇒ 「买了缪尔赛思不给变形同构体」的现象已经消失（本包无需改动）。
+
+### 1.2.0 — 首次发布
+
+核心盟约【东】（12 名成员 / 24 枚棋子）、10 组专属特质（19 条记录）、1 件新装备、
+4 名新干员的语音与美术（112 个 mp3 + Spine / 立绘 / 头像 / 技能图标）、7 条官方盟约成员表补全。
 
 ## 本包目前有什么
 

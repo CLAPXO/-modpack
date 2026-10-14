@@ -39,7 +39,6 @@ function build(bb, chess, def) {
       [S1]: {
         kind: 'duration',
         duration: num(b1.duration, 36),
-        spCost: 0, spType: 'none', trigger: 'NEVER',
         mods: { batPct: batMod(num(b1.base_attack_time, 0.5), chess) },
         onStart({ unit }) { unit.mem.kichiS1Hits = 0; },
         onTick({ battle, unit }) {
@@ -60,7 +59,6 @@ function build(bb, chess, def) {
       [S2]: {
         kind: 'duration',
         duration: num(b2.duration, 30),
-        spCost: 0, spType: 'none', trigger: 'NEVER',
         mods: { atkPct: num(b2.atk, 0.6), batPct: batMod(num(b2.base_attack_time, 0.7), chess) },
         onStart({ unit }) { unit.mem.kichiCc = 0; },
         install(battle, unit) {
