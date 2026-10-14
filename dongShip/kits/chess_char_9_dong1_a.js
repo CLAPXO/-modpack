@@ -334,6 +334,20 @@ const X4 = Object.freeze([[1, -1], [1, 0], [1, 1], [0, -1], [0, 0], [0, 1], [-1,
 
 const bbOf = (chess, id) => skillRec(chess, id)?.bb ?? {};
 const tileKey = (r, c) => r * COLS + c;
+// 队友是否在遥的攻击范围内：优先用引擎给单位的 rangeKeySet（no new import），拿不到就退路为全场地。
+// 每次队友受伤充多少 SP：从她当前装备技能的 bb 读 ally_damaged_sp（默认 3，数值在数据里可调）
+const allyHurtSpOf = (u) => {
+  const b = (u && u.skill && u.skill.bb) || {};
+  return typeof b.ally_damaged_sp === 'number' ? b.ally_damaged_sp : 3;
+};
+const allyHurtInRange = (u, a) => {
+  const set = u && u.rangeKeySet;
+  if (!set || !a) return true;
+  const keys = a.rangeKeys || a.keys || (Number.isInteger(a.tileR) && Number.isInteger(a.tileC) ? [a.tileR * COLS + a.tileC] : null);
+  if (!keys || !keys.length) return true;
+  for (const kk of keys) if (set.has(kk)) return true;
+  return false;
+};
 const skillOn = (u, id) => !!(u && u.skill && u.skill.id === id && u.skill.active);
 
 /** Allies that may get a bubble from `by` on tile keys `keys`: no bubble yet, not 孤立; the lowest HP share first. */
@@ -474,7 +488,16 @@ const __default = {
             b.data = { ...b.data, boom: true };
             battle.after(breakDelay, () => { if (a.alive && a.findBuff(BUBBLE) === b) burst(battle, unit, a, b); }, { owner: a });
           }, { owner: unit });
-          battle.on('deploy', (c) => { if (c.unit === unit) { unit.mem.harukaS2Uses = 0; unit.mem.harukaS2Endless = false; } }, { owner: unit });
+          // 作者要求：范围内队友受伤 ⇒ 立刻给她充能（不再依赖"敌人走进攻击范围"；配合 S3 的 DEFAULT 触发）
+                            battle.on('damaged', (c) => {
+                              const a = c.target;
+                              if (!a || a === unit || a.side !== 'ally' || !(c.amount > 0)) return;
+                              if (!allyHurtInRange(unit, a)) return;
+                              if (!up(unit)) return;
+                              const gain = Math.max(0, num(allyHurtSpOf(unit)));
+                              if (gain > 0) giveSp(unit, gain, 'trait');
+                            }, { owner: unit });
+                            battle.on('deploy', (c) => { if (c.unit === unit) { unit.mem.harukaS2Uses = 0; unit.mem.harukaS2Endless = false; } }, { owner: unit });
         } },
         { install(battle, unit) { // 幽隙栖萤: each heal of hers while S2 runs ⇒ arts damage around the healed unit
           if (unit.skill?.id !== S2) return;

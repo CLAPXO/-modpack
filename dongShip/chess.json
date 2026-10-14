@@ -28,14 +28,13 @@
     "position": "RANGED",
     "nationId": "higashi",
     "bonds": [
-      "preciShip",
       "visiShip",
       "dongShip"
     ],
     "garrisonIds": [
       "garrison_yuki_a"
     ],
-    "price": 3,
+    "price": 1,
     "sellPrice": 1,
     "upgradeNum": 3,
     "upgradeChessId": "chess_char_1_21_b",
@@ -534,14 +533,13 @@
     "position": "RANGED",
     "nationId": "higashi",
     "bonds": [
-      "preciShip",
       "visiShip",
       "dongShip"
     ],
     "garrisonIds": [
       "garrison_yuki_b"
     ],
-    "price": 3,
+    "price": 1,
     "sellPrice": 1,
     "upgradeNum": 0,
     "upgradeChessId": null,
@@ -1288,7 +1286,8 @@
         "max_target_shield_add": 0,
         "ability_range_radius": 1.7,
         "max_target_extra": 2,
-        "atk_scale_extra": 1.4
+        "atk_scale_extra": 1.4,
+        "ally_damaged_sp": 3
       },
       "bbStr": {},
       "rangeId": null,
@@ -1369,7 +1368,8 @@
         "maxChargeTime": 1,
         "increment": 1,
         "bb": {
-          "attack_speed": 30
+          "attack_speed": 30,
+          "ally_damaged_sp": 3
         },
         "bbStr": {},
         "rangeId": null,
@@ -1406,7 +1406,8 @@
           "max_target_shield_add": 0,
           "ability_range_radius": 1.7,
           "max_target_extra": 2,
-          "atk_scale_extra": 1.4
+          "atk_scale_extra": 1.4,
+          "ally_damaged_sp": 3
         },
         "bbStr": {},
         "rangeId": null,
@@ -1442,7 +1443,8 @@
           "atk": 0.25,
           "levitate_duration": 3,
           "interval": 1,
-          "atk_scale": 0.6
+          "atk_scale": 0.6,
+          "ally_damaged_sp": 3
         },
         "bbStr": {},
         "rangeId": "y-8",
@@ -1542,102 +1544,9 @@
         ],
         "prefabId": "skchr_haruka_3",
         "trigger": {
-          "rule": "ACTIVE_RANGE",
+          "rule": "DEFAULT",
           "rawRule": "DEFAULT",
-          "customRangeGrid": [
-            [
-              2,
-              -1
-            ],
-            [
-              2,
-              0
-            ],
-            [
-              2,
-              1
-            ],
-            [
-              2,
-              2
-            ],
-            [
-              1,
-              -1
-            ],
-            [
-              1,
-              0
-            ],
-            [
-              1,
-              1
-            ],
-            [
-              1,
-              2
-            ],
-            [
-              1,
-              3
-            ],
-            [
-              0,
-              -1
-            ],
-            [
-              0,
-              0
-            ],
-            [
-              0,
-              1
-            ],
-            [
-              0,
-              2
-            ],
-            [
-              0,
-              3
-            ],
-            [
-              -1,
-              -1
-            ],
-            [
-              -1,
-              0
-            ],
-            [
-              -1,
-              1
-            ],
-            [
-              -1,
-              2
-            ],
-            [
-              -1,
-              3
-            ],
-            [
-              -2,
-              -1
-            ],
-            [
-              -2,
-              0
-            ],
-            [
-              -2,
-              1
-            ],
-            [
-              -2,
-              2
-            ]
-          ]
+          "customRangeGrid": null
         },
         "index": 2,
         "overrideTokenKey": null,
@@ -1821,7 +1730,8 @@
         "max_target_shield_add": 1,
         "ability_range_radius": 1.7,
         "max_target_extra": 3,
-        "atk_scale_extra": 2
+        "atk_scale_extra": 2,
+        "ally_damaged_sp": 3
       },
       "bbStr": {},
       "rangeId": null,
@@ -1904,7 +1814,8 @@
         "maxChargeTime": 1,
         "increment": 1,
         "bb": {
-          "attack_speed": 45
+          "attack_speed": 45,
+          "ally_damaged_sp": 3
         },
         "bbStr": {},
         "rangeId": null,
@@ -1941,7 +1852,8 @@
           "max_target_shield_add": 1,
           "ability_range_radius": 1.7,
           "max_target_extra": 3,
-          "atk_scale_extra": 2
+          "atk_scale_extra": 2,
+          "ally_damaged_sp": 3
         },
         "bbStr": {},
         "rangeId": null,
@@ -1977,7 +1889,8 @@
           "atk": 0.4,
           "levitate_duration": 4,
           "interval": 1,
-          "atk_scale": 0.7
+          "atk_scale": 0.7,
+          "ally_damaged_sp": 3
         },
         "bbStr": {},
         "rangeId": "y-8",
@@ -2077,102 +1990,9 @@
         ],
         "prefabId": "skchr_haruka_3",
         "trigger": {
-          "rule": "ACTIVE_RANGE",
+          "rule": "DEFAULT",
           "rawRule": "DEFAULT",
-          "customRangeGrid": [
-            [
-              2,
-              -1
-            ],
-            [
-              2,
-              0
-            ],
-            [
-              2,
-              1
-            ],
-            [
-              2,
-              2
-            ],
-            [
-              1,
-              -1
-            ],
-            [
-              1,
-              0
-            ],
-            [
-              1,
-              1
-            ],
-            [
-              1,
-              2
-            ],
-            [
-              1,
-              3
-            ],
-            [
-              0,
-              -1
-            ],
-            [
-              0,
-              0
-            ],
-            [
-              0,
-              1
-            ],
-            [
-              0,
-              2
-            ],
-            [
-              0,
-              3
-            ],
-            [
-              -1,
-              -1
-            ],
-            [
-              -1,
-              0
-            ],
-            [
-              -1,
-              1
-            ],
-            [
-              -1,
-              2
-            ],
-            [
-              -1,
-              3
-            ],
-            [
-              -2,
-              -1
-            ],
-            [
-              -2,
-              0
-            ],
-            [
-              -2,
-              1
-            ],
-            [
-              -2,
-              2
-            ]
-          ]
+          "customRangeGrid": null
         },
         "index": 2,
         "overrideTokenKey": null,
@@ -2388,39 +2208,88 @@
       "rangeGrid": null
     },
     "skill": {
-      "skillId": "skchr_saga_3",
-      "iconId": "skchr_saga_3",
-      "name": "怒目",
+      "skillId": "skchr_saga_2",
+      "iconId": "skchr_saga_2",
+      "name": "除恶",
       "level": 4,
-      "desc": "技能持续时间内逐渐获得20点部署费用，攻击间隔稍微增大，攻击距离+1，攻击力+70%，同时攻击阻挡的所有敌人，目标生命值低于一半时额外追加一次攻击",
-      "descRaw": "技能持续时间内逐渐获得<@ba.vup>20</>点部署费用，攻击间隔<@ba.vdown>稍微增大</>，攻击距离<@ba.vup>+1</>，攻击力<@ba.vup>+70%</>，同时攻击阻挡的所有敌人，目标生命值低于一半时额外追加一次攻击",
+      "desc": "立即获得4点部署费用；对十字范围内最多6名地面敌人造成相当于攻击力280%的物理伤害，之后消灭其中重伤的敌方单位。可充能2次",
+      "descRaw": "立即获得<@ba.vup>4</>点部署费用；对十字范围内最多<@ba.vup>6</>名地面敌人造成相当于攻击力<@ba.vup>280%</>的物理伤害，之后消灭其中<$ba.dying>重伤</>的敌方单位。<@ba.rem>可充能2次</>",
       "skillType": "MANUAL",
       "durationType": "NONE",
-      "duration": 20,
+      "duration": 0,
       "spType": "INCREASE_WITH_TIME",
-      "spCost": 47,
-      "initSp": 26,
-      "maxChargeTime": 1,
+      "spCost": 18,
+      "initSp": 9,
+      "maxChargeTime": 2,
       "increment": 1,
       "bb": {
-        "atk": 0.7,
-        "cost": 1,
-        "interval": 1,
-        "base_attack_time": 0.5,
-        "ability_range_forward_extend": 1,
-        "value": 20,
-        "attack@hp_ratio": 0.5,
+        "atk_scale": 2.8,
+        "cost": 4,
+        "cnt": 2,
         "reveal_interval": 1,
         "reveal_duration": 1.2
       },
       "bbStr": {},
-      "rangeId": null,
-      "rangeGrid": null,
-      "prefabId": "skchr_saga_3",
+      "rangeId": "x-6",
+      "rangeGrid": [
+        [
+          2,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          -2
+        ],
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          -1,
+          0
+        ],
+        [
+          -2,
+          0
+        ]
+      ],
+      "prefabId": "skchr_saga_2",
       "trigger": {
-        "rule": "ACTIVE_RANGE",
+        "rule": "SKILL_RANGE",
         "rawRule": "DEFAULT",
         "customRangeGrid": [
+          [
+            2,
+            0
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            0,
+            -2
+          ],
+          [
+            0,
+            -1
+          ],
           [
             0,
             0
@@ -2432,12 +2301,19 @@
           [
             0,
             2
+          ],
+          [
+            -1,
+            0
+          ],
+          [
+            -2,
+            0
           ]
         ]
       },
-      "index": 2,
-      "overrideTokenKey": null,
-      "isDefault": false
+      "index": 1,
+      "overrideTokenKey": null
     },
     "talents": [
       {
@@ -2630,7 +2506,7 @@
         },
         "index": 1,
         "overrideTokenKey": null,
-        "isDefault": false
+        "isDefault": true
       },
       {
         "skillId": "skchr_saga_3",
@@ -2682,7 +2558,7 @@
         },
         "index": 2,
         "overrideTokenKey": null,
-        "isDefault": true
+        "isDefault": false
       }
     ]
   },
@@ -2782,39 +2658,88 @@
       "moduleDescRaw": "首次部署时部署费用-4"
     },
     "skill": {
-      "skillId": "skchr_saga_3",
-      "iconId": "skchr_saga_3",
-      "name": "怒目",
+      "skillId": "skchr_saga_2",
+      "iconId": "skchr_saga_2",
+      "name": "除恶",
       "level": 7,
-      "desc": "技能持续时间内逐渐获得20点部署费用，攻击间隔稍微增大，攻击距离+1，攻击力+100%，同时攻击阻挡的所有敌人，目标生命值低于一半时额外追加一次攻击",
-      "descRaw": "技能持续时间内逐渐获得<@ba.vup>20</>点部署费用，攻击间隔<@ba.vdown>稍微增大</>，攻击距离<@ba.vup>+1</>，攻击力<@ba.vup>+100%</>，同时攻击阻挡的所有敌人，目标生命值低于一半时额外追加一次攻击",
+      "desc": "立即获得4点部署费用；对十字范围内最多6名地面敌人造成相当于攻击力320%的物理伤害，之后消灭其中重伤的敌方单位。可充能2次",
+      "descRaw": "立即获得<@ba.vup>4</>点部署费用；对十字范围内最多<@ba.vup>6</>名地面敌人造成相当于攻击力<@ba.vup>320%</>的物理伤害，之后消灭其中<$ba.dying>重伤</>的敌方单位。<@ba.rem>可充能2次</>",
       "skillType": "MANUAL",
       "durationType": "NONE",
-      "duration": 20,
+      "duration": 0,
       "spType": "INCREASE_WITH_TIME",
-      "spCost": 44,
-      "initSp": 27,
-      "maxChargeTime": 1,
+      "spCost": 16,
+      "initSp": 10,
+      "maxChargeTime": 2,
       "increment": 1,
       "bb": {
-        "atk": 1,
-        "cost": 1,
-        "interval": 1,
-        "base_attack_time": 0.5,
-        "ability_range_forward_extend": 1,
-        "value": 20,
-        "attack@hp_ratio": 0.5,
+        "atk_scale": 3.2,
+        "cost": 4,
+        "cnt": 2,
         "reveal_interval": 1,
         "reveal_duration": 1.2
       },
       "bbStr": {},
-      "rangeId": null,
-      "rangeGrid": null,
-      "prefabId": "skchr_saga_3",
+      "rangeId": "x-6",
+      "rangeGrid": [
+        [
+          2,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          -2
+        ],
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          -1,
+          0
+        ],
+        [
+          -2,
+          0
+        ]
+      ],
+      "prefabId": "skchr_saga_2",
       "trigger": {
-        "rule": "ACTIVE_RANGE",
+        "rule": "SKILL_RANGE",
         "rawRule": "DEFAULT",
         "customRangeGrid": [
+          [
+            2,
+            0
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            0,
+            -2
+          ],
+          [
+            0,
+            -1
+          ],
           [
             0,
             0
@@ -2826,12 +2751,19 @@
           [
             0,
             2
+          ],
+          [
+            -1,
+            0
+          ],
+          [
+            -2,
+            0
           ]
         ]
       },
-      "index": 2,
-      "overrideTokenKey": null,
-      "isDefault": false
+      "index": 1,
+      "overrideTokenKey": null
     },
     "talents": [
       {
@@ -3038,7 +2970,7 @@
         },
         "index": 1,
         "overrideTokenKey": null,
-        "isDefault": false
+        "isDefault": true
       },
       {
         "skillId": "skchr_saga_3",
@@ -3090,7 +3022,7 @@
         },
         "index": 2,
         "overrideTokenKey": null,
-        "isDefault": true
+        "isDefault": false
       }
     ],
     "statsBase": {
@@ -6586,43 +6518,36 @@
       "rangeGrid": null
     },
     "skill": {
-      "skillId": "skchr_yato2_2",
-      "iconId": "skchr_yato2_2",
-      "name": "乱舞",
+      "skillId": "skchr_yato2_1",
+      "iconId": "skchr_yato2_1",
+      "name": "鬼人化",
       "level": 7,
-      "desc": "第一天赋效果提升至2.1倍，攻击力提升至130%并对前方一格的所有敌人发动16次斩击，期间更容易受到敌人的攻击",
-      "descRaw": "第一天赋效果提升至<@ba.vup>2.1</>倍，攻击力提升至<@ba.vup>130%</>并对前方一格的所有敌人发动16次斩击，<@ba.vup>期间更容易受到敌人的攻击</>",
+      "desc": "攻击速度+70，攻击变为二连击，且技能期间对同一目标的第三次攻击变为六连击",
+      "descRaw": "攻击速度<@ba.vup>+70</>，攻击变为<@ba.vup>二连击</>，且技能期间对同一目标的第三次攻击变为<@ba.vup>六连击</>",
       "skillType": "PASSIVE",
       "durationType": "NONE",
-      "duration": 0,
+      "duration": 20,
       "spType": "INCREASE_WITH_TIME",
       "spCost": 0,
       "initSp": 0,
       "maxChargeTime": 1,
       "increment": 0,
       "bb": {
-        "talent_scale": 2.1,
-        "atk_scale": 1.3,
-        "hits": 16,
-        "taunt": 1
+        "attack_speed": 70,
+        "hits": 2,
+        "third_hits": 6
       },
       "bbStr": {},
-      "rangeId": "x-4",
-      "rangeGrid": [
-        [
-          0,
-          1
-        ]
-      ],
+      "rangeId": null,
+      "rangeGrid": null,
       "prefabId": null,
       "trigger": {
         "rule": "NEVER",
         "rawRule": "NEVER",
         "customRangeGrid": null
       },
-      "index": 1,
-      "overrideTokenKey": null,
-      "isDefault": false
+      "index": 0,
+      "overrideTokenKey": null
     },
     "talents": [
       {
@@ -6704,7 +6629,7 @@
         },
         "index": 0,
         "overrideTokenKey": null,
-        "isDefault": false
+        "isDefault": true
       },
       {
         "skillId": "skchr_yato2_2",
@@ -6743,7 +6668,7 @@
         },
         "index": 1,
         "overrideTokenKey": null,
-        "isDefault": true
+        "isDefault": false
       },
       {
         "skillId": "skchr_yato2_3",
@@ -6876,43 +6801,36 @@
       "rangeGrid": null
     },
     "skill": {
-      "skillId": "skchr_yato2_2",
-      "iconId": "skchr_yato2_2",
-      "name": "乱舞",
+      "skillId": "skchr_yato2_1",
+      "iconId": "skchr_yato2_1",
+      "name": "鬼人化",
       "level": 7,
-      "desc": "第一天赋效果提升至2.1倍，攻击力提升至130%并对前方一格的所有敌人发动16次斩击，期间更容易受到敌人的攻击",
-      "descRaw": "第一天赋效果提升至<@ba.vup>2.1</>倍，攻击力提升至<@ba.vup>130%</>并对前方一格的所有敌人发动16次斩击，<@ba.vup>期间更容易受到敌人的攻击</>",
+      "desc": "攻击速度+70，攻击变为二连击，且技能期间对同一目标的第三次攻击变为六连击",
+      "descRaw": "攻击速度<@ba.vup>+70</>，攻击变为<@ba.vup>二连击</>，且技能期间对同一目标的第三次攻击变为<@ba.vup>六连击</>",
       "skillType": "PASSIVE",
       "durationType": "NONE",
-      "duration": 0,
+      "duration": 20,
       "spType": "INCREASE_WITH_TIME",
       "spCost": 0,
       "initSp": 0,
       "maxChargeTime": 1,
       "increment": 0,
       "bb": {
-        "talent_scale": 2.1,
-        "atk_scale": 1.3,
-        "hits": 16,
-        "taunt": 1
+        "attack_speed": 70,
+        "hits": 2,
+        "third_hits": 6
       },
       "bbStr": {},
-      "rangeId": "x-4",
-      "rangeGrid": [
-        [
-          0,
-          1
-        ]
-      ],
+      "rangeId": null,
+      "rangeGrid": null,
       "prefabId": null,
       "trigger": {
         "rule": "NEVER",
         "rawRule": "NEVER",
         "customRangeGrid": null
       },
-      "index": 1,
-      "overrideTokenKey": null,
-      "isDefault": false
+      "index": 0,
+      "overrideTokenKey": null
     },
     "talents": [
       {
@@ -6994,7 +6912,7 @@
         },
         "index": 0,
         "overrideTokenKey": null,
-        "isDefault": false
+        "isDefault": true
       },
       {
         "skillId": "skchr_yato2_2",
@@ -7033,7 +6951,7 @@
         },
         "index": 1,
         "overrideTokenKey": null,
-        "isDefault": true
+        "isDefault": false
       },
       {
         "skillId": "skchr_yato2_3",

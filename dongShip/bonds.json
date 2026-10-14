@@ -39,10 +39,11 @@
     ],
     "bb": {
       "base_damage_scale": 0.033,
-      "damage_scale_per_stack": 0.0029754,
+      "damage_scale_per_stack": 0.0043955,
       "power_char_cnt": 3,
       "power_bond_char_cnt": 6,
-      "neural_damage": 30
+      "neural_damage": 30,
+      "curve_k": 0.0000111111
     },
     "bbStr": {
       "key": "act2autochess_bond_eff_dong"
@@ -52,10 +53,11 @@
         "key": "env_gbuff_new",
         "bb": {
           "base_damage_scale": 0.033,
-          "damage_scale_per_stack": 0.0029754,
+          "damage_scale_per_stack": 0.0043955,
           "power_char_cnt": 3,
           "power_bond_char_cnt": 6,
-          "neural_damage": 30
+          "neural_damage": 30,
+          "curve_k": 0.0000111111
         },
         "bbStr": {
           "key": "act2autochess_bond_eff_dong"
@@ -224,128 +226,6 @@
       },
       "layerGain": "波登可 +1 / 调香师 +2 to highest-layer bond at prep end (work from bench); 流明 +2 to active bonds of every bench operator; 纯烬艾雅法拉 +3 highest-layer bond per skill; its own +2/+4 per round.",
       "howToPlay": "Cheap universal layer engine: activate as many bonds as possible so each gets +2/+4 every round (helps the hidden-round threshold)."
-    }
-  },
-  "preciShip": {
-    "bondId": "preciShip",
-    "name": "精准",
-    "identifier": 9,
-    "isCore": false,
-    "bondType": "REGULAR",
-    "bondOrder": 2,
-    "powerIdList": [],
-    "iconId": "icon_preciShip",
-    "activeCount": 2,
-    "thresholds": [
-      2,
-      3
-    ],
-    "maxCount": null,
-    "thresholdTemplate": "count_threshold_upward",
-    "countMode": "BOARD",
-    "countsHand": false,
-    "countsGoldenOnly": false,
-    "activeType": "BATTLE",
-    "isActiveInDeck": false,
-    "noStack": false,
-    "weight": 10,
-    "maxInactiveBondCount": -1,
-    "layerMilestones": [],
-    "desc": "【精准】干员攻击力提升（受层数影响）\n<在场3名不同【精准】干员>生效范围变为【精准】干员和所有远程干员，且攻击无视一定的防御力和法术抗性",
-    "descRaw": "【精准】干员<@ba.vup>攻击力</>提升<@autochess.gray>（受层数影响）</>\n<在场<@autochess.dgreen>3</>名不同【精准】干员>生效范围变为【精准】干员和所有远程干员，且攻击无视一定的<@ba.vup>防御力</>和<@ba.vup>法术抗性</>",
-    "effectId": "bondeffect_preci",
-    "effectName": "精准",
-    "effectDesc": "【精准】干员攻击力+{0:0%}（受层数影响）\n<在场3名不同【精准】干员>生效范围变为所有【精准】干员和远程干员，且攻击无视30%防御力和法术抗性",
-    "effectDescRaw": "【精准】干员攻击力<@ba.vup>+{0:0%}</><@ba.acrem>（受层数影响）</>\n<在场<@ba.vup>3</>名不同【精准】干员>生效范围变为所有【精准】干员和远程干员，且攻击无视<@ba.vup>30%</>防御力和法术抗性",
-    "effectDescParams": [
-      {
-        "index": 0,
-        "format": "0%",
-        "base": "base_atk",
-        "perStack": "atk_per_stack"
-      }
-    ],
-    "bb": {
-      "base_atk": 0.1,
-      "atk_per_stack": 0.012,
-      "power_def_penetrate": 0.3,
-      "power_magic_resist_penetrate": 0.3,
-      "power_bond_char_cnt": 3
-    },
-    "bbStr": {
-      "key": "act1autochess_bond_eff_preci"
-    },
-    "buffs": [
-      {
-        "key": "env_gbuff_new",
-        "bb": {
-          "base_atk": 0.1,
-          "atk_per_stack": 0.012,
-          "power_def_penetrate": 0.3,
-          "power_magic_resist_penetrate": 0.3,
-          "power_bond_char_cnt": 3
-        },
-        "bbStr": {
-          "key": "act1autochess_bond_eff_preci"
-        }
-      }
-    ],
-    "baseParams": [
-      "base_atk"
-    ],
-    "perStackParams": [
-      "atk_per_stack"
-    ],
-    "members": [
-      "chess_char_1_09_a",
-      "chess_char_1_17_a",
-      "chess_char_1_21_a",
-      "chess_char_2_01_a",
-      "chess_char_3_11_a",
-      "chess_char_4_06_a",
-      "chess_char_4_14_a",
-      "chess_char_4_20_a",
-      "chess_char_5_02_a",
-      "chess_char_6_01_a",
-      "chess_char_6_05_a",
-      "chess_char_6_08_a",
-      "chess_char_6_12_a"
-    ],
-    "visibleMembers": [
-      "chess_char_1_09_a",
-      "chess_char_1_17_a",
-      "chess_char_1_21_a",
-      "chess_char_2_01_a",
-      "chess_char_3_11_a",
-      "chess_char_4_06_a",
-      "chess_char_4_14_a",
-      "chess_char_4_20_a",
-      "chess_char_5_02_a",
-      "chess_char_6_01_a",
-      "chess_char_6_05_a",
-      "chess_char_6_08_a",
-      "chess_char_6_12_a"
-    ],
-    "spec": {
-      "tiers": [
-        {
-          "need": "2 distinct",
-          "effect": "精准 members ATK x(1 + 0.10 + 0.012*L)."
-        },
-        {
-          "need": "3 distinct",
-          "effect": "Scope becomes 精准 members + every RANGED operator; affected units also ignore 30% of target DEF and 30% of target RES."
-        }
-      ],
-      "formulas": {
-        "atkMultiplier": "1.10 + 0.012*L",
-        "defPenetrateRatio(3)": "0.3",
-        "resPenetrateRatio(3)": "0.3"
-      },
-      "layerGain": "Kill/skill/deploy in battle: 寒芒克洛丝 gives front operator \"开技能 +1 精准 (<=10/battle)\"; 远牙 grant (+4/deploy); 缇缇 +1 per sleep/stun; 蕾缪安, 送葬人; 莱恩哈特 休整期结束 +5 own active bonds; 获得时: 深靛 +2, 雪猎 +5. 机变 \"缇缇的盟誓\" +10.",
-      "assumed": [
-        "penetration = ratio ignore (like 无视 x% 防御)"
-      ]
     }
   },
   "raidShip": {

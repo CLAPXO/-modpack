@@ -200,17 +200,19 @@ export function install(battle) {
             //   式子是 **3.3% + 0.2975% × 层数** —— 与界面那条式子（`bb[base] + bb[perStack] × 层数`）逐字相同，
 //   所以 `base_damage_scale = 0.033`、`damage_scale_per_stack = 0.0032233`，**显示值 == 实际值**，没有折算：
 //     0 层 3.3% / 50 层 19.4% / 100 层 35.5% / 150 层 51.6% / 200 层 67.8% / **325 层正好 100%**
-//   （斜率照"300 层 = 100%"反解：(1 − 0.033) / 325 = 0.0029754；base 仍是 3.3%）
+//   （斜率照"300 层 = 100%"反解：(1 − 0.033) / 325 = 0.0043955；base 仍是 3.3%）
       //   ⚠ 两个数都是 bb 值，代码里不写死；读不到就是 0（不触发）。改数值时**两个文件一起改**：
       //     `bonds.json`（游戏读的）与 `bond-specs/dongShip.json`（编辑器的源，不改的话下次保存会把它改回去）。
-      const pct = Math.max(0, num(bb.base_damage_scale) + num(bb.damage_scale_per_stack) * L);
+      // 叠层曲线：curve_k > 0 时用**平方函数** pct = curve_k · L²（前面平缓、后面陡起来；400 层 = 100%），
+                    // 没给 curve_k 就退回原来的线性 base + perStack × L（向后兼容）。
+                    const kq = num(bb.curve_k);
+                    const pct = Math.max(0, kq > 0 ? kq * L * L : num(bb.base_damage_scale) + num(bb.damage_scale_per_stack) * L);
       if (eff1 && pct > 0 && t.alive) {
-        const mul = Number.isFinite(dmg.mul) && dmg.mul > 0 ? dmg.mul : 1;
-        const info = {
-          amount: s.s.atk * pct * mul, type: 'phys', canDodge: false,
+                const info = {
+          amount: s.s.atk * pct, type: 'phys', canDodge: false, isSplash: false, isAttack: false,
                 // tags 里带 talent：引擎的武者回血（professions.js installMushaHeal）会跳过 talent/dot/periodic 三种标签，
       // 所以盟约的追加攻击不算宴这类武者的「输出伤害」，不会触发她的特性回血。
-      isSkill: !!dmg.isSkill, tags: [TAG, 'talent'],
+      isSkill: false, tags: [TAG, 'talent'],
         };
         weaknessRetype(info, s, t);                  // 赤刃明霄陈 / 双模机械臂: phys vs arts, the stronger one
         battle.dealDamage(s, t, info);
@@ -220,7 +222,7 @@ export function install(battle) {
       const nd = num(bb.neural_damage);
       if (eff2 && nd > 0 && t.alive) {
         battle.dealDamage(s, t, {
-          amount: nd, type: 'element', element: 'neural', canDodge: false, isSkill: false, tags: [TAG_NEURAL],
+          amount: nd, type: 'element', element: 'neural', canDodge: false, isSplash: false, isAttack: false, isSkill: false, tags: [TAG_NEURAL],
         });
       }
     });

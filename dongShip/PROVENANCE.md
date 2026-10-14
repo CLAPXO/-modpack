@@ -44,7 +44,7 @@ GPL-3.0-or-later（本包代码）；© Hypergryph / Yostar（随包素材，非
 清单**不含本文件**（它记录这个值，含进去就自指）与 `.tune-backup/**`（编辑器调数值留下的本地备份，不进发布 zip）；188 个文件）：
 
 ```
-a7b8bb7fe59b1a7688339ce15a324ad7b53de237419b72325c7465a0510bda56
+e542ee178ec0433422bc6fd51cf41d7d8c1df09d0fcd6e917beeabc182d397dc
 ```
 
 复算：`node F:\wsxy\22\hash-pack.mjs`（同时打印**引擎身份哈希** = `loadWorkshop().packs[0].hash` —— 那一份含本文件与
@@ -109,6 +109,13 @@ a7b8bb7fe59b1a7688339ce15a324ad7b53de237419b72325c7465a0510bda56
 | 33 | 玩家反馈「夜刀的入场动画是不是没绑」 | 是。包里 `art.chars[*].spine.*` 只声明了 `skel`/`atlas`，**没有声明 `anims` 动画角色**，而客户端 `public/js/render/spine.js:697` 的 `deploy()` 只认 `roles.deploy`（`die()` 有 `|| 'Die'` 兜底，deploy 没有）⇒ 4 名自带模型的新干员**全部没有入场动画**；顺带查了攻击/技能/死亡角色的可用性。修复：用引擎自带工具在同一份 .skel 上解析并解析角色（`tools/assets/skel.mjs` 的 parseSkel + `tools/assets/anim-roles.mjs` 的 resolveRoles，运行时 `@pixi-spine/runtime-3.8`），把 `anims` / `animations`(时长表) / `events` / `hits` / `bounds` / `pma` / `textures` 写进 `art.chars`，与官方 `data/assets.json` 条目同形；夜刀的模型没有 `Start`、只有 `Start_1/2/3`，入场显式绑 `Start_1`。同时发现 `char_118_yuki`(白雪) 的 **back 模型 .skel 已损坏**（3.8/4.0/4.1 三个解析器都在读中段时越界，29168 字节），已移除该侧的声明并删掉损坏文件（客户端 `assets.js:161` 在没有合法 `spine.back` 时回退到 front），待重新获取模型后再补。新增体检脚本 `F:\wsxy\22\audit-spine-anims.mjs`（逐模型断言 deploy/idle/attack 与贴图）| 2026-10-14 |
 | 34 | 作者要求重定【东】效果一的斜率（口径不变：界面显示值与实际结算值逐字相同） | `server/battle/dong.mjs` 的 `base_damage_scale` 保持 3.3%，`damage_scale_per_stack` 由 0.004835 改为 **0.0032233** ⇒ 300 层正好 100%（50 层 19.4% / 100 层 35.5% / 150 层 51.6% / 200 层 67.8%）；`bonds.json`、`bond-specs/dongShip.json`、公告与 `pack.json` 描述的同一组数字同步 | 2026-10-14 |
 | 35 | 作者要求的一轮强度与归属调整 | ① 麒麟R夜刀 4 本 → **5 本**（price 4 / sellPrice 1），并加入**不屈**盟约（`indomShip`，同时在 `overrides` 与 `bonds.json` 里补全该盟约的成员表，夜刀才会在界面里出现）；② 遥 5 本 → **4 本**（price 3）；③ 效果一斜率 0.0032233 → **0.0029754**（325 层正好 100%）；④ 神经损伤 60 → **30**/次；⑤ 嵯峨特质的攻击速度 1.5 → **1**（精锐 3 → **2**），攻击力/生命值不动；⑥ 白雪特性补一句「可攻击空中单位」（`canHitFly` 本就为 true，只是文本没写）| 2026-10-15 |
+| 37 | 作者要求：白雪价格 1 金、去掉精准盟约 | `chess_char_1_21_a/b` 的 `price` 3 → 1；`bonds` 去掉 `preciShip`（保留 `visiShip` 与 `dongShip`）；`bonds:preciShip` 覆盖原本只多了白雪一条，连 `pack.json.overrides` 与 `bonds.json` 的那条覆盖一并删除 | 2026-10-15 |
+| 38 | 玩家反馈：夜刀打铳骑时盟约追加伤害疑似真伤且溢出极高 | 检查：追加攻击 `type` 只在 phys/arts 之间按目标抗性切换（`weaknessRetype`），**不会变成真伤**；真伤来自敌方机制或元素损伤显示。真正的问题是 **继承了来源伤害的 `mul`**（`amount = atk × pct × dmg.mul`）—— 技能/暴击那一击的倍率会把追加攻击一起放大 ⇒ 溢出爆表；且 DamageInfo 未显式声明溅射/攻击行为、`isSkill` 跟着来源走。修复：`amount = atk × pct`、显式 `isSplash:false / isAttack:false / isSkill:false`，神经损伤那一份同样显式声明 ⇒ 追加攻击是**纯单目标的一次伤害** | 2026-10-15 |
+| 39 | 作者要求加强【东】：改为 220 层达到 100% | 斜率 `damage_scale_per_stack` 0.0029754 -> **0.0043955**（`base_damage_scale` 仍 0.033）⇒ 0.033 + 0.0043955 × 220 = 100.0%；同步 `bonds.json`（顶层 bb 与 buffs[0].bb）、编辑器源 `bond-specs/dongShip.json`、`dong.mjs` 注释与 `pack.json` 描述（0.43955% / 220 层）；战斗模块本身从 bb 读数，无需改逻辑 | 2026-10-15 |
+| 40 | 作者要求：叠层→伤害改为**简单平方函数**（不要复杂分段，前面平缓、400 层陡） | bb 新增 `curve_k = 0.00000625`，战斗模块 pct = **curve_k · 层数²**（有 curve_k 用平方，没有则退回线性 base+perStack，向后兼容）。锚点：100 层 6.25% / 200 层 25% / 300 层 56.3% / 400 层 **100%** / 450 层 126.6%。同步 bonds.json（顶层 bb 与 buffs[0].bb）、bond-specs、pack.json 描述与公告 | 2026-10-15 |
+| 41 | 作者要求：平方曲线的 100% 锚点放到 **300 层**，且从 300 层起陡起来 | `curve_k` 0.00000625 -> **0.0000111111**（= 1/300²）⇒ 300 层 = 100.0%；曲线仍是单一平方 pct = curve_k·L²，增量随层数递增 ⇒ 300 层之后最陡（350 层 136.1%、400 层 177.8%、450 层 225.0%）。同步 bonds.json（2 处）、bond-specs、pack.json 描述与公告 | 2026-10-15 |
+| 42 | 作者要求：夜刀默认技能改 S1、嵯峨默认技能改 S2 | 记录里 `skills[]` 本来就是完整技能对象，默认技能由**顶层 `skill`**（其 `index`）决定（客户端 `loadoutModel.skillRecord` 只认 `chess.skill.index === index` 的那份）。改法：`chess_char_9_yato_a/_b` 的顶层 skill 换成 index 0（鬼人化）、`chess_char_9_dong2_a/_b` 换成 index 1（除恶），并把各 skills[i].isDefault 同步。斩业星熊默认本来就是 index 1（无始无明 = S2），未改 | 2026-10-15 |
+| 43 | 作者要求：遥改成"范围内队友受伤即触发技能"，不要再依赖"敌人走进攻击范围" | ① 数据：`chess_char_9_dong1_a/_b` 的 S3 夏末游鳞 `trigger.rule` **ACTIVE_RANGE → DEFAULT**（SP 满即放，不再需要敌人进范围）；② kit：`kits/chess_char_9_dong1_a.js` 在浮光泡影天赋里新增 `battle.on('damaged')` —— **队友在她攻击范围内受伤** ⇒ `giveSp(unit, ally_damaged_sp, 'trait')`（范围判定用引擎 support 的 `inRange`，新 import 自 `@battle/index.js`）；③ 数据：三个技能 bb 新增 `ally_damaged_sp = 3`（每次受伤充 3 SP，代码不写死、可调）。盟约/特性数值未动 | 2026-10-15 |
 
 **验证**（都是可复跑的）：
 
