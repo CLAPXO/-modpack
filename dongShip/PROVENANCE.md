@@ -41,10 +41,10 @@ GPL-3.0-or-later（本包代码）；© Hypergryph / Yostar（随包素材，非
 | 随包素材 | 见第 6 项 | —— |
 
 **发布件内容指纹**（引擎 `shared/modIdentity.js` 的 `modManifestDigest`：对每个发布文件的「相对路径 + sha256(字节)」成对后再取 sha256；
-清单**不含本文件**（它记录这个值，含进去就自指）与 `.tune-backup/**`（编辑器调数值留下的本地备份，不进发布 zip）；191 个文件）：
+清单**不含本文件**（它记录这个值，含进去就自指）与 `.tune-backup/**`（编辑器调数值留下的本地备份，不进发布 zip）；188 个文件）：
 
 ```
-be476be77bc6f1b034f1df25a7e70d18d24b3a87faa8cce5c346f69d0f753d44
+9f663a4c1d3319d56a1b28d2f40e888d39c097946e0f8b0e2912890fc3f39098
 ```
 
 复算：`node F:\wsxy\22\hash-pack.mjs`（同时打印**引擎身份哈希** = `loadWorkshop().packs[0].hash` —— 那一份含本文件与
@@ -106,6 +106,8 @@ be476be77bc6f1b034f1df25a7e70d18d24b3a87faa8cce5c346f69d0f753d44
 | 30 | 作者要求适配 **Forge 0.18.3 / 游戏 0.2.5** 并按 Stronghold-Protocol-Forge-Mods 的上传要求交付 | 用新版整合包自带的数据与工具重验：`shared/constants.js` 的 `MOD_API_VERSION` **仍是 1**（所以 `pack.json` 的 `api: ">=1 <2"` 不用改）；`data/*.json` 逐文件 sha256 与旧版（0.17.0 / 0.2.2）比对 —— **20 个文件里只有 `choices.json` 不同**，本包覆盖/引用的 10 条官方棋子、7 条官方盟约、参照的 7 条官方特质（`garrison_76/147/05/101/07/09`）与经济表（`itemPoolCopies`）**一条都没变** ⇒ **覆盖记录无需重新同步**；`pack.json` 版本 1.1.0 → **1.2.0**、广告（公告）加一条适配须知、描述里点明"会影响对局结果"（上传红线 3） | 新版引擎的校验器：`SP_WORKSHOP=<干净工坊根> node <新引擎>/tools/workshop-validate.mjs --workshop <根> --json` ⇒ **errors = 0**、`VALID`（warnings 60 与旧版逐条相同）；仓库闸门 `node tools/check-packs.mjs --engine <新引擎 app> --root packs` ⇒ `packs/dongShip ✓`、`failedGates: []`、退出码 0（原始输出留在交付包的 `verify/` 里） |
 | 31 | 上游发布**Forge 0.18.4 / 游戏数据 0.2.6**，要求本包适配 | 用 0.18.4 自带的数据与工具重验：`chess` / `bonds` / `garrisons` / `items` / `config` 五张表在 0.2.4 → 0.2.6 之间**逐字节相同**（`server/match/gamedata.js` 与 `data/*.json` 实测），`refresh-chess-overrides.mjs --dry` 17 条覆盖记录全部「不变」、新增 id 与官方无冲突；工具面 `tools/workshop-validate.mjs` = 0 error / VALID、`tools/doctor.mjs` 正常、`tools/check-imports.mjs` 无错、`tools/sim-check.mjs` 267 场无头战斗跑通；15 个回归脚本 + 新增 `audit-kit-skill-sp.mjs` 全过。**包的数据一个字都没改** | 2026-10-14 |
 | 32 | 玩家反馈「吉星战斗中不显示能量条」 | 定位为本包 `kits/chess_char_3_kichi_a.js` 与自带数据不一致：数据里 S1「欢迎您来！」`skillType: MANUAL` / `spCost: 50` / `initSp: 30`、S2「吉星高照！」`spCost: 44` / `initSp: 22`（`INCREASE_WITH_TIME`），而 kit 的 spec 把两个技能写成 `spCost: 0, spType: 'none', trigger: 'NEVER'`。引擎 `server/sim/skills.js:93` 取 `s.spCost ?? d.spCost` ⇒ spec 覆盖数据 ⇒ `server/sim/units.js:229` 的 `spMax` 变 0 ⇒ 客户端 `public/js/render/units.js:1546` 的 `showSp = (spMax > 0 || !!ammo)` 为假 ⇒ 不画能量条；同时 kit 的 hook 都判 `unit.skill.active`、`trigger NEVER` 又永不激活 ⇒ **S1/S2 的效果此前一次都没生效**。修复 = 删掉 kit 里这两行覆盖，让两个技能照数据充能（spMax 50 / 44），`MANUAL` 技能由引擎自动施放（S1 持续 36 s、S2 持续 30 s）。另修正 `pack.json` 描述里过期的公式（0.275% → 0.4835%）。验证：校验器 0 error / VALID、16/16 回归脚本通过、新增 `audit-kit-skill-sp.mjs` 全包 36 条技能 SP 一致、服务器重启后 `/workshop-kits/dongShip/chess_char_3_kichi_a.js` 已无 `spCost: 0` | 2026-10-14 |
+| 33 | 玩家反馈「夜刀的入场动画是不是没绑」 | 是。包里 `art.chars[*].spine.*` 只声明了 `skel`/`atlas`，**没有声明 `anims` 动画角色**，而客户端 `public/js/render/spine.js:697` 的 `deploy()` 只认 `roles.deploy`（`die()` 有 `|| 'Die'` 兜底，deploy 没有）⇒ 4 名自带模型的新干员**全部没有入场动画**；顺带查了攻击/技能/死亡角色的可用性。修复：用引擎自带工具在同一份 .skel 上解析并解析角色（`tools/assets/skel.mjs` 的 parseSkel + `tools/assets/anim-roles.mjs` 的 resolveRoles，运行时 `@pixi-spine/runtime-3.8`），把 `anims` / `animations`(时长表) / `events` / `hits` / `bounds` / `pma` / `textures` 写进 `art.chars`，与官方 `data/assets.json` 条目同形；夜刀的模型没有 `Start`、只有 `Start_1/2/3`，入场显式绑 `Start_1`。同时发现 `char_118_yuki`(白雪) 的 **back 模型 .skel 已损坏**（3.8/4.0/4.1 三个解析器都在读中段时越界，29168 字节），已移除该侧的声明并删掉损坏文件（客户端 `assets.js:161` 在没有合法 `spine.back` 时回退到 front），待重新获取模型后再补。新增体检脚本 `F:\wsxy\22\audit-spine-anims.mjs`（逐模型断言 deploy/idle/attack 与贴图）| 2026-10-14 |
+| 34 | 作者要求重定【东】效果一的斜率（口径不变：界面显示值与实际结算值逐字相同） | `server/battle/dong.mjs` 的 `base_damage_scale` 保持 3.3%，`damage_scale_per_stack` 由 0.004835 改为 **0.0032233** ⇒ 300 层正好 100%（50 层 19.4% / 100 层 35.5% / 150 层 51.6% / 200 层 67.8%）；`bonds.json`、`bond-specs/dongShip.json`、公告与 `pack.json` 描述的同一组数字同步 | 2026-10-14 |
 
 **验证**（都是可复跑的）：
 

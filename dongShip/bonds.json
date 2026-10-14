@@ -39,7 +39,7 @@
     ],
     "bb": {
       "base_damage_scale": 0.033,
-      "damage_scale_per_stack": 0.004835,
+      "damage_scale_per_stack": 0.0032233,
       "power_char_cnt": 3,
       "power_bond_char_cnt": 6,
       "neural_damage": 60
@@ -52,7 +52,7 @@
         "key": "env_gbuff_new",
         "bb": {
           "base_damage_scale": 0.033,
-          "damage_scale_per_stack": 0.004835,
+          "damage_scale_per_stack": 0.0032233,
           "power_char_cnt": 3,
           "power_bond_char_cnt": 6,
           "neural_damage": 60
