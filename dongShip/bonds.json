@@ -76,13 +76,13 @@
       "chess_char_2_11_a",
       "chess_char_2_noirc2_a",
       "chess_char_3_kichi_a",
-      "chess_char_4_09_a",
       "chess_char_4_17_a",
       "chess_char_5_20_a",
       "chess_char_6_hsgma2_a",
       "chess_char_9_dong1_a",
       "chess_char_9_dong2_a",
-      "chess_char_9_yato_a"
+      "chess_char_9_yato_a",
+      "chess_char_9_akafuyu_a"
     ],
     "visibleMembers": [
       "chess_char_1_18_a",
@@ -90,13 +90,13 @@
       "chess_char_2_11_a",
       "chess_char_2_noirc2_a",
       "chess_char_3_kichi_a",
-      "chess_char_4_09_a",
       "chess_char_4_17_a",
       "chess_char_5_20_a",
       "chess_char_6_hsgma2_a",
       "chess_char_9_dong1_a",
       "chess_char_9_dong2_a",
-      "chess_char_9_yato_a"
+      "chess_char_9_yato_a",
+      "chess_char_9_akafuyu_a"
     ],
     "genericBuffs": true
   },
@@ -992,7 +992,97 @@
         "reaches100%AtL": "205"
       },
       "layerGain": "雷蛇 休整期结束 +1; 砾 被击倒 +2; 归溟幽灵鲨 +5; 风笛 kills +2; 机变 \"风笛的盟誓\" +8."
+    }
+  },
+  "soloShip": {
+    "bondId": "soloShip",
+    "name": "独行",
+    "identifier": 22,
+    "isCore": false,
+    "bondType": "REGULAR",
+    "bondOrder": 2,
+    "powerIdList": [],
+    "iconId": "icon_soloShip",
+    "activeCount": 1,
+    "thresholds": [
+      1
+    ],
+    "maxCount": 1,
+    "thresholdTemplate": "count_threshold_downward",
+    "countMode": "BOARD",
+    "countsHand": false,
+    "countsGoldenOnly": false,
+    "activeType": "BATTLE",
+    "isActiveInDeck": false,
+    "noStack": true,
+    "weight": 10,
+    "maxInactiveBondCount": -1,
+    "layerMilestones": [],
+    "desc": "<在场1名【独行】干员>【独行】干员攻击力和生命值+60%，初始技力+15（在场2名及以上【独行】干员时失效）",
+    "descRaw": "<在场1名【独行】干员>【独行】干员攻击力和生命值<@ba.vup>+60%</>，初始技力<@ba.vup>+15</>（在场2名及以上【独行】干员时失效）",
+    "effectId": "bondeffect_solo",
+    "effectName": "独行",
+    "effectDesc": "<在场1名【独行】干员>【独行】干员攻击力和生命值+60%，初始技力+15（在场2名及以上【独行】干员时失效）",
+    "effectDescRaw": "<在场<@ba.vup>1</>名【独行】干员>【独行】干员攻击力和生命值<@ba.vup>+60%</>，初始技力<@ba.vup>+15</><@ba.acrem>（在场2名及以上【独行】干员时失效）</>",
+    "effectDescParams": [],
+    "bb": {
+      "atk": 0.6,
+      "max_hp": 0.6,
+      "sp": 15
     },
-    "id": "indomShip"
+    "bbStr": {
+      "key": "act2autochess_bond_eff_solo"
+    },
+    "buffs": [
+      {
+        "key": "env_gbuff_new",
+        "bb": {
+          "atk": 0.6,
+          "max_hp": 0.6,
+          "sp": 15
+        },
+        "bbStr": {
+          "key": "act2autochess_bond_eff_solo"
+        }
+      }
+    ],
+    "baseParams": [],
+    "perStackParams": [],
+    "members": [
+      "chess_char_1_08_a",
+      "chess_char_2_17_a",
+      "chess_char_3_17_a",
+      "chess_char_4_09_a",
+      "chess_char_4_18_a",
+      "chess_char_5_11_a",
+      "chess_char_1_21_a",
+      "chess_char_9_akafuyu_a"
+    ],
+    "visibleMembers": [
+      "chess_char_1_08_a",
+      "chess_char_2_17_a",
+      "chess_char_3_17_a",
+      "chess_char_4_09_a",
+      "chess_char_4_18_a",
+      "chess_char_5_11_a",
+      "chess_char_1_21_a",
+      "chess_char_9_akafuyu_a"
+    ],
+    "spec": {
+      "tiers": [
+        {
+          "need": "exactly 1 distinct 独行 on board",
+          "effect": "That operator ATK +60%, maxHP +60%, +15 SP when deployed. Disabled when 2+ different 独行 operators are on the board."
+        }
+      ],
+      "formulas": {
+        "atkMul": "1.6",
+        "hpMul": "1.6",
+        "spOnDeploy": "15"
+      },
+      "notes": [
+        "noStack=true"
+      ]
+    }
   }
 }

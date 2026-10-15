@@ -300,52 +300,6 @@
       "chess_char_9_dong2_b"
     ]
   },
-  "garrison_mizuki_dong_a": {
-    "garrisonId": "garrison_mizuki_dong_a",
-    "desc": "【东】每叠加3层，本干员攻击力+1%",
-    "descRaw": "【东】每叠加3层，本干员攻击力<@ba.vup>+1%</>",
-    "eventType": "IN_BATTLE",
-    "eventTypeDesc": "作战能力",
-    "eventTypeIcon": "icon_battle",
-    "effectType": "GAIN_BUFF",
-    "effectKey": "act1autochess_gar_eff_attrByBond",
-    "battleRuneKey": "env_gbuff_new_with_verify",
-    "charLevel": 0,
-    "bb": {
-      "divide_num": 3,
-      "atk": 0.01
-    },
-    "bbStr": {
-      "key": "act1autochess_gar_eff_attrByBond",
-      "bond_id": "dongShip"
-    },
-    "owners": [
-      "chess_char_4_09_a"
-    ]
-  },
-  "garrison_mizuki_dong_b": {
-    "garrisonId": "garrison_mizuki_dong_b",
-    "desc": "【东】每叠加3层，本干员攻击力+2%",
-    "descRaw": "【东】每叠加3层，本干员攻击力<@ba.vup>+2%</>",
-    "eventType": "IN_BATTLE",
-    "eventTypeDesc": "作战能力",
-    "eventTypeIcon": "icon_battle",
-    "effectType": "GAIN_BUFF",
-    "effectKey": "act1autochess_gar_eff_attrByBond",
-    "battleRuneKey": "env_gbuff_new_with_verify",
-    "charLevel": 0,
-    "bb": {
-      "divide_num": 3,
-      "atk": 0.02
-    },
-    "bbStr": {
-      "key": "act1autochess_gar_eff_attrByBond",
-      "bond_id": "dongShip"
-    },
-    "owners": [
-      "chess_char_4_09_b"
-    ]
-  },
   "garrison_noirc2_dong_a": {
     "garrisonId": "garrison_noirc2_dong_a",
     "desc": "<进入休整期时>若棋盘上有5名以上【东】干员，获得1个等级不高于当前商店等级的【东】干员",
@@ -436,6 +390,54 @@
     },
     "owners": [
       "chess_char_9_dong1_b"
+    ]
+  },
+  "garrison_akafuyu_dong_a": {
+    "garrisonId": "garrison_akafuyu_dong_a",
+    "desc": "【东】每叠加3层，本干员攻击力、生命值+1.5%",
+    "descRaw": "【东】每叠加3层，本干员攻击力、生命值+1.5%",
+    "eventType": "IN_BATTLE",
+    "eventTypeDesc": "作战能力",
+    "eventTypeIcon": "icon_battle",
+    "effectType": "GAIN_BUFF",
+    "effectKey": "act1autochess_gar_eff_attrByBond",
+    "battleRuneKey": "env_gbuff_new_with_verify",
+    "charLevel": 0,
+    "bb": {
+      "divide_num": 3,
+      "atk": 0.015,
+      "max_hp": 0.015
+    },
+    "bbStr": {
+      "key": "act1autochess_gar_eff_attrByBond",
+      "bond_id": "dongShip"
+    },
+    "owners": [
+      "chess_char_9_akafuyu_a"
+    ]
+  },
+  "garrison_akafuyu_dong_b": {
+    "garrisonId": "garrison_akafuyu_dong_b",
+    "desc": "【东】每叠加3层，本干员攻击力、生命值+1.5%",
+    "descRaw": "【东】每叠加3层，本干员攻击力、生命值+1.5%",
+    "eventType": "IN_BATTLE",
+    "eventTypeDesc": "作战能力",
+    "eventTypeIcon": "icon_battle",
+    "effectType": "GAIN_BUFF",
+    "effectKey": "act1autochess_gar_eff_attrByBond",
+    "battleRuneKey": "env_gbuff_new_with_verify",
+    "charLevel": 0,
+    "bb": {
+      "divide_num": 3,
+      "atk": 0.015,
+      "max_hp": 0.015
+    },
+    "bbStr": {
+      "key": "act1autochess_gar_eff_attrByBond",
+      "bond_id": "dongShip"
+    },
+    "owners": [
+      "chess_char_9_akafuyu_b"
     ]
   }
 }

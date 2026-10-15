@@ -29,7 +29,8 @@
     "nationId": "higashi",
     "bonds": [
       "visiShip",
-      "dongShip"
+      "dongShip",
+      "soloShip"
     ],
     "garrisonIds": [
       "garrison_yuki_a"
@@ -534,7 +535,8 @@
     "nationId": "higashi",
     "bonds": [
       "visiShip",
-      "dongShip"
+      "dongShip",
+      "soloShip"
     ],
     "garrisonIds": [
       "garrison_yuki_b"
@@ -4527,1179 +4529,6 @@
       "4": {
         "stats.cost": 14,
         "statsBase.cost": 14
-      }
-    }
-  },
-  "chess_char_4_09_a": {
-    "chessId": "chess_char_4_09_a",
-    "baseId": "chess_char_4_09_a",
-    "goldenId": "chess_char_4_09_b",
-    "isGolden": false,
-    "tier": 4,
-    "identifier": 68,
-    "isHidden": false,
-    "isDiy": false,
-    "visible": true,
-    "chessType": "NORMAL",
-    "backup": {
-      "charId": "char_617_sharp2",
-      "tmplId": null,
-      "skillIndex": 0,
-      "uniEquipId": null,
-      "potRank": 0
-    },
-    "shopSortId": 9,
-    "charId": "char_437_mizuki",
-    "name": "水月",
-    "appellation": "Mizuki",
-    "rarity": 6,
-    "profession": "SPECIAL",
-    "subProfessionId": "stalker",
-    "subProfessionName": "伏击客",
-    "position": "MELEE",
-    "nationId": "higashi",
-    "bonds": [
-      "egirShip",
-      "soloShip",
-      "dongShip"
-    ],
-    "garrisonIds": [
-      "garrison_07_a",
-      "garrison_mizuki_dong_a"
-    ],
-    "price": 3,
-    "sellPrice": 1,
-    "upgradeNum": 3,
-    "upgradeChessId": "chess_char_4_09_b",
-    "status": {
-      "phase": 2,
-      "level": 1,
-      "skillLevel": 4,
-      "equipLevel": 0
-    },
-    "stats": {
-      "maxHp": 1336,
-      "atk": 724,
-      "def": 302,
-      "res": 30,
-      "cost": 19,
-      "blockCnt": 0,
-      "bat": 3.5,
-      "aspd": 100,
-      "respawnTime": 66,
-      "spRecovery": 1,
-      "hpRecoveryPerSec": 0,
-      "moveSpeed": 1,
-      "tauntLevel": -1,
-      "massLevel": 0,
-      "deployLimit": 1,
-      "deckStack": 0
-    },
-    "immunities": {
-      "stun": false,
-      "silence": false,
-      "sleep": false,
-      "frozen": false,
-      "levitate": false
-    },
-    "rangeId": "y-1",
-    "rangeGrid": [
-      [
-        1,
-        -1
-      ],
-      [
-        1,
-        0
-      ],
-      [
-        1,
-        1
-      ],
-      [
-        0,
-        -1
-      ],
-      [
-        0,
-        0
-      ],
-      [
-        0,
-        1
-      ],
-      [
-        0,
-        2
-      ],
-      [
-        -1,
-        -1
-      ],
-      [
-        -1,
-        0
-      ],
-      [
-        -1,
-        1
-      ]
-    ],
-    "dmgType": "phys",
-    "attackKind": "melee",
-    "projectile": "none",
-    "canHitFly": false,
-    "targetPriority": null,
-    "trait": {
-      "desc": "对攻击范围内所有敌人造成伤害\n拥有50%的物理和法术闪避且不容易成为敌人的攻击目标",
-      "descRaw": "对攻击范围内<@ba.kw>所有敌人</>造成伤害\n拥有50%的物理和法术闪避且不容易成为敌人的<@ba.kw>攻击目标</>",
-      "bb": {
-        "prob": 0.5
-      },
-      "bbStr": {},
-      "rangeGrid": null
-    },
-    "skill": {
-      "skillId": "skchr_mizuki_2",
-      "iconId": "skchr_mizuki_2",
-      "name": "囚徒困境",
-      "level": 4,
-      "desc": "攻击间隔小幅度缩短，攻击力+15%，第一天赋额外攻击1个目标并附加0.8秒束缚",
-      "descRaw": "攻击间隔<@ba.vup>小幅度缩短</>，攻击力<@ba.vup>+15%</>，第一天赋额外攻击<@ba.vup>1</>个目标并附加<@ba.vup>0.8</>秒<$ba.root>束缚</>",
-      "skillType": "MANUAL",
-      "durationType": "NONE",
-      "duration": 17,
-      "spType": "INCREASE_WITH_TIME",
-      "spCost": 22,
-      "initSp": 5,
-      "maxChargeTime": 1,
-      "increment": 1,
-      "bb": {
-        "base_attack_time": -0.7,
-        "atk": 0.15,
-        "attack@unmovable": 0.8,
-        "attack@max_target": 1
-      },
-      "bbStr": {},
-      "rangeId": null,
-      "rangeGrid": null,
-      "prefabId": "skchr_mizuki_2",
-      "trigger": {
-        "rule": "DEFAULT",
-        "rawRule": "DEFAULT",
-        "customRangeGrid": null
-      },
-      "index": 1,
-      "overrideTokenKey": null
-    },
-    "talents": [
-      {
-        "index": 0,
-        "name": "创伤性癔症",
-        "desc": "攻击时对攻击目标中生命值最少的敌人额外造成相当于攻击力50%的法术伤害",
-        "descRaw": "攻击时对攻击目标中生命值最少的敌人额外造成相当于攻击力50%的法术伤害",
-        "bb": {
-          "attack@mizuki_t_1.atk_scale": 0.5,
-          "attack@max_target": 1
-        },
-        "bbStr": {},
-        "rangeGrid": null,
-        "tokenKey": null,
-        "hidden": false,
-        "fromModule": false
-      },
-      {
-        "index": 1,
-        "name": "反移情",
-        "desc": "攻击范围内存在生命值低于一半的敌人时，攻击力+12%（+2%）",
-        "descRaw": "攻击范围内存在生命值低于一半的敌人时，攻击力+12%<@ba.talpu>（+2%）</>",
-        "bb": {
-          "hp_ratio": 0.5,
-          "atk": 0.12
-        },
-        "bbStr": {},
-        "rangeGrid": null,
-        "tokenKey": null,
-        "hidden": false,
-        "fromModule": false,
-        "potMin": 4,
-        "potBelow": {
-          "desc": "攻击范围内存在生命值低于一半的敌人时，攻击力+10%",
-          "descRaw": "攻击范围内存在生命值低于一半的敌人时，攻击力+10%",
-          "bb": {
-            "hp_ratio": 0.5,
-            "atk": 0.1
-          }
-        }
-      }
-    ],
-    "tokens": [],
-    "module": {
-      "id": "uniequip_002_mizuki",
-      "name": "使者之约",
-      "type": "AMB-X",
-      "level": 0,
-      "active": false
-    },
-    "assets": {
-      "avatar": "char_437_mizuki",
-      "portrait": "char_437_mizuki_1",
-      "spine": "char_437_mizuki",
-      "skillIcon": "skchr_mizuki_2",
-      "subProfIcon": "sub_stalker_icon"
-    },
-    "skills": [
-      {
-        "skillId": "skchr_mizuki_1",
-        "iconId": "skchr_mizuki_1",
-        "name": "唤醒",
-        "level": 4,
-        "desc": "下次攻击造成相当于攻击力200%的物理伤害，且第一天赋伤害倍率提升至2.0倍\n可充能2次",
-        "descRaw": "下次攻击造成相当于攻击力<@ba.vup>200%</>的物理伤害，且第一天赋伤害倍率提升至<@ba.vup>2.0</>倍\n<@ba.rem>可充能2次</>",
-        "skillType": "AUTO",
-        "durationType": "NONE",
-        "duration": 0,
-        "spType": "INCREASE_WITH_TIME",
-        "spCost": 9,
-        "initSp": 0,
-        "maxChargeTime": 2,
-        "increment": 1,
-        "bb": {
-          "atk_scale": 2,
-          "talent_scale": 2,
-          "cnt": 2
-        },
-        "bbStr": {},
-        "rangeId": null,
-        "rangeGrid": null,
-        "prefabId": "skchr_mizuki_1",
-        "trigger": {
-          "rule": "DEFAULT",
-          "rawRule": "DEFAULT",
-          "customRangeGrid": null
-        },
-        "index": 0,
-        "overrideTokenKey": null,
-        "isDefault": false
-      },
-      {
-        "skillId": "skchr_mizuki_2",
-        "iconId": "skchr_mizuki_2",
-        "name": "囚徒困境",
-        "level": 4,
-        "desc": "攻击间隔小幅度缩短，攻击力+15%，第一天赋额外攻击1个目标并附加0.8秒束缚",
-        "descRaw": "攻击间隔<@ba.vup>小幅度缩短</>，攻击力<@ba.vup>+15%</>，第一天赋额外攻击<@ba.vup>1</>个目标并附加<@ba.vup>0.8</>秒<$ba.root>束缚</>",
-        "skillType": "MANUAL",
-        "durationType": "NONE",
-        "duration": 17,
-        "spType": "INCREASE_WITH_TIME",
-        "spCost": 22,
-        "initSp": 5,
-        "maxChargeTime": 1,
-        "increment": 1,
-        "bb": {
-          "base_attack_time": -0.7,
-          "atk": 0.15,
-          "attack@unmovable": 0.8,
-          "attack@max_target": 1
-        },
-        "bbStr": {},
-        "rangeId": null,
-        "rangeGrid": null,
-        "prefabId": "skchr_mizuki_2",
-        "trigger": {
-          "rule": "DEFAULT",
-          "rawRule": "DEFAULT",
-          "customRangeGrid": null
-        },
-        "index": 1,
-        "overrideTokenKey": null,
-        "isDefault": true
-      },
-      {
-        "skillId": "skchr_mizuki_3",
-        "iconId": "skchr_mizuki_3",
-        "name": "镜花水月",
-        "level": 4,
-        "desc": "攻击范围扩大，攻击力+90%，第一天赋额外攻击2个目标并附加0.7秒晕眩；每次攻击命中目标少于3名敌人时，自身流失最大生命值的15%。",
-        "descRaw": "攻击范围<@ba.vup>扩大</>，攻击力<@ba.vup>+90%</>，第一天赋额外攻击<@ba.vup>2</>个目标并附加<@ba.vup>0.7</>秒<$ba.stun>晕眩</>；每次攻击命中目标少于3名敌人时，自身流失最大生命值的<@ba.vup>15%</>。",
-        "skillType": "MANUAL",
-        "durationType": "NONE",
-        "duration": 30,
-        "spType": "INCREASE_WITH_TIME",
-        "spCost": 75,
-        "initSp": 25,
-        "maxChargeTime": 1,
-        "increment": 1,
-        "bb": {
-          "atk": 0.9,
-          "attack@stun": 0.7,
-          "attack@hp_ratio": 0.15,
-          "attack@max_target": 2
-        },
-        "bbStr": {},
-        "rangeId": "y-4",
-        "rangeGrid": [
-          [
-            2,
-            -1
-          ],
-          [
-            2,
-            0
-          ],
-          [
-            2,
-            1
-          ],
-          [
-            1,
-            -1
-          ],
-          [
-            1,
-            0
-          ],
-          [
-            1,
-            1
-          ],
-          [
-            1,
-            2
-          ],
-          [
-            0,
-            -1
-          ],
-          [
-            0,
-            0
-          ],
-          [
-            0,
-            1
-          ],
-          [
-            0,
-            2
-          ],
-          [
-            0,
-            3
-          ],
-          [
-            -1,
-            -1
-          ],
-          [
-            -1,
-            0
-          ],
-          [
-            -1,
-            1
-          ],
-          [
-            -1,
-            2
-          ],
-          [
-            -2,
-            -1
-          ],
-          [
-            -2,
-            0
-          ],
-          [
-            -2,
-            1
-          ]
-        ],
-        "prefabId": "skchr_mizuki_3",
-        "trigger": {
-          "rule": "ACTIVE_RANGE",
-          "rawRule": "DEFAULT",
-          "customRangeGrid": [
-            [
-              2,
-              -1
-            ],
-            [
-              2,
-              0
-            ],
-            [
-              2,
-              1
-            ],
-            [
-              1,
-              -1
-            ],
-            [
-              1,
-              0
-            ],
-            [
-              1,
-              1
-            ],
-            [
-              1,
-              2
-            ],
-            [
-              0,
-              -1
-            ],
-            [
-              0,
-              0
-            ],
-            [
-              0,
-              1
-            ],
-            [
-              0,
-              2
-            ],
-            [
-              0,
-              3
-            ],
-            [
-              -1,
-              -1
-            ],
-            [
-              -1,
-              0
-            ],
-            [
-              -1,
-              1
-            ],
-            [
-              -1,
-              2
-            ],
-            [
-              -2,
-              -1
-            ],
-            [
-              -2,
-              0
-            ],
-            [
-              -2,
-              1
-            ]
-          ]
-        },
-        "index": 2,
-        "overrideTokenKey": null,
-        "isDefault": false
-      }
-    ],
-    "potDown": {
-      "0": {
-        "stats.cost": 21
-      },
-      "1": {
-        "stats.respawnTime": 70
-      },
-      "2": {
-        "stats.atk": 692
-      },
-      "4": {
-        "stats.cost": 20
-      }
-    }
-  },
-  "chess_char_4_09_b": {
-    "chessId": "chess_char_4_09_b",
-    "baseId": "chess_char_4_09_a",
-    "goldenId": "chess_char_4_09_b",
-    "isGolden": true,
-    "tier": 4,
-    "identifier": 201,
-    "isHidden": false,
-    "isDiy": false,
-    "visible": true,
-    "chessType": "NORMAL",
-    "backup": {
-      "charId": "char_617_sharp2",
-      "tmplId": null,
-      "skillIndex": 0,
-      "uniEquipId": null,
-      "potRank": 0
-    },
-    "shopSortId": 9,
-    "charId": "char_437_mizuki",
-    "name": "水月",
-    "appellation": "Mizuki",
-    "rarity": 6,
-    "profession": "SPECIAL",
-    "subProfessionId": "stalker",
-    "subProfessionName": "伏击客",
-    "position": "MELEE",
-    "nationId": "higashi",
-    "bonds": [
-      "egirShip",
-      "soloShip",
-      "dongShip"
-    ],
-    "garrisonIds": [
-      "garrison_07_b",
-      "garrison_mizuki_dong_b"
-    ],
-    "price": 3,
-    "sellPrice": 1,
-    "upgradeNum": 0,
-    "upgradeChessId": null,
-    "status": {
-      "phase": 2,
-      "level": 60,
-      "skillLevel": 7,
-      "equipLevel": 1
-    },
-    "stats": {
-      "maxHp": 1736,
-      "atk": 899,
-      "def": 338,
-      "res": 30,
-      "cost": 19,
-      "blockCnt": 0,
-      "bat": 3.5,
-      "aspd": 100,
-      "respawnTime": 66,
-      "spRecovery": 1,
-      "hpRecoveryPerSec": 0,
-      "moveSpeed": 1,
-      "tauntLevel": -1,
-      "massLevel": 0,
-      "deployLimit": 1,
-      "deckStack": 0
-    },
-    "immunities": {
-      "stun": false,
-      "silence": false,
-      "sleep": false,
-      "frozen": false,
-      "levitate": false
-    },
-    "rangeId": "y-1",
-    "rangeGrid": [
-      [
-        1,
-        -1
-      ],
-      [
-        1,
-        0
-      ],
-      [
-        1,
-        1
-      ],
-      [
-        0,
-        -1
-      ],
-      [
-        0,
-        0
-      ],
-      [
-        0,
-        1
-      ],
-      [
-        0,
-        2
-      ],
-      [
-        -1,
-        -1
-      ],
-      [
-        -1,
-        0
-      ],
-      [
-        -1,
-        1
-      ]
-    ],
-    "dmgType": "phys",
-    "attackKind": "melee",
-    "projectile": "none",
-    "canHitFly": false,
-    "targetPriority": null,
-    "trait": {
-      "desc": "对攻击范围内所有敌人造成伤害\n拥有50%的物理和法术闪避且不容易成为敌人的攻击目标",
-      "descRaw": "对攻击范围内<@ba.kw>所有敌人</>造成伤害\n拥有50%的物理和法术闪避且不容易成为敌人的<@ba.kw>攻击目标</>",
-      "bb": {
-        "prob": 0.5
-      },
-      "bbStr": {},
-      "rangeGrid": null,
-      "moduleDesc": "攻击范围内所有敌人移动速度-20%",
-      "moduleDescRaw": "攻击范围内所有敌人移动速度<@ba.kw>-20%</>"
-    },
-    "skill": {
-      "skillId": "skchr_mizuki_2",
-      "iconId": "skchr_mizuki_2",
-      "name": "囚徒困境",
-      "level": 7,
-      "desc": "攻击间隔缩短，攻击力+20%，第一天赋额外攻击1个目标并附加1秒束缚",
-      "descRaw": "攻击间隔<@ba.vup>缩短</>，攻击力<@ba.vup>+20%</>，第一天赋额外攻击<@ba.vup>1</>个目标并附加<@ba.vup>1</>秒<$ba.root>束缚</>",
-      "skillType": "MANUAL",
-      "durationType": "NONE",
-      "duration": 19,
-      "spType": "INCREASE_WITH_TIME",
-      "spCost": 19,
-      "initSp": 5,
-      "maxChargeTime": 1,
-      "increment": 1,
-      "bb": {
-        "base_attack_time": -1.2,
-        "atk": 0.2,
-        "attack@unmovable": 1,
-        "attack@max_target": 1
-      },
-      "bbStr": {},
-      "rangeId": null,
-      "rangeGrid": null,
-      "prefabId": "skchr_mizuki_2",
-      "trigger": {
-        "rule": "DEFAULT",
-        "rawRule": "DEFAULT",
-        "customRangeGrid": null
-      },
-      "index": 1,
-      "overrideTokenKey": null
-    },
-    "talents": [
-      {
-        "index": 0,
-        "name": "创伤性癔症",
-        "desc": "攻击时对攻击目标中生命值最少的敌人额外造成相当于攻击力50%的法术伤害",
-        "descRaw": "攻击时对攻击目标中生命值最少的敌人额外造成相当于攻击力50%的法术伤害",
-        "bb": {
-          "attack@mizuki_t_1.atk_scale": 0.5,
-          "attack@max_target": 1
-        },
-        "bbStr": {},
-        "rangeGrid": null,
-        "tokenKey": null,
-        "hidden": false,
-        "fromModule": false
-      },
-      {
-        "index": 1,
-        "name": "反移情",
-        "desc": "攻击范围内存在生命值低于一半的敌人时，攻击力+12%（+2%）",
-        "descRaw": "攻击范围内存在生命值低于一半的敌人时，攻击力+12%<@ba.talpu>（+2%）</>",
-        "bb": {
-          "hp_ratio": 0.5,
-          "atk": 0.12
-        },
-        "bbStr": {},
-        "rangeGrid": null,
-        "tokenKey": null,
-        "hidden": false,
-        "fromModule": false,
-        "potMin": 4,
-        "potBelow": {
-          "desc": "攻击范围内存在生命值低于一半的敌人时，攻击力+10%",
-          "descRaw": "攻击范围内存在生命值低于一半的敌人时，攻击力+10%",
-          "bb": {
-            "hp_ratio": 0.5,
-            "atk": 0.1
-          }
-        }
-      },
-      {
-        "index": -1,
-        "name": null,
-        "desc": null,
-        "descRaw": null,
-        "bb": {
-          "move_speed": -0.2
-        },
-        "bbStr": {},
-        "rangeGrid": null,
-        "tokenKey": null,
-        "hidden": true,
-        "fromModule": true
-      }
-    ],
-    "tokens": [],
-    "module": {
-      "id": "uniequip_002_mizuki",
-      "name": "使者之约",
-      "type": "AMB-X",
-      "level": 1,
-      "active": true
-    },
-    "assets": {
-      "avatar": "char_437_mizuki_2",
-      "portrait": "char_437_mizuki_2",
-      "spine": "char_437_mizuki",
-      "skillIcon": "skchr_mizuki_2",
-      "subProfIcon": "sub_stalker_icon"
-    },
-    "skills": [
-      {
-        "skillId": "skchr_mizuki_1",
-        "iconId": "skchr_mizuki_1",
-        "name": "唤醒",
-        "level": 7,
-        "desc": "下次攻击造成相当于攻击力230%的物理伤害，且第一天赋伤害倍率提升至2.3倍\n可充能2次",
-        "descRaw": "下次攻击造成相当于攻击力<@ba.vup>230%</>的物理伤害，且第一天赋伤害倍率提升至<@ba.vup>2.3</>倍\n<@ba.rem>可充能2次</>",
-        "skillType": "AUTO",
-        "durationType": "NONE",
-        "duration": 0,
-        "spType": "INCREASE_WITH_TIME",
-        "spCost": 8,
-        "initSp": 0,
-        "maxChargeTime": 2,
-        "increment": 1,
-        "bb": {
-          "atk_scale": 2.3,
-          "talent_scale": 2.3,
-          "cnt": 2
-        },
-        "bbStr": {},
-        "rangeId": null,
-        "rangeGrid": null,
-        "prefabId": "skchr_mizuki_1",
-        "trigger": {
-          "rule": "DEFAULT",
-          "rawRule": "DEFAULT",
-          "customRangeGrid": null
-        },
-        "index": 0,
-        "overrideTokenKey": null,
-        "isDefault": false
-      },
-      {
-        "skillId": "skchr_mizuki_2",
-        "iconId": "skchr_mizuki_2",
-        "name": "囚徒困境",
-        "level": 7,
-        "desc": "攻击间隔缩短，攻击力+20%，第一天赋额外攻击1个目标并附加1秒束缚",
-        "descRaw": "攻击间隔<@ba.vup>缩短</>，攻击力<@ba.vup>+20%</>，第一天赋额外攻击<@ba.vup>1</>个目标并附加<@ba.vup>1</>秒<$ba.root>束缚</>",
-        "skillType": "MANUAL",
-        "durationType": "NONE",
-        "duration": 19,
-        "spType": "INCREASE_WITH_TIME",
-        "spCost": 19,
-        "initSp": 5,
-        "maxChargeTime": 1,
-        "increment": 1,
-        "bb": {
-          "base_attack_time": -1.2,
-          "atk": 0.2,
-          "attack@unmovable": 1,
-          "attack@max_target": 1
-        },
-        "bbStr": {},
-        "rangeId": null,
-        "rangeGrid": null,
-        "prefabId": "skchr_mizuki_2",
-        "trigger": {
-          "rule": "DEFAULT",
-          "rawRule": "DEFAULT",
-          "customRangeGrid": null
-        },
-        "index": 1,
-        "overrideTokenKey": null,
-        "isDefault": true
-      },
-      {
-        "skillId": "skchr_mizuki_3",
-        "iconId": "skchr_mizuki_3",
-        "name": "镜花水月",
-        "level": 7,
-        "desc": "攻击范围扩大，攻击力+105%，第一天赋额外攻击2个目标并附加1秒晕眩；每次攻击命中目标少于3名敌人时，自身流失最大生命值的15%。",
-        "descRaw": "攻击范围<@ba.vup>扩大</>，攻击力<@ba.vup>+105%</>，第一天赋额外攻击<@ba.vup>2</>个目标并附加<@ba.vup>1</>秒<$ba.stun>晕眩</>；每次攻击命中目标少于3名敌人时，自身流失最大生命值的<@ba.vup>15%</>。",
-        "skillType": "MANUAL",
-        "durationType": "NONE",
-        "duration": 30,
-        "spType": "INCREASE_WITH_TIME",
-        "spCost": 70,
-        "initSp": 30,
-        "maxChargeTime": 1,
-        "increment": 1,
-        "bb": {
-          "atk": 1.05,
-          "attack@stun": 1,
-          "attack@hp_ratio": 0.15,
-          "attack@max_target": 2
-        },
-        "bbStr": {},
-        "rangeId": "y-4",
-        "rangeGrid": [
-          [
-            2,
-            -1
-          ],
-          [
-            2,
-            0
-          ],
-          [
-            2,
-            1
-          ],
-          [
-            1,
-            -1
-          ],
-          [
-            1,
-            0
-          ],
-          [
-            1,
-            1
-          ],
-          [
-            1,
-            2
-          ],
-          [
-            0,
-            -1
-          ],
-          [
-            0,
-            0
-          ],
-          [
-            0,
-            1
-          ],
-          [
-            0,
-            2
-          ],
-          [
-            0,
-            3
-          ],
-          [
-            -1,
-            -1
-          ],
-          [
-            -1,
-            0
-          ],
-          [
-            -1,
-            1
-          ],
-          [
-            -1,
-            2
-          ],
-          [
-            -2,
-            -1
-          ],
-          [
-            -2,
-            0
-          ],
-          [
-            -2,
-            1
-          ]
-        ],
-        "prefabId": "skchr_mizuki_3",
-        "trigger": {
-          "rule": "ACTIVE_RANGE",
-          "rawRule": "DEFAULT",
-          "customRangeGrid": [
-            [
-              2,
-              -1
-            ],
-            [
-              2,
-              0
-            ],
-            [
-              2,
-              1
-            ],
-            [
-              1,
-              -1
-            ],
-            [
-              1,
-              0
-            ],
-            [
-              1,
-              1
-            ],
-            [
-              1,
-              2
-            ],
-            [
-              0,
-              -1
-            ],
-            [
-              0,
-              0
-            ],
-            [
-              0,
-              1
-            ],
-            [
-              0,
-              2
-            ],
-            [
-              0,
-              3
-            ],
-            [
-              -1,
-              -1
-            ],
-            [
-              -1,
-              0
-            ],
-            [
-              -1,
-              1
-            ],
-            [
-              -1,
-              2
-            ],
-            [
-              -2,
-              -1
-            ],
-            [
-              -2,
-              0
-            ],
-            [
-              -2,
-              1
-            ]
-          ]
-        },
-        "index": 2,
-        "overrideTokenKey": null,
-        "isDefault": false
-      }
-    ],
-    "statsBase": {
-      "maxHp": 1616,
-      "atk": 839,
-      "def": 338,
-      "res": 30,
-      "cost": 19,
-      "blockCnt": 0,
-      "bat": 3.5,
-      "aspd": 100,
-      "respawnTime": 66,
-      "spRecovery": 1,
-      "hpRecoveryPerSec": 0,
-      "moveSpeed": 1,
-      "tauntLevel": -1,
-      "massLevel": 0,
-      "deployLimit": 1,
-      "deckStack": 0
-    },
-    "traitBase": {
-      "desc": "对攻击范围内所有敌人造成伤害\n拥有50%的物理和法术闪避且不容易成为敌人的攻击目标",
-      "descRaw": "对攻击范围内<@ba.kw>所有敌人</>造成伤害\n拥有50%的物理和法术闪避且不容易成为敌人的<@ba.kw>攻击目标</>",
-      "bb": {
-        "prob": 0.5
-      },
-      "bbStr": {},
-      "rangeGrid": null
-    },
-    "talentsBase": [
-      {
-        "index": 0,
-        "name": "创伤性癔症",
-        "desc": "攻击时对攻击目标中生命值最少的敌人额外造成相当于攻击力50%的法术伤害",
-        "descRaw": "攻击时对攻击目标中生命值最少的敌人额外造成相当于攻击力50%的法术伤害",
-        "bb": {
-          "attack@mizuki_t_1.atk_scale": 0.5,
-          "attack@max_target": 1
-        },
-        "bbStr": {},
-        "rangeGrid": null,
-        "tokenKey": null,
-        "hidden": false,
-        "fromModule": false
-      },
-      {
-        "index": 1,
-        "name": "反移情",
-        "desc": "攻击范围内存在生命值低于一半的敌人时，攻击力+12%（+2%）",
-        "descRaw": "攻击范围内存在生命值低于一半的敌人时，攻击力+12%<@ba.talpu>（+2%）</>",
-        "bb": {
-          "hp_ratio": 0.5,
-          "atk": 0.12
-        },
-        "bbStr": {},
-        "rangeGrid": null,
-        "tokenKey": null,
-        "hidden": false,
-        "fromModule": false,
-        "potMin": 4,
-        "potBelow": {
-          "desc": "攻击范围内存在生命值低于一半的敌人时，攻击力+10%",
-          "descRaw": "攻击范围内存在生命值低于一半的敌人时，攻击力+10%",
-          "bb": {
-            "hp_ratio": 0.5,
-            "atk": 0.1
-          }
-        }
-      }
-    ],
-    "modules": [
-      {
-        "uniEquipId": "uniequip_002_mizuki",
-        "name": "使者之约",
-        "typeName": "AMB-X",
-        "typeIcon": "amb-x",
-        "icon": "uniequip_002_mizuki",
-        "isDefault": true,
-        "level": 1,
-        "attr": {
-          "maxHp": 120,
-          "atk": 60
-        },
-        "traitOverride": {
-          "desc": "对攻击范围内所有敌人造成伤害\n拥有50%的物理和法术闪避且不容易成为敌人的攻击目标",
-          "descRaw": "对攻击范围内<@ba.kw>所有敌人</>造成伤害\n拥有50%的物理和法术闪避且不容易成为敌人的<@ba.kw>攻击目标</>",
-          "bb": {
-            "prob": 0.5
-          },
-          "bbStr": {},
-          "rangeGrid": null,
-          "moduleDesc": "攻击范围内所有敌人移动速度-20%",
-          "moduleDescRaw": "攻击范围内所有敌人移动速度<@ba.kw>-20%</>"
-        },
-        "talentChanges": [
-          {
-            "talentIndex": -1,
-            "name": null,
-            "desc": null,
-            "descRaw": null,
-            "bb": {
-              "move_speed": -0.2
-            },
-            "bbStr": {},
-            "rangeGrid": null,
-            "tokenKey": null,
-            "hidden": true
-          }
-        ]
-      },
-      {
-        "uniEquipId": "uniequip_003_mizuki",
-        "name": "深蓝之籽",
-        "typeName": "AMB-Y",
-        "typeIcon": "amb-y",
-        "icon": "uniequip_003_mizuki",
-        "isDefault": false,
-        "level": 1,
-        "attr": {
-          "atk": 50,
-          "aspd": 5
-        },
-        "traitOverride": {
-          "desc": "对攻击范围内所有敌人造成伤害\n拥有65%的物理和法术闪避且不容易成为敌人的攻击目标",
-          "descRaw": "对攻击范围内<@ba.kw>所有敌人</>造成伤害\n拥有65%的物理和法术闪避且不容易成为敌人的<@ba.kw>攻击目标</>",
-          "bb": {
-            "prob": 0.65
-          },
-          "bbStr": {},
-          "rangeGrid": null
-        },
-        "talentChanges": []
-      },
-      {
-        "uniEquipId": "uniequip_004_mizuki",
-        "name": "水月特限证章",
-        "typeName": "ISW-A",
-        "typeIcon": "isw-a",
-        "icon": "uniequip_004_mizuki",
-        "isDefault": false,
-        "level": 1,
-        "attr": {
-          "maxHp": 140,
-          "atk": 85
-        },
-        "traitOverride": {
-          "desc": "对攻击范围内所有敌人造成伤害\n拥有50%的物理和法术闪避且不容易成为敌人的攻击目标",
-          "descRaw": "对攻击范围内<@ba.kw>所有敌人</>造成伤害\n拥有50%的物理和法术闪避且不容易成为敌人的<@ba.kw>攻击目标</>",
-          "bb": {
-            "prob": 0.5
-          },
-          "bbStr": {},
-          "rangeGrid": null,
-          "moduleDesc": "在集成战略中，攻击速度+50，每秒恢复4%生命值",
-          "moduleDescRaw": "在<@ba.kw>集成战略</>中，攻击速度+50，每秒恢复4%生命值"
-        },
-        "talentChanges": [
-          {
-            "talentIndex": -1,
-            "name": null,
-            "desc": null,
-            "descRaw": null,
-            "bb": {
-              "attack_speed": 50,
-              "hp_recovery_per_sec_by_max_hp_ratio": 0.04,
-              "sp_recovery_per_sec": 0
-            },
-            "bbStr": {},
-            "rangeGrid": null,
-            "tokenKey": null,
-            "hidden": true
-          }
-        ]
-      }
-    ],
-    "potDown": {
-      "0": {
-        "stats.cost": 21,
-        "statsBase.cost": 21
-      },
-      "1": {
-        "stats.respawnTime": 70,
-        "statsBase.respawnTime": 70
-      },
-      "2": {
-        "stats.atk": 867,
-        "statsBase.atk": 807
-      },
-      "4": {
-        "stats.cost": 20,
-        "statsBase.cost": 20
       }
     }
   },
@@ -10597,5 +9426,676 @@
         "isDefault": false
       }
     ]
+  },
+  "chess_char_9_akafuyu_a": {
+    "chessId": "chess_char_9_akafuyu_a",
+    "baseId": "chess_char_9_akafuyu_a",
+    "goldenId": "chess_char_9_akafuyu_b",
+    "isGolden": false,
+    "tier": 4,
+    "identifier": 282,
+    "isHidden": false,
+    "isDiy": false,
+    "visible": true,
+    "chessType": "PRESET",
+    "backup": {
+      "charId": "char_475_akafyu",
+      "tmplId": null,
+      "skillIndex": 0,
+      "uniEquipId": null,
+      "potRank": 0
+    },
+    "shopSortId": 282,
+    "charId": "char_475_akafyu",
+    "name": "赤冬",
+    "appellation": "Akafuyu",
+    "rarity": 5,
+    "profession": "WARRIOR",
+    "subProfessionId": "musha",
+    "subProfessionName": "武者",
+    "position": "MELEE",
+    "nationId": "higashi",
+    "bonds": [
+      "dongShip",
+      "soloShip"
+    ],
+    "garrisonIds": [
+      "garrison_akafuyu_dong_a"
+    ],
+    "price": 3,
+    "sellPrice": 1,
+    "upgradeNum": 3,
+    "upgradeChessId": "chess_char_9_akafuyu_b",
+    "status": {
+      "phase": 1,
+      "level": 70,
+      "skillLevel": 4,
+      "equipLevel": 0
+    },
+    "stats": {
+      "maxHp": 2726,
+      "atk": 634,
+      "def": 333,
+      "res": 0,
+      "cost": 23,
+      "blockCnt": 1,
+      "bat": 1.2,
+      "aspd": 100,
+      "spRecovery": 1,
+      "hpRecoveryPerSec": 0,
+      "moveSpeed": 1,
+      "tauntLevel": 0,
+      "massLevel": 0,
+      "deployLimit": 1,
+      "deckStack": 0,
+      "respawnTime": 66
+    },
+    "immunities": {
+      "stun": false,
+      "silence": false,
+      "sleep": false,
+      "frozen": false,
+      "levitate": false
+    },
+    "rangeId": "1-1",
+    "rangeGrid": [
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        1
+      ]
+    ],
+    "dmgType": "phys",
+    "attackKind": "melee",
+    "projectile": "none",
+    "canHitFly": false,
+    "targetPriority": null,
+    "trait": {
+      "desc": "不成为其他角色的治疗目标，每次攻击到敌人后回复自身50生命（精英2后更新）",
+      "descRaw": "不成为其他角色的治疗目标，每次攻击到敌人后回复自身<@ba.kw>50</>生命（精英2后更新）",
+      "bb": {
+        "value": 50
+      },
+      "bbStr": {},
+      "rangeGrid": null
+    },
+    "skill": {
+      "skillId": "skchr_akafuyu_1",
+      "iconId": "skchr_akafuyu_1",
+      "name": "信影流·雷刀之势",
+      "level": 4,
+      "desc": "阻挡数变为0，攻击力+50%，攻击变为二连击",
+      "descRaw": "阻挡数变为<@ba.vup>0</>，攻击力<@ba.vup>+50%</>，攻击变为<@ba.vup>二连击</>",
+      "skillType": "MANUAL",
+      "durationType": "NONE",
+      "duration": 12,
+      "spType": "INCREASE_WITH_TIME",
+      "spCost": 19,
+      "initSp": 0,
+      "maxChargeTime": 1,
+      "increment": 1,
+      "bb": {
+        "atk": 0.5,
+        "hits": 2,
+        "block_cnt": 0
+      },
+      "bbStr": {},
+      "rangeId": null,
+      "rangeGrid": null,
+      "prefabId": "skchr_akafuyu_1",
+      "trigger": {
+        "rule": "DEFAULT",
+        "rawRule": "DEFAULT",
+        "customRangeGrid": null
+      },
+      "index": 0,
+      "overrideTokenKey": null,
+      "isDefault": true
+    },
+    "talents": [
+      {
+        "index": 0,
+        "name": "信影流·羽飞",
+        "desc": "在场时，自身获得最高+100攻击速度的坚忍（损失70%生命值时达到最大加成）",
+        "descRaw": "在场时，自身获得最高+100攻击速度的<$ba.berserk>坚忍</>（损失70%生命值时达到最大加成）",
+        "bb": {
+          "min_attack_speed": 100,
+          "min_hp_ratio": 0.3
+        },
+        "bbStr": {},
+        "rangeGrid": null,
+        "tokenKey": null,
+        "hidden": false,
+        "fromModule": false
+      }
+    ],
+    "tokens": [],
+    "module": {
+      "id": "uniequip_001_akafyu",
+      "name": "赤冬证章",
+      "type": "ORIGINAL",
+      "level": 0,
+      "active": false
+    },
+    "assets": {
+      "avatar": "char_475_akafyu",
+      "avatarE2": "char_475_akafyu",
+      "portrait": "char_475_akafyu_1",
+      "portraitE2": "char_475_akafyu_2",
+      "spine": "char_475_akafyu",
+      "skillIcon": "skchr_akafuyu_2",
+      "subProfIcon": "sub_musha_icon"
+    },
+    "skills": [
+      {
+        "skillId": "skchr_akafuyu_1",
+        "iconId": "skchr_akafuyu_1",
+        "name": "信影流·雷刀之势",
+        "level": 4,
+        "desc": "阻挡数变为0，攻击力+50%，攻击变为二连击",
+        "descRaw": "阻挡数变为<@ba.vup>0</>，攻击力<@ba.vup>+50%</>，攻击变为<@ba.vup>二连击</>",
+        "skillType": "MANUAL",
+        "durationType": "NONE",
+        "duration": 12,
+        "spType": "INCREASE_WITH_TIME",
+        "spCost": 19,
+        "initSp": 0,
+        "maxChargeTime": 1,
+        "increment": 1,
+        "bb": {
+          "atk": 0.5,
+          "hits": 2,
+          "block_cnt": 0
+        },
+        "bbStr": {},
+        "rangeId": null,
+        "rangeGrid": null,
+        "prefabId": "skchr_akafuyu_1",
+        "trigger": {
+          "rule": "DEFAULT",
+          "rawRule": "DEFAULT",
+          "customRangeGrid": null
+        },
+        "index": 0,
+        "overrideTokenKey": null,
+        "isDefault": true
+      },
+      {
+        "skillId": "skchr_akafuyu_2",
+        "iconId": "skchr_akafuyu_2",
+        "name": "信影流·十文字胜",
+        "level": 4,
+        "desc": "立即流失50%当前生命，获得一层护盾（技能结束后消失），攻击力+70%，防御力+90%",
+        "descRaw": "立即流失<@ba.vdown>50%</>当前生命，获得一层<$ba.shield>护盾</>（技能结束后消失），攻击力<@ba.vup>+70%</>，防御力<@ba.vup>+90%</>",
+        "skillType": "MANUAL",
+        "durationType": "NONE",
+        "duration": 20,
+        "spType": "INCREASE_WITH_TIME",
+        "spCost": 32,
+        "initSp": 15,
+        "maxChargeTime": 1,
+        "increment": 1,
+        "bb": {
+          "atk": 0.7,
+          "def": 0.9,
+          "hp_ratio": 0.5,
+          "shield": 1
+        },
+        "bbStr": {},
+        "rangeId": null,
+        "rangeGrid": null,
+        "prefabId": "skchr_akafuyu_2",
+        "trigger": {
+          "rule": "DEFAULT",
+          "rawRule": "DEFAULT",
+          "customRangeGrid": null
+        },
+        "index": 1,
+        "overrideTokenKey": null,
+        "isDefault": false
+      }
+    ],
+    "statsBase": {
+      "maxHp": 2726,
+      "atk": 634,
+      "def": 333,
+      "res": 0,
+      "cost": 23,
+      "blockCnt": 1,
+      "bat": 1.2,
+      "aspd": 100,
+      "spRecovery": 1,
+      "hpRecoveryPerSec": 0,
+      "moveSpeed": 1,
+      "tauntLevel": 0,
+      "massLevel": 0,
+      "deployLimit": 1,
+      "deckStack": 0,
+      "respawnTime": 66
+    },
+    "traitBase": {
+      "desc": "不成为其他角色的治疗目标，每次攻击到敌人后回复自身50生命（精英2后更新）",
+      "descRaw": "不成为其他角色的治疗目标，每次攻击到敌人后回复自身<@ba.kw>50</>生命（精英2后更新）",
+      "bb": {
+        "value": 50
+      },
+      "bbStr": {},
+      "rangeGrid": null
+    },
+    "talentsBase": [
+      {
+        "index": 0,
+        "name": "信影流·羽飞",
+        "desc": "在场时，自身获得最高+100攻击速度的坚忍（损失70%生命值时达到最大加成）",
+        "descRaw": "在场时，自身获得最高+100攻击速度的<$ba.berserk>坚忍</>（损失70%生命值时达到最大加成）",
+        "bb": {
+          "min_attack_speed": 100,
+          "min_hp_ratio": 0.3
+        },
+        "bbStr": {},
+        "rangeGrid": null,
+        "tokenKey": null,
+        "hidden": false,
+        "fromModule": false
+      }
+    ],
+    "potDown": {
+      "0": {
+        "stats.cost": 24
+      },
+      "1": {
+        "stats.respawnTime": 70
+      },
+      "2": {
+        "stats.atk": 611
+      },
+      "3": {
+        "stats.respawnTime": 62
+      },
+      "4": {
+        "stats.cost": 23
+      }
+    }
+  },
+  "chess_char_9_akafuyu_b": {
+    "chessId": "chess_char_9_akafuyu_b",
+    "baseId": "chess_char_9_akafuyu_a",
+    "goldenId": "chess_char_9_akafuyu_b",
+    "isGolden": true,
+    "tier": 4,
+    "identifier": 283,
+    "isHidden": false,
+    "isDiy": false,
+    "visible": true,
+    "chessType": "PRESET",
+    "backup": {
+      "charId": "char_475_akafyu",
+      "tmplId": null,
+      "skillIndex": 0,
+      "uniEquipId": null,
+      "potRank": 0
+    },
+    "shopSortId": 283,
+    "charId": "char_475_akafyu",
+    "name": "赤冬",
+    "appellation": "Akafuyu",
+    "rarity": 5,
+    "profession": "WARRIOR",
+    "subProfessionId": "musha",
+    "subProfessionName": "武者",
+    "position": "MELEE",
+    "nationId": "higashi",
+    "bonds": [
+      "dongShip",
+      "soloShip"
+    ],
+    "garrisonIds": [
+      "garrison_akafuyu_dong_b"
+    ],
+    "price": 3,
+    "sellPrice": 1,
+    "upgradeNum": 0,
+    "upgradeChessId": null,
+    "status": {
+      "phase": 2,
+      "level": 60,
+      "skillLevel": 7,
+      "equipLevel": 3
+    },
+    "stats": {
+      "maxHp": 3635,
+      "atk": 735,
+      "def": 411,
+      "res": 0,
+      "cost": 25,
+      "blockCnt": 1,
+      "bat": 1.2,
+      "aspd": 100,
+      "spRecovery": 1,
+      "hpRecoveryPerSec": 0,
+      "moveSpeed": 1,
+      "tauntLevel": 0,
+      "massLevel": 0,
+      "deployLimit": 1,
+      "deckStack": 0,
+      "respawnTime": 70
+    },
+    "immunities": {
+      "stun": false,
+      "silence": false,
+      "sleep": false,
+      "frozen": false,
+      "levitate": false
+    },
+    "rangeId": "1-1",
+    "rangeGrid": [
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        1
+      ]
+    ],
+    "dmgType": "phys",
+    "attackKind": "melee",
+    "projectile": "none",
+    "canHitFly": false,
+    "targetPriority": null,
+    "trait": {
+      "desc": "不成为其他角色的治疗目标，每次攻击到敌人后回复自身70生命",
+      "descRaw": "不成为其他角色的治疗目标，每次攻击到敌人后回复自身<@ba.kw>70</>生命",
+      "bb": {
+        "value": 70
+      },
+      "bbStr": {},
+      "rangeGrid": null,
+      "moduleDesc": "生命值低于50%时，获得25%的庇护",
+      "moduleDescRaw": "生命值低于50%时，获得<@ba.vup>25%</>的<$ba.protect>庇护</>"
+    },
+    "skill": {
+      "skillId": "skchr_akafuyu_1",
+      "iconId": "skchr_akafuyu_1",
+      "name": "信影流·雷刀之势",
+      "level": 7,
+      "desc": "阻挡数变为0，攻击力+80%，攻击变为二连击",
+      "descRaw": "阻挡数变为<@ba.vup>0</>，攻击力<@ba.vup>+80%</>，攻击变为<@ba.vup>二连击</>",
+      "skillType": "MANUAL",
+      "durationType": "NONE",
+      "duration": 12,
+      "spType": "INCREASE_WITH_TIME",
+      "spCost": 16,
+      "initSp": 0,
+      "maxChargeTime": 1,
+      "increment": 1,
+      "bb": {
+        "atk": 0.8,
+        "hits": 2,
+        "block_cnt": 0
+      },
+      "bbStr": {},
+      "rangeId": null,
+      "rangeGrid": null,
+      "prefabId": "skchr_akafuyu_1",
+      "trigger": {
+        "rule": "DEFAULT",
+        "rawRule": "DEFAULT",
+        "customRangeGrid": null
+      },
+      "index": 0,
+      "overrideTokenKey": null,
+      "isDefault": false
+    },
+    "talents": [
+      {
+        "index": 0,
+        "name": "信影流·羽飞",
+        "desc": "在场时，自身获得最高+100攻击速度的坚忍（损失70%生命值时达到最大加成）",
+        "descRaw": "在场时，自身获得最高+100攻击速度的<$ba.berserk>坚忍</>（损失70%生命值时达到最大加成）",
+        "bb": {
+          "min_attack_speed": 100,
+          "min_hp_ratio": 0.3
+        },
+        "bbStr": {},
+        "rangeGrid": null,
+        "tokenKey": null,
+        "hidden": false,
+        "fromModule": false
+      },
+      {
+        "index": 1,
+        "name": "信影流·逆风",
+        "desc": "阻挡敌人时防御力+12%",
+        "descRaw": "阻挡敌人时防御力<@ba.vup>+12%</>",
+        "bb": {
+          "def": 0.12
+        },
+        "bbStr": {},
+        "rangeGrid": null,
+        "tokenKey": null,
+        "hidden": false,
+        "fromModule": true
+      }
+    ],
+    "tokens": [],
+    "module": {
+      "id": "uniequip_002_akafyu",
+      "name": "武将甲胄",
+      "type": "SBL-X",
+      "level": 3,
+      "active": true
+    },
+    "assets": {
+      "avatar": "char_475_akafyu",
+      "avatarE2": "char_475_akafyu",
+      "portrait": "char_475_akafyu_1",
+      "portraitE2": "char_475_akafyu_2",
+      "spine": "char_475_akafyu",
+      "skillIcon": "skchr_akafuyu_2",
+      "subProfIcon": "sub_musha_icon"
+    },
+    "skills": [
+      {
+        "skillId": "skchr_akafuyu_1",
+        "iconId": "skchr_akafuyu_1",
+        "name": "信影流·雷刀之势",
+        "level": 7,
+        "desc": "阻挡数变为0，攻击力+80%，攻击变为二连击",
+        "descRaw": "阻挡数变为<@ba.vup>0</>，攻击力<@ba.vup>+80%</>，攻击变为<@ba.vup>二连击</>",
+        "skillType": "MANUAL",
+        "durationType": "NONE",
+        "duration": 12,
+        "spType": "INCREASE_WITH_TIME",
+        "spCost": 16,
+        "initSp": 0,
+        "maxChargeTime": 1,
+        "increment": 1,
+        "bb": {
+          "atk": 0.8,
+          "hits": 2,
+          "block_cnt": 0
+        },
+        "bbStr": {},
+        "rangeId": null,
+        "rangeGrid": null,
+        "prefabId": "skchr_akafuyu_1",
+        "trigger": {
+          "rule": "DEFAULT",
+          "rawRule": "DEFAULT",
+          "customRangeGrid": null
+        },
+        "index": 0,
+        "overrideTokenKey": null,
+        "isDefault": true
+      },
+      {
+        "skillId": "skchr_akafuyu_2",
+        "iconId": "skchr_akafuyu_2",
+        "name": "信影流·十文字胜",
+        "level": 7,
+        "desc": "立即流失50%当前生命，获得一层护盾（技能结束后消失），攻击力+100%，防御力+120%",
+        "descRaw": "立即流失<@ba.vdown>50%</>当前生命，获得一层<$ba.shield>护盾</>（技能结束后消失），攻击力<@ba.vup>+100%</>，防御力<@ba.vup>+120%</>",
+        "skillType": "MANUAL",
+        "durationType": "NONE",
+        "duration": 20,
+        "spType": "INCREASE_WITH_TIME",
+        "spCost": 25,
+        "initSp": 15,
+        "maxChargeTime": 1,
+        "increment": 1,
+        "bb": {
+          "atk": 1,
+          "def": 1.2,
+          "hp_ratio": 0.5,
+          "shield": 1
+        },
+        "bbStr": {},
+        "rangeId": null,
+        "rangeGrid": null,
+        "prefabId": "skchr_akafuyu_2",
+        "trigger": {
+          "rule": "DEFAULT",
+          "rawRule": "DEFAULT",
+          "customRangeGrid": null
+        },
+        "index": 1,
+        "overrideTokenKey": null,
+        "isDefault": false
+      }
+    ],
+    "statsBase": {
+      "maxHp": 3635,
+      "atk": 665,
+      "def": 361,
+      "res": 0,
+      "cost": 25,
+      "blockCnt": 1,
+      "bat": 1.2,
+      "aspd": 100,
+      "spRecovery": 1,
+      "hpRecoveryPerSec": 0,
+      "moveSpeed": 1,
+      "tauntLevel": 0,
+      "massLevel": 0,
+      "deployLimit": 1,
+      "deckStack": 0,
+      "respawnTime": 70
+    },
+    "traitBase": {
+      "desc": "不成为其他角色的治疗目标，每次攻击到敌人后回复自身70生命",
+      "descRaw": "不成为其他角色的治疗目标，每次攻击到敌人后回复自身<@ba.kw>70</>生命",
+      "bb": {
+        "value": 70
+      },
+      "bbStr": {},
+      "rangeGrid": null,
+      "moduleDesc": "生命值低于50%时，获得25%的庇护",
+      "moduleDescRaw": "生命值低于50%时，获得25%的<$ba.protect>庇护</>"
+    },
+    "talentsBase": [
+      {
+        "index": 0,
+        "name": "信影流·羽飞",
+        "desc": "在场时，自身获得最高+100攻击速度的坚忍（损失70%生命值时达到最大加成）",
+        "descRaw": "在场时，自身获得最高+100攻击速度的<$ba.berserk>坚忍</>（损失70%生命值时达到最大加成）",
+        "bb": {
+          "min_attack_speed": 100,
+          "min_hp_ratio": 0.3
+        },
+        "bbStr": {},
+        "rangeGrid": null,
+        "tokenKey": null,
+        "hidden": false,
+        "fromModule": false
+      },
+      {
+        "index": 1,
+        "name": "信影流·逆风",
+        "desc": "阻挡敌人时防御力+12%",
+        "descRaw": "阻挡敌人时防御力<@ba.vup>+12%</>",
+        "bb": {
+          "def": 0.12
+        },
+        "bbStr": {},
+        "rangeGrid": null,
+        "tokenKey": null,
+        "hidden": false,
+        "fromModule": true
+      }
+    ],
+    "modules": [
+      {
+        "uniEquipId": "uniequip_002_akafyu",
+        "name": "武将甲胄",
+        "typeName": "SBL-X",
+        "typeIcon": "sbl-x",
+        "icon": "uniequip_002_akafyu",
+        "isDefault": true,
+        "level": 3,
+        "attr": {
+          "atk": 70,
+          "def": 50
+        },
+        "traitOverride": {
+          "desc": "不成为其他角色的治疗目标，每次攻击到敌人后回复自身70生命",
+          "descRaw": "不成为其他角色的治疗目标，每次攻击到敌人后回复自身<@ba.kw>70</>生命",
+          "bb": {
+            "value": 70
+          },
+          "bbStr": {},
+          "rangeGrid": null,
+          "moduleDesc": "生命值低于50%时，获得25%的庇护",
+          "moduleDescRaw": "生命值低于50%时，获得<@ba.vup>25%</>的<$ba.protect>庇护</>"
+        },
+        "talentChanges": [
+          {
+            "talentIndex": 1,
+            "name": "信影流·逆风",
+            "desc": "阻挡敌人时防御力+12%",
+            "descRaw": "阻挡敌人时防御力<@ba.vup>+12%</>",
+            "bb": {
+              "def": 0.12
+            },
+            "bbStr": {},
+            "rangeGrid": null,
+            "tokenKey": null,
+            "hidden": false
+          }
+        ]
+      },
+      {
+        "uniEquipId": "uniequip_001_akafyu",
+        "name": "赤冬证章",
+        "typeName": "ORIGINAL",
+        "typeIcon": "original",
+        "icon": "uniequip_001_akafyu",
+        "isDefault": false,
+        "level": 0,
+        "attr": {},
+        "traitOverride": null,
+        "talentChanges": []
+      }
+    ],
+    "potDown": {
+      "0": {
+        "stats.cost": 26
+      },
+      "1": {
+        "stats.respawnTime": 70
+      },
+      "2": {
+        "stats.atk": 712
+      },
+      "3": {
+        "stats.respawnTime": 66
+      },
+      "4": {
+        "stats.cost": 25
+      }
+    }
   }
 }

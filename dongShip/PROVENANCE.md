@@ -41,14 +41,14 @@ GPL-3.0-or-later（本包代码）；© Hypergryph / Yostar（随包素材，非
 | 随包素材 | 见第 6 项 | —— |
 
 **发布件内容指纹**（引擎 `shared/modIdentity.js` 的 `modManifestDigest`：对每个发布文件的「相对路径 + sha256(字节)」成对后再取 sha256；
-清单**不含本文件**（它记录这个值，含进去就自指）与 `.tune-backup/**`（编辑器调数值留下的本地备份，不进发布 zip）；188 个文件）：
+清单**不含本文件**（它记录这个值，含进去就自指）与 `.tune-backup/**`（编辑器调数值留下的本地备份，不进发布 zip）；228 个文件）：
 
 ```
-e542ee178ec0433422bc6fd51cf41d7d8c1df09d0fcd6e917beeabc182d397dc
+82bbc6ae43fa47c5047203d14684ad965e38ec54dfde9e0846d694e85bf779b4
 ```
 
 复算：`node F:\wsxy\22\hash-pack.mjs`（同时打印**引擎身份哈希** = `loadWorkshop().packs[0].hash` —— 那一份含本文件与
-`.tune-backup/`，是房间摘要闸门用的；1.2.1 起的发布 zip 另外排除了 `README-部署说明.md`、`bond-specs/`、`item-specs/`（只给编辑器与人看、引擎装载器不读），所以 zip 的指纹与此值不同；此值按上面 191 个文件计算）。
+`.tune-backup/`，是房间摘要闸门用的；1.2.1 起的发布 zip 另外排除了 `README-部署说明.md`、`bond-specs/`、`item-specs/`（只给编辑器与人看、引擎装载器不读），所以 zip 的指纹与此值不同；此值按上面 228 个文件计算）。
 
 ## 5. 改了什么（原做法 → 本包做法 → 为什么）
 
@@ -116,14 +116,18 @@ e542ee178ec0433422bc6fd51cf41d7d8c1df09d0fcd6e917beeabc182d397dc
 | 41 | 作者要求：平方曲线的 100% 锚点放到 **300 层**，且从 300 层起陡起来 | `curve_k` 0.00000625 -> **0.0000111111**（= 1/300²）⇒ 300 层 = 100.0%；曲线仍是单一平方 pct = curve_k·L²，增量随层数递增 ⇒ 300 层之后最陡（350 层 136.1%、400 层 177.8%、450 层 225.0%）。同步 bonds.json（2 处）、bond-specs、pack.json 描述与公告 | 2026-10-15 |
 | 42 | 作者要求：夜刀默认技能改 S1、嵯峨默认技能改 S2 | 记录里 `skills[]` 本来就是完整技能对象，默认技能由**顶层 `skill`**（其 `index`）决定（客户端 `loadoutModel.skillRecord` 只认 `chess.skill.index === index` 的那份）。改法：`chess_char_9_yato_a/_b` 的顶层 skill 换成 index 0（鬼人化）、`chess_char_9_dong2_a/_b` 换成 index 1（除恶），并把各 skills[i].isDefault 同步。斩业星熊默认本来就是 index 1（无始无明 = S2），未改 | 2026-10-15 |
 | 43 | 作者要求：遥改成"范围内队友受伤即触发技能"，不要再依赖"敌人走进攻击范围" | ① 数据：`chess_char_9_dong1_a/_b` 的 S3 夏末游鳞 `trigger.rule` **ACTIVE_RANGE → DEFAULT**（SP 满即放，不再需要敌人进范围）；② kit：`kits/chess_char_9_dong1_a.js` 在浮光泡影天赋里新增 `battle.on('damaged')` —— **队友在她攻击范围内受伤** ⇒ `giveSp(unit, ally_damaged_sp, 'trait')`（范围判定用引擎 support 的 `inRange`，新 import 自 `@battle/index.js`）；③ 数据：三个技能 bb 新增 `ally_damaged_sp = 3`（每次受伤充 3 SP，代码不写死、可调）。盟约/特性数值未动 | 2026-10-15 |
+| 46 | 作者要求：把**赤冬**（`char_475_akafyu`）作为本包第 5 名自增干员加盟约 —— 记录 id `chess_char_9_akafuyu_a/_b`、4 阶 3 金、盟约【东】+【独行】、基础模板照宴（武者）、特质「每 3 层【东】：攻击力、生命 +1.5%」 | ① `chess.json` 新增两条记录（普通 `phase1 Lv70` / 精锐 `phase2 Lv60` + 模组 3 级），数值按 PRTS 缩放：E1max 2726/634/333、E2max 3635/798/378（`statsBase` 665/361 + 武将甲胄 attr 70/50）；两个技能（信影流·雷刀之势 = 二连击 + 阻挡数归零；信影流·十文字胜 = 流失 50% 当前生命 + 一层护盾 + 攻/防加成）都是 `INCREASE_WITH_TIME` + `MANUAL`，默认技能 **S1**；天赋1 信影流·羽飞（坚忍 +100 攻速、损失 70% 吃满）、天赋2 信影流·逆风（模组，阻挡时防御 +12%）；② `kits/chess_char_9_akafuyu_a.js`（唯一一条 kit 同时服务 `_a` / `_b`，引擎按 `baseId` 回退）；③ `garrisons.json` 新增 `garrison_akafuyu_dong_a/_b`（`act1autochess_gar_eff_attrByBond`，`divide_num: 3`、atk/max_hp 0.015，两条同值）；④ `bonds.json` 的【东】与【独行】`members`/`visibleMembers` 各补一条；⑤ `pack.json.art.chars` 登记头像 / 立绘 / 前后 Spine（动画角色按 `tools/assets/anim-roles.mjs` 的解析结果绑定：`deploy: Start`、`attack: Attack`、S2 = `Skill2_Begin` + `Skill2` + `Skill2_Idle`）、`art.skills` 登记两张技能图标、`voices` / `voiceLangs.cn` 各 12 槽位 | 2026-10-15 |
+| 47 | 作者要求：**撤掉水月**（她的改动只有 `bonds`(+dongShip) 与 `garrisonIds`） | ① `pack.json.overrides` 删 `chess:chess_char_4_09_a` / `_b`（18 → 16 条）；② `chess.json` 删两条记录；③ `garrisons.json` 删两条孤儿特质 `garrison_mizuki_dong_a/_b`；④ `bonds.json`【东】成员表删她（【独行】是官方盟约、官方成员表本来就含她，只做追加，保留官方那条是正确行为） | 2026-10-15 |
+| 44 | 作者要求：白雪加上【独行】盟约 | `chess_char_1_21_a/_b` 的 `bonds` 追加 `soloShip`；并新增 `bonds:soloShip` 覆盖（官方副本 + 把白雪写入 members/visibleMembers，界面才显示她），同时在 pack.json.overrides 显式声明 | 2026-10-15 |
 
 **验证**（都是可复跑的）：
 
 ```
 node F:\wsxy\forge\app\tools\workshop-validate.mjs F:\wsxy\forge\app\workshop\dongShip   # 0 error(s) / VALID
-node F:\wsxy\22\audit-dong-traits.mjs      # 按 Forge 规则逐条审计 17 条特质：0 错 0 警
-node F:\wsxy\22\verify-load.mjs            # 引擎装载 + server.meta 装配：0 错，仅注册 2 个自定义键
-node F:\wsxy\22\test-dong-handlers.mjs     # 两个处理器的行为断言：17 条全过
+node F:\wsxy\22\test-akafuyu.mjs          # 赤冬专项：89 条全过（记录/盟约/特质/数值/技能/模组合成/kit/外观/语音）
+node F:\wsxy\22\audit-dong-traits.mjs      # 按 Forge 规则逐条审计 19 条特质：0 错 1 警（potDown 的既有差异）
+node F:\wsxy\22\audit-bond-display.mjs     # 24 条盟约的成员可见性 + 头像链：0 错 0 警
+node F:\wsxy\22\test-dong-handlers.mjs     # 两个处理器的行为断言：19 条全过
 node F:\wsxy\22\test-noirc2-module.mjs     # 火龙模组（引擎 loadoutRecord 合成）：14 条全过
 node F:\wsxy\22\test-haruka-saga-modules.mjs # 遥 / 嵯峨 模组（默认 / 换模组 / 不装备）：25 条全过
 ```
@@ -139,18 +143,18 @@ node F:\wsxy\22\test-haruka-saga-modules.mjs # 遥 / 嵯峨 模组（默认 / �
 按 `SKILL.md` §14 的口径：**含官方素材的包不因此被拒，但必须标注清楚**。以下为**实测清点**。
 
 ```
-assets/  合计 172 个文件，14,265,192 B（13.60 MB）
+assets/  合计 208 个文件，16,884,033 B（16.10 MB）
 
 按目录                                按扩展名
-  spine        36 个  10,412,449 B     .mp3   112 个   2,377,017 B
-  voice       112 个   2,377,017 B     .skel   12 个   8,518,000 B（约）
-  char         12 个   1,250,122 B     .png    36 个
-  skill         9 个     158,953 B     .atlas  12 个
+  spine        39 个  11,461,809 B     .mp3   140 个   3,065,888 B
+  voice       140 个   3,065,888 B     .skel   13 个   9,372,157 B
+  char         15 个   2,091,769 B     .png    42 个   4,312,785 B
+  skill        11 个     197,916 B     .atlas  13 个     133,203 B
   item          2 个      54,035 B
   bond          1 个      12,616 B
 
 自制 / 官方：盟约图标 assets/bond/dongShip.png（1 个，12,616 B）为**自制**；
-其余 171 个（spine 36 / char 12 / skill 9 / item 2 / voice 112）均为**官方素材**。
+其余 207 个（spine 39 / char 15 / skill 11 / item 2 / voice 140）均为**官方素材**。
 道具图标来自官方道具图（艺人见面抽选券），干员语音来自官方语音文件，两者都算官方素材。
 ```
 
@@ -160,17 +164,18 @@ assets/  合计 172 个文件，14,265,192 B（13.60 MB）
 
 | 素材 | 数量 | 来源 | 说明 |
 |---|---|---|---|
-| **Spine 模型**（`.skel` `.atlas` `.png`） | 36 | 见下三行 | 4 名干员 × front/back × 3 文件 |
+| **Spine 模型**（`.skel` `.atlas` `.png`） | 39 | 见下五行 | 5 名干员 × front/back × 3 文件（赤冬另有 1 套 +3） |
 | └ 火龙S黑角 `char_1030_noirc2` | 6 | 作者提供 `D:\ccccc\SHJ\{FRONT,BACK}` | —— |
 | └ 白雪 `char_118_yuki` | 6 | **PRTS**（正面 `F_` 骨骼、背面 `B_` 骨骼） | 见 `kits/chess_char_1_21_a.js` 顶部注释 |
 | └ 吉星 `char_4203_kichi` | 6 | 作者提供 `D:\ccccc\kichi` | —— |
 | └ 麒麟R夜刀 `char_1029_yato2` | 6 | 作者提供 `D:\ccccc\yato` | —— |
-| **半身像**（180×360） | 8 | 火龙 = **PRTS**；吉星 / 白雪 / 夜刀 = **作者提供**并裁切 | 格式对齐官方（原版对照：佩佩 `char_4058_pepe`） |
-| **头像**（180×180） | 4 | 火龙 = **PRTS**；其余 = **作者提供** | 同上 |
-| **技能图标**（128×128） | 9 | **PRTS** | PRTS 的文件名是技能**名**（如 `技能_居合拔刀气刃斩.png`），已重命名为 `skchr_*.png` |
+| └ 赤冬 `char_475_akafyu` | 9 | 作者提供 `D:\ccccc\aka`（正面 3 + 背面 3 + 立绘头像 3） | `D:\ccccc\aka\back\char_475_akafyu (1).png` 是背面那页 512×512 贴图，装进包时重命名为同名 `.png`（正/背各在自己的目录里，互不覆盖） |
+| **半身像**（180×360） | 10 | 火龙 = **PRTS**；吉星 / 白雪 / 夜刀 = **作者提供**并裁切 | 格式对齐官方（原版对照：佩佩 `char_4058_pepe`） |
+| **头像**（180×180） | 5 | 火龙 = **PRTS**；其余 = **作者提供** | 同上 |
+| **技能图标**（128×128） | 11 | **PRTS** | 文件名是技能**名**（如 `技能_居合拔刀气刃斩.png`），已重命名为 `skchr_*.png`；赤冬两张取自 PRTS 静态资源 `torappu.prts.wiki/assets/skill_icon/skill_icon_skchr_akafyu_{1,2}.png`（她的 charId 是 `char_475_akafyu`，官方素材仓库里**没有**这个命名，Kengxxiao 镜像只有 `char_475_akafyu`） |
 | **盟约图标** `bond/dongShip.png` | 1 | **自制** | 盟约【东】的图标 |
 | **道具图标** `item/act44side_token_ticket.png`（128×128，银色双箭头 = 普通）/ `item/act44side_token_ticket_g.png`（128×128，金色双箭头 = 精锐） | 2 | **作者第二次提供的贴图**（`D:\ccccc\dong\dong.rar` 里的两张 128×128；原文件是 JPEG、后缀写成 .PNG，已转成真 PNG） | 装备「艺人见面抽选券」的图标；`pack.json` 的 `itemIcons` 把它挂到官方道具 id `act44side_token_ticket` 上，走 `/workshop-assets` 路由。无光晕那版留在工作区 `F:\wsxy\22\icon\act44side_token_ticket_noglow.png`（覆盖同名文件即可换） |
-| **干员战斗语音** `voice/<charId>/{jp,cn}/<slot>_<n>.mp3`（12 槽位 × 2 语种 = 112 个 mp3, 2.27 MB） | 112 | **上游官方语音**（ArknightsAssets2 语音仓库，经 gh-proxy 镜像） | 白雪 / 吉星 / 麒麟R夜刀 / 火龙S黑角是**本包自增**的干员，本机官方素材清单里没有它们 ⇒ 语音由包自带：`pack.json` 的 `voices` = 日文（默认语种）、`voiceLangs.cn` = 中文；槽位对齐引擎 `tools/assets/audio.mjs` 的 `VOICE_SLOTS`。下载/安装脚本 `F:\wsxy\22\fetch-dong-voices.mjs` |
+| **干员战斗语音** `voice/<charId>/{jp,cn}/<slot>_<n>.mp3`（12 槽位 × 2 语种，5 名干员 = 140 个 mp3, 2.92 MB） | 140 | **上游官方语音**（ArknightsAssets2 语音仓库，经 gh-proxy 镜像） | 白雪 / 吉星 / 麒麟R夜刀 / 火龙S黑角 / 赤冬是**本包自增**的干员，本机官方素材清单里没有它们 ⇒ 语音由包自带：`pack.json` 的 `voices` = 日文（默认语种）、`voiceLangs.cn` = 中文；槽位对齐引擎 `tools/assets/audio.mjs` 的 `VOICE_SLOTS`。下载/安装脚本 `F:\wsxy\22\fetch-dong-voices.mjs`（赤冬那一批用 `F:\wsxy\22\akafyu-fetch.mjs`，行号取自 gamedata `charword_table.json`：行动出发 CN_019 … 行动失败 CN_032） |
 
 ### 6.3 权利声明
 
