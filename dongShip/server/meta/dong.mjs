@@ -50,40 +50,22 @@ const requireActiveOf = (desc) => {
   if (d.includes('无需激活')) return false;
   return /已激活|激活且/.test(d);
 };
-
-  /**
-   * 棋盘上有多少名【东】干员（棋子；token 不算、备战席不算）。
-   *
-   * 成员资格用**引擎那一份** `ctx.pieceBonds`：自己的 `bonds` ∪ 装备/特质/**变形同构体配对**授予的
-   * —— 所以装了【艺人见面抽选券】+变形同构体的干员，**算**一名【东】。
-   *
-   * 默认**按棋子数**（普通 + 精锐同场各算 1 名，与"场上有五名【东】干员"的字面一致）；
-   * `bbStr.dedupe_count: true` 时按 `baseId` 去重（同一名干员的普通/精锐只算 1 名）。
-   *
-   * ⚠ 为什么不用 `ctx.bondCount(bond)`：它是引擎给"盟约是否激活"用的计数，会额外 **+1 调和**
-   *   （`maniShip` 激活时给每条 isCore 盟约 +1，东是 `isCore: true`），拿它当人数门槛会误触发。
-   */
-  const boardCount = (ctx, bond, { dedupe = false } = {}) => {
-    const seen = new Set();
-    let n = 0;
-    for (const p of ctx.board()) {
-      if (!p || p.kind !== 'chess' || !p.id) continue;
-      if (!bond) { n++; continue; }                       // bond 为空 ⇒ 数所有干员（仅 bbStr.count_any 时）
-      const rec = ctx.chessRecord(p.id);
-      const base = (rec && (rec.baseId || (rec.isGolden ? p.id.replace(/_b$/, '_a') : p.id))) || p.id;
-      if (dedupe && seen.has(base)) continue;
-      if (ctx.pieceBonds(p.uid).includes(bond)) { if (dedupe) seen.add(base); n++; }
-    }
-    return n;
-  };
+/**
+ * 棋盘上有多少名【东】干员：数棋子（token 不算、备战席不算），普通与精锐各算 1 名。
+ * 成员资格用引擎的 ctx.pieceBonds（自己的 bonds ∪ 装备/特质/变形同构体授予的）。
+ * 不用 ctx.bondCount()：那个会额外 +1 调和（maniShip 激活时给 isCore 盟约 +1），拿它当人数门槛会误触发。
+ */
+const boardCount = (ctx, bond) => {
+  let n = 0;
+  for (const p of ctx.board()) {
+    if (!p || p.kind !== 'chess' || !p.id) continue;
+    if (ctx.pieceBonds(p.uid).includes(bond)) n++;
+  }
+  return n;
+};
 
   /** 调试开关：`set DONG_DEBUG=1` 启动服务器（或全局 `__DONG_DEBUG = true`）时，每次触发都把判定过程打到控制台。 */
-  /**
-   * 调试开关：数据里给 `bbStr.debug: true`（garrisons.json）时，每次进入休整期都把判定过程打到服务器控制台。
-   * 不能用 `process.env` —— `server.meta` 模块的静态扫描禁止读环境变量（同一颗种子必须在任何机器上打出同一局）。
-   */
-  const wantDebug = (bbStr) => !!(bbStr && (bbStr.debug === true || bbStr.debug === 'true'));
-
+  
 /**
  * 登记本包的处理器。键 = `garrison:<effectKey>`（`pack.json.server.meta.registers` 里逐条声明）。
  * 处理器形状与官方内容模块逐字相同：`{ run(ctx) }`（`run` 在特质自己的 `eventType` 对应的钩子上被调用）。
@@ -102,59 +84,26 @@ export function registerMeta(registry) {
    *   bbStr { bond: "dongShip" }           数哪个盟约
    * （`desc` 里没有"无需激活"，但这条特质按设计**不要求盟约已激活**：它是把盟约凑起来的发动机。）
    */
-    const DONG_PREP_POOL = {
-      run(ctx) {
-        const { bb, bbStr } = ctx.source;
-        // 门槛：「若棋盘上有 5 名以上【东】干员」—— 数棋盘上的**棋子**（不含备战席/token），见 boardCount。
-        const bond = bondOf(bbStr.bond);
-        // bbStr.count_any === true 改成数所有干员；bbStr.count_bond 可指定别的盟约；bbStr.dedupe_count 可去重。
-        const countBond = bbStr.count_any === true ? null : bondOf(bbStr.count_bond || bbStr.bond);
-        const dedupe = bbStr.dedupe_count === true;
-        const need = num(bb.check_count, 5);
-        const have = boardCount(ctx, countBond, { dedupe });
-        if (have < need) {
-          if (wantDebug(bbStr)) {
-            try {
-              const total = ctx.board().filter((p) => p && p.kind === 'chess').length;
-              console.log('[dongShip] 黑角发牌：棋盘棋子 ' + total + ' 枚 / 计数 ' + (countBond || '任意') + (dedupe ? '（去重）' : '') +
-                ' = ' + have + ' 名，门槛 ' + need + ' ⇒ 未触发（不发放）');
-            } catch (e) { /* 忽略 */ }
-          }
-          return;
-        }
-        const count = Math.max(1, Math.min(10, num(bb.count, 1)));
-        const maxTier = ctx.shopLevel();
-        /**
-         * 抽一个"等级不高于当前商店等级"的【东】干员 id。
-         *
-         * ⚠ 2026-10-17 修（精锐黑角"不给发干员"）：原来只调 `rollChess({ bond, maxTier })`，而它**只从还有剩余份数的
-         *   池子里抽**。凑够 5 名【东】时往往正好把这几种低阶【东】都买走了（商店 3 级时全服能发的【东】只有 5 种：
-         *   tier1 宴、tier2 白雪/黑角、tier3 遥/吉星），剩余份数为 0 ⇒ rollChess 返回 null ⇒ **静默不发**
-         *   （无报错、无提示）。精锐抽 2 次更容易撞空，表现成"精锐黑角不给发干员"。
-         *   现在按两级兜底，保证"说发就发"：
-         *     ① 正常抽（尊重剩余份数与商店等级）
-         *     ② 抽空 ⇒ `ignoreCounts: true` 再抽（不看剩余份数，仍受商店等级限制；官方 builtinMeta 也这么用）
-         *   发牌用 `requirePool: false`：这条特质是"凭空获得一个【东】"，不该因为共享池没份数就作废。
-         */
-        const draw = () => {
-          const r1 = ctx.rollChess({ bond, maxTier });
-          if (r1) return r1;
-          return ctx.rollChess({ bond, maxTier, ignoreCounts: true });
-        };
-        const got = [];
-        for (let i = 0; i < count; i++) {
-          const id = draw();
-          if (id) { got.push(id); ctx.grantChess(id, { requirePool: false }); }
-        }
-        if (wantDebug(bbStr)) {
-          try {
-            const total = ctx.board().filter((p) => p && p.kind === 'chess').length;
-            console.log('[dongShip] 黑角发牌：棋盘棋子 ' + total + ' 枚 / 计数 ' + (countBond || '任意') + (dedupe ? '（去重）' : '') +
-              ' = ' + have + ' 名，门槛 ' + need + ' ⇒ 触发；发放 ' + got.length + '/' + count + (got.length ? ' [' + got.join(', ') + ']' : ''));
-          } catch (e) { /* 调试输出永不影响对局 */ }
-        }
-      },
-    };
+const DONG_PREP_POOL = {
+  /**
+   * <进入休整期时>若棋盘上有 5 名以上【东】干员，获得 N 个等级不高于当前商店等级的【东】干员。
+   *
+   * 发牌这一段完全照引擎自己的写法（server/sim/content/garrisons/meta.js 的 SERVER_MOST_BOND）：
+   *   const id = ctx.rollChess({ bond, maxTier });  if (id) ctx.grantChess(id);
+   * 即：从共享池按盟约 + 商店等级抽一张（尊重剩余份数），抽到就给 —— 不加任何自定义兜底。
+   * 唯一自写的部分只有"数 5 名【东】"这个门槛（官方没有 conditionkey 能表达它）。
+   */
+  run(ctx) {
+    const { bb, bbStr } = ctx.source;
+    const bond = bondOf(bbStr.bond);
+    if (boardCount(ctx, bond) < num(bb.check_count, 5)) return;
+    const maxTier = Math.max(1, Math.min(6, ctx.shopLevel()));
+    for (let i = 0; i < Math.min(10, num(bb.count, 1)); i++) {
+      const id = ctx.rollChess({ bond, maxTier });
+      if (id) ctx.grantChess(id);
+    }
+  },
+};
 
   /**
    * 安洁莉娜（新增特质，与官方那条并存）：<休整期结束时>本回合每刷新过 1 次，使已激活的【东】层数 +N。

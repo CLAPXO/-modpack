@@ -1,15 +1,15 @@
 {
-  "version": "1.2.18",
-  "date": "2026-10-17",
-  "summary": "东盟约 1.2.18：黑角门槛恢复为「棋盘上 5 名以上【东】干员」；新增 DONG_DEBUG 调试输出，用来定位\"不发牌\"。",
+  "version": "1.2.20",
+  "date": "2026-10-18",
+  "summary": "东盟约 1.2.20：黑角发牌回到引擎自己的写法（照 SERVER_MOST_BOND：rollChess + grantChess），去掉全部自定义兜底与调试输出。",
   "sections": [
     {
-      "name": "本版（1.2.18）：黑角门槛回到【东】+ 调试开关",
+      "name": "本版（1.2.20）：黑角发牌改成引擎原生写法",
       "items": [
-        "门槛：**棋盘上 5 名以上【东】干员**（数棋子，不看备战席/token；普通与精锐同场各算 1 名）。1.2.17 的\"数所有干员\"是理解偏差，已回退。",
-        "可选开关（都在 garrisons.json 的 bbStr）：`count_any: true` 改数所有干员；`count_bond: \"xxx\"` 换盟约；`dedupe_count: true` 按 baseId 去重。",
-        "新增调试：用 `set DONG_DEBUG=1` 再启动服务器，每次进入休整期都会在控制台打一行，例如 `[dongShip] 黑角发牌：棋盘棋子 5 枚 / 计数 dongShip = 5 名，门槛 5 ⇒ 触发；发放 1/1 [...]`，不触发时打 `⇒ 未触发（不发放）` —— 拿这一行就能判断是\"没数够\"还是\"没抽到\"。",
-        "牌池兜底仍在（1.2.16）：抽空后忽略剩余份数再抽、requirePool:false 发放，可重复、场上已有也发。"
+        "发牌：`const id = ctx.rollChess({ bond, maxTier: 商店等级 }); if (id) ctx.grantChess(id);` —— 与官方 `SERVER_MOST_BOND`（\"最多的盟约给一张\"）逐字同形，**不再有** ignoreCounts / requirePool:false / 调试输出 / count_any / dedupe_count 这些自定义东西。",
+        "门槛：棋盘上 **5 名【东】干员**（数棋子；备战席 / token 不算；普通与精锐各算 1 名）。这是唯一自写的部分 —— 官方没有 conditionkey 能表达\"5 名某盟约\"。",
+        "行为与官方一致：只从**还有剩余份数**的池子里抽、抽到什么给什么；池子里没有可发的【东】时这一回合就不发（官方发牌类特质同理）。",
+        "本次不改任何数值。"
       ]
     },
     {
