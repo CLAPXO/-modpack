@@ -325,7 +325,7 @@
   "garrison_noirc2_dong_b": {
     "garrisonId": "garrison_noirc2_dong_b",
     "desc": "<进入休整期时>若棋盘上有5名以上【东】干员，获得2个等级不高于当前商店等级的【东】干员",
-    "descRaw": "<进入休整期时>若棋盘上有5名以上【东】干员，获得2个等级不高于当前商店等级的【东】干员",
+    "descRaw": "<进入休整期时>若棋盘上有<@ba.vup>5</>名以上【东】干员，获得2个等级不高于当前商店等级的【东】干员",
     "eventType": "SERVER_PREP_START",
     "eventTypeDesc": "整备能力",
     "eventTypeIcon": "icon_gold",

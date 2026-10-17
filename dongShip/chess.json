@@ -9473,9 +9473,9 @@
       "equipLevel": 0
     },
     "stats": {
-      "maxHp": 2726,
-      "atk": 634,
-      "def": 333,
+      "maxHp": 3271,
+      "atk": 761,
+      "def": 400,
       "res": 0,
       "cost": 23,
       "blockCnt": 1,
@@ -9514,10 +9514,10 @@
     "canHitFly": false,
     "targetPriority": null,
     "trait": {
-      "desc": "不成为其他角色的治疗目标，每次攻击到敌人后回复自身50生命（精英2后更新）",
-      "descRaw": "不成为其他角色的治疗目标，每次攻击到敌人后回复自身<@ba.kw>50</>生命（精英2后更新）",
+      "desc": "不成为其他角色的治疗目标，每次攻击到敌人后回复自身60生命（精英2后更新）",
+      "descRaw": "不成为其他角色的治疗目标，每次攻击到敌人后回复自身<@ba.kw>60</>生命（精英2后更新）",
       "bb": {
-        "value": 50
+        "value": 60
       },
       "bbStr": {},
       "rangeGrid": null
@@ -9527,8 +9527,8 @@
       "iconId": "skchr_akafuyu_1",
       "name": "信影流·雷刀之势",
       "level": 4,
-      "desc": "阻挡数变为0，攻击力+50%，攻击变为二连击",
-      "descRaw": "阻挡数变为<@ba.vup>0</>，攻击力<@ba.vup>+50%</>，攻击变为<@ba.vup>二连击</>",
+      "desc": "阻挡数变为0，攻击力+60%，攻击变为二连击",
+      "descRaw": "阻挡数变为<@ba.vup>0</>，攻击力<@ba.vup>+60%</>，攻击变为<@ba.vup>二连击</>",
       "skillType": "MANUAL",
       "durationType": "NONE",
       "duration": 12,
@@ -9559,10 +9559,10 @@
       {
         "index": 0,
         "name": "信影流·羽飞",
-        "desc": "在场时，自身获得最高+100攻击速度的坚忍（损失70%生命值时达到最大加成）",
-        "descRaw": "在场时，自身获得最高+100攻击速度的<$ba.berserk>坚忍</>（损失70%生命值时达到最大加成）",
+        "desc": "在场时，自身获得最高+120攻击速度的坚忍（损失70%生命值时达到最大加成）",
+        "descRaw": "在场时，自身获得最高+120攻击速度的<$ba.berserk>坚忍</>（损失70%生命值时达到最大加成）",
         "bb": {
-          "min_attack_speed": 100,
+          "min_attack_speed": 120,
           "min_hp_ratio": 0.3
         },
         "bbStr": {},
@@ -9595,8 +9595,8 @@
         "iconId": "skchr_akafuyu_1",
         "name": "信影流·雷刀之势",
         "level": 4,
-        "desc": "阻挡数变为0，攻击力+50%，攻击变为二连击",
-        "descRaw": "阻挡数变为<@ba.vup>0</>，攻击力<@ba.vup>+50%</>，攻击变为<@ba.vup>二连击</>",
+        "desc": "阻挡数变为0，攻击力+60%，攻击变为二连击",
+        "descRaw": "阻挡数变为<@ba.vup>0</>，攻击力<@ba.vup>+60%</>，攻击变为<@ba.vup>二连击</>",
         "skillType": "MANUAL",
         "durationType": "NONE",
         "duration": 12,
@@ -9606,7 +9606,7 @@
         "maxChargeTime": 1,
         "increment": 1,
         "bb": {
-          "atk": 0.5,
+          "atk": 0.6,
           "hits": 2,
           "block_cnt": 0
         },
@@ -9628,8 +9628,8 @@
         "iconId": "skchr_akafuyu_2",
         "name": "信影流·十文字胜",
         "level": 4,
-        "desc": "立即流失50%当前生命，获得一层护盾（技能结束后消失），攻击力+70%，防御力+90%",
-        "descRaw": "立即流失<@ba.vdown>50%</>当前生命，获得一层<$ba.shield>护盾</>（技能结束后消失），攻击力<@ba.vup>+70%</>，防御力<@ba.vup>+90%</>",
+        "desc": "立即流失50%当前生命，获得一层护盾（技能结束后消失），攻击力+84%，防御力+108%",
+        "descRaw": "立即流失<@ba.vdown>50%</>当前生命，获得一层<$ba.shield>护盾</>（技能结束后消失），攻击力<@ba.vup>+84%</>，防御力<@ba.vup>+108%</>",
         "skillType": "MANUAL",
         "durationType": "NONE",
         "duration": 20,
@@ -9639,8 +9639,8 @@
         "maxChargeTime": 1,
         "increment": 1,
         "bb": {
-          "atk": 0.7,
-          "def": 0.9,
+          "atk": 0.84,
+          "def": 1.08,
           "hp_ratio": 0.5,
           "shield": 1
         },
@@ -9659,9 +9659,9 @@
       }
     ],
     "statsBase": {
-      "maxHp": 2726,
-      "atk": 634,
-      "def": 333,
+      "maxHp": 3271,
+      "atk": 761,
+      "def": 400,
       "res": 0,
       "cost": 23,
       "blockCnt": 1,
@@ -9677,8 +9677,8 @@
       "respawnTime": 66
     },
     "traitBase": {
-      "desc": "不成为其他角色的治疗目标，每次攻击到敌人后回复自身50生命（精英2后更新）",
-      "descRaw": "不成为其他角色的治疗目标，每次攻击到敌人后回复自身<@ba.kw>50</>生命（精英2后更新）",
+      "desc": "不成为其他角色的治疗目标，每次攻击到敌人后回复自身60生命（精英2后更新）",
+      "descRaw": "不成为其他角色的治疗目标，每次攻击到敌人后回复自身<@ba.kw>60</>生命（精英2后更新）",
       "bb": {
         "value": 50
       },
@@ -9689,10 +9689,10 @@
       {
         "index": 0,
         "name": "信影流·羽飞",
-        "desc": "在场时，自身获得最高+100攻击速度的坚忍（损失70%生命值时达到最大加成）",
-        "descRaw": "在场时，自身获得最高+100攻击速度的<$ba.berserk>坚忍</>（损失70%生命值时达到最大加成）",
+        "desc": "在场时，自身获得最高+120攻击速度的坚忍（损失70%生命值时达到最大加成）",
+        "descRaw": "在场时，自身获得最高+120攻击速度的<$ba.berserk>坚忍</>（损失70%生命值时达到最大加成）",
         "bb": {
-          "min_attack_speed": 100,
+          "min_attack_speed": 120,
           "min_hp_ratio": 0.3
         },
         "bbStr": {},
@@ -9710,7 +9710,7 @@
         "stats.respawnTime": 70
       },
       "2": {
-        "stats.atk": 611
+        "stats.atk": 733
       },
       "3": {
         "stats.respawnTime": 62
@@ -9766,9 +9766,9 @@
       "equipLevel": 3
     },
     "stats": {
-      "maxHp": 3635,
-      "atk": 735,
-      "def": 411,
+      "maxHp": 4362,
+      "atk": 882,
+      "def": 493,
       "res": 0,
       "cost": 25,
       "blockCnt": 1,
@@ -9807,10 +9807,10 @@
     "canHitFly": false,
     "targetPriority": null,
     "trait": {
-      "desc": "不成为其他角色的治疗目标，每次攻击到敌人后回复自身70生命",
-      "descRaw": "不成为其他角色的治疗目标，每次攻击到敌人后回复自身<@ba.kw>70</>生命",
+      "desc": "不成为其他角色的治疗目标，每次攻击到敌人后回复自身84生命",
+      "descRaw": "不成为其他角色的治疗目标，每次攻击到敌人后回复自身<@ba.kw>84</>生命",
       "bb": {
-        "value": 70
+        "value": 84
       },
       "bbStr": {},
       "rangeGrid": null,
@@ -9822,8 +9822,8 @@
       "iconId": "skchr_akafuyu_1",
       "name": "信影流·雷刀之势",
       "level": 7,
-      "desc": "阻挡数变为0，攻击力+80%，攻击变为二连击",
-      "descRaw": "阻挡数变为<@ba.vup>0</>，攻击力<@ba.vup>+80%</>，攻击变为<@ba.vup>二连击</>",
+      "desc": "阻挡数变为0，攻击力+96%，攻击变为二连击",
+      "descRaw": "阻挡数变为<@ba.vup>0</>，攻击力<@ba.vup>+96%</>，攻击变为<@ba.vup>二连击</>",
       "skillType": "MANUAL",
       "durationType": "NONE",
       "duration": 12,
@@ -9854,10 +9854,10 @@
       {
         "index": 0,
         "name": "信影流·羽飞",
-        "desc": "在场时，自身获得最高+100攻击速度的坚忍（损失70%生命值时达到最大加成）",
-        "descRaw": "在场时，自身获得最高+100攻击速度的<$ba.berserk>坚忍</>（损失70%生命值时达到最大加成）",
+        "desc": "在场时，自身获得最高+120攻击速度的坚忍（损失70%生命值时达到最大加成）",
+        "descRaw": "在场时，自身获得最高+120攻击速度的<$ba.berserk>坚忍</>（损失70%生命值时达到最大加成）",
         "bb": {
-          "min_attack_speed": 100,
+          "min_attack_speed": 120,
           "min_hp_ratio": 0.3
         },
         "bbStr": {},
@@ -9869,10 +9869,10 @@
       {
         "index": 1,
         "name": "信影流·逆风",
-        "desc": "阻挡敌人时防御力+12%",
-        "descRaw": "阻挡敌人时防御力<@ba.vup>+12%</>",
+        "desc": "阻挡敌人时防御力+14.4%",
+        "descRaw": "阻挡敌人时防御力<@ba.vup>+14.4%</>",
         "bb": {
-          "def": 0.12
+          "def": 0.144
         },
         "bbStr": {},
         "rangeGrid": null,
@@ -9904,8 +9904,8 @@
         "iconId": "skchr_akafuyu_1",
         "name": "信影流·雷刀之势",
         "level": 7,
-        "desc": "阻挡数变为0，攻击力+80%，攻击变为二连击",
-        "descRaw": "阻挡数变为<@ba.vup>0</>，攻击力<@ba.vup>+80%</>，攻击变为<@ba.vup>二连击</>",
+        "desc": "阻挡数变为0，攻击力+96%，攻击变为二连击",
+        "descRaw": "阻挡数变为<@ba.vup>0</>，攻击力<@ba.vup>+96%</>，攻击变为<@ba.vup>二连击</>",
         "skillType": "MANUAL",
         "durationType": "NONE",
         "duration": 12,
@@ -9915,7 +9915,7 @@
         "maxChargeTime": 1,
         "increment": 1,
         "bb": {
-          "atk": 0.8,
+          "atk": 0.96,
           "hits": 2,
           "block_cnt": 0
         },
@@ -9937,8 +9937,8 @@
         "iconId": "skchr_akafuyu_2",
         "name": "信影流·十文字胜",
         "level": 7,
-        "desc": "立即流失50%当前生命，获得一层护盾（技能结束后消失），攻击力+100%，防御力+120%",
-        "descRaw": "立即流失<@ba.vdown>50%</>当前生命，获得一层<$ba.shield>护盾</>（技能结束后消失），攻击力<@ba.vup>+100%</>，防御力<@ba.vup>+120%</>",
+        "desc": "立即流失50%当前生命，获得一层护盾（技能结束后消失），攻击力+120%，防御力+144%",
+        "descRaw": "立即流失<@ba.vdown>50%</>当前生命，获得一层<$ba.shield>护盾</>（技能结束后消失），攻击力<@ba.vup>+120%</>，防御力<@ba.vup>+144%</>",
         "skillType": "MANUAL",
         "durationType": "NONE",
         "duration": 20,
@@ -9948,8 +9948,8 @@
         "maxChargeTime": 1,
         "increment": 1,
         "bb": {
-          "atk": 1,
-          "def": 1.2,
+          "atk": 1.2,
+          "def": 1.44,
           "hp_ratio": 0.5,
           "shield": 1
         },
@@ -9968,9 +9968,9 @@
       }
     ],
     "statsBase": {
-      "maxHp": 3635,
-      "atk": 665,
-      "def": 361,
+      "maxHp": 4362,
+      "atk": 798,
+      "def": 433,
       "res": 0,
       "cost": 25,
       "blockCnt": 1,
@@ -9986,8 +9986,8 @@
       "respawnTime": 70
     },
     "traitBase": {
-      "desc": "不成为其他角色的治疗目标，每次攻击到敌人后回复自身70生命",
-      "descRaw": "不成为其他角色的治疗目标，每次攻击到敌人后回复自身<@ba.kw>70</>生命",
+      "desc": "不成为其他角色的治疗目标，每次攻击到敌人后回复自身84生命",
+      "descRaw": "不成为其他角色的治疗目标，每次攻击到敌人后回复自身<@ba.kw>84</>生命",
       "bb": {
         "value": 70
       },
@@ -10000,10 +10000,10 @@
       {
         "index": 0,
         "name": "信影流·羽飞",
-        "desc": "在场时，自身获得最高+100攻击速度的坚忍（损失70%生命值时达到最大加成）",
-        "descRaw": "在场时，自身获得最高+100攻击速度的<$ba.berserk>坚忍</>（损失70%生命值时达到最大加成）",
+        "desc": "在场时，自身获得最高+120攻击速度的坚忍（损失70%生命值时达到最大加成）",
+        "descRaw": "在场时，自身获得最高+120攻击速度的<$ba.berserk>坚忍</>（损失70%生命值时达到最大加成）",
         "bb": {
-          "min_attack_speed": 100,
+          "min_attack_speed": 120,
           "min_hp_ratio": 0.3
         },
         "bbStr": {},
@@ -10015,10 +10015,10 @@
       {
         "index": 1,
         "name": "信影流·逆风",
-        "desc": "阻挡敌人时防御力+12%",
-        "descRaw": "阻挡敌人时防御力<@ba.vup>+12%</>",
+        "desc": "阻挡敌人时防御力+14.4%",
+        "descRaw": "阻挡敌人时防御力<@ba.vup>+14.4%</>",
         "bb": {
-          "def": 0.12
+          "def": 0.144
         },
         "bbStr": {},
         "rangeGrid": null,
@@ -10037,14 +10037,14 @@
         "isDefault": true,
         "level": 3,
         "attr": {
-          "atk": 70,
-          "def": 50
+          "atk": 84,
+          "def": 60
         },
         "traitOverride": {
-          "desc": "不成为其他角色的治疗目标，每次攻击到敌人后回复自身70生命",
-          "descRaw": "不成为其他角色的治疗目标，每次攻击到敌人后回复自身<@ba.kw>70</>生命",
+          "desc": "不成为其他角色的治疗目标，每次攻击到敌人后回复自身84生命",
+          "descRaw": "不成为其他角色的治疗目标，每次攻击到敌人后回复自身<@ba.kw>84</>生命",
           "bb": {
-            "value": 70
+            "value": 84
           },
           "bbStr": {},
           "rangeGrid": null,
@@ -10055,10 +10055,10 @@
           {
             "talentIndex": 1,
             "name": "信影流·逆风",
-            "desc": "阻挡敌人时防御力+12%",
-            "descRaw": "阻挡敌人时防御力<@ba.vup>+12%</>",
+            "desc": "阻挡敌人时防御力+14.4%",
+            "descRaw": "阻挡敌人时防御力<@ba.vup>+14.4%</>",
             "bb": {
-              "def": 0.12
+              "def": 0.144
             },
             "bbStr": {},
             "rangeGrid": null,
@@ -10088,7 +10088,7 @@
         "stats.respawnTime": 70
       },
       "2": {
-        "stats.atk": 712
+        "stats.atk": 854
       },
       "3": {
         "stats.respawnTime": 66
