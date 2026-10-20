@@ -2,21 +2,104 @@
 
 [《卫戍协议：盟约》](https://github.com/sganggs/Stronghold-Protocol)（网页版）非官方同人**工坊包** —— 为核心盟约【东】而做。
 
+**最新版本：1.2.29** · 下载见 [Releases](https://github.com/CLAPXO/-modpack/releases/latest)（`dongShip-1.2.29.zip`）· 本版改动见 [CHANGELOG-1.2.29.md](CHANGELOG-1.2.29.md)
+
+> ⚠ 本包是**工坊包**（放进 `app\workshop\`），**不是 `plugins\` 脚本插件**：不需要 `SP_PLUGIN_SCRIPTS`，也不需要"房间选中插件"。详见下面的「安装」。
+
 ## 适配版本
 
 | | |
 |---|---|
-| 引擎 | **Forge 0.18.3 – 0.18.4**（[Stronghold-Protocol-Forge](https://github.com/XiaMo233M/Stronghold-Protocol-Forge)）|
-| 游戏数据 | **0.2.5 – 0.2.6** |
-| 下载 Forge | [Forge Releases](https://github.com/XiaMo233M/Stronghold-Protocol-Forge/releases) · 本包实测过的版本：[`v0.18.4-0.2.6`](https://github.com/XiaMo233M/Stronghold-Protocol-Forge/releases/tag/v0.18.4-0.2.6) · [`v0.18.3-0.2.5`](https://github.com/XiaMo233M/Stronghold-Protocol-Forge/releases/tag/v0.18.3-0.2.5) |
+| 引擎 | **Forge 0.19.1**（[Stronghold-Protocol-Forge](https://github.com/XiaMo233M/Stronghold-Protocol-Forge)）|
+| 游戏数据 | **0.3.1** |
+| 下载 Forge | [Forge Releases](https://github.com/XiaMo233M/Stronghold-Protocol-Forge/releases) |
 | 包声明 | `api: ">=1 <2"`（模组 API = 1）· `game: "0.2.x"` · 层 B · **`combat: true`（会改变对局结果）** |
-| 实测 | 引擎校验器 `errors = 0`（VALID）· `tools/doctor.mjs` 正常 · `tools/check-imports.mjs` 无错 · `tools/sim-check.mjs` 267 场无头战斗跑通 · 16 个回归脚本全过 · 用 Forge 导入工具装进空工坊根通过 |
+| 引擎补丁 | **不需要**（本包不含 `server.meta`，用引擎内置键 + `server.modules`） |
+| 实测 | 引擎校验器 `0 error / VALID` · 20 个自检脚本全过 · 用 Forge 自带 `workshop-pack.mjs import` 装进空工坊根通过 · 装完起服务器 `modPacks = 1` |
 
 > 引擎升级后若加载器报 `MOD_API_INCOMPATIBLE`，说明模组 API 版本变了（当前为 1）。
 
+## 安装
+
+### 一、下载
+
+到 [Releases](https://github.com/CLAPXO/-modpack/releases) 下载 **`dongShip-1.2.29.zip`**（约 8.5 MB）。
+这个 zip 的**根目录就是包根**（`pack.json` 在最外层），可以直接被 Forge 的导入工具识别。
+
+### 二、装（三种方式，任选一种）
+
+**方式 A：编辑器导入（推荐）**
+
+1. 打开 Forge 编辑器；
+2. 「包管理」→「导入」→ 选中 `dongShip-1.2.29.zip`；
+3. 确认包是**启用**状态，然后重启服务器。
+
+**方式 B：`安装工坊包.bat`**
+
+把 zip 拖到 Forge 根目录的 `安装工坊包.bat` 上，或在命令行里：
+
+```bat
+cd /d <Forge 目录>
+node tools\workshop-pack.mjs import D:\路径\dongShip-1.2.29.zip
+```
+
+**方式 C：手动**
+
+解压后把里面的 `dongShip` 文件夹整个放到：
+
+```
+<Forge 目录>\app\workshop\dongShip\        ← pack.json 必须在这一层
+```
+
+然后重启服务器（`启动游戏.bat`）。
+
+> 云服务器升级：用仓库发布的**覆盖式更新包**解压到 Forge 的上一层目录即可（引擎与 mod 一起更新）。
+
+### 三、装完怎么验（30 秒）
+
+1. 服务器日志里出现：`[workshop] applied 1 pack(s): 东盟约(dongShip): bonds +1 ~8, chess +16 ~8, garrisons +19, items +2, 70 voice lines …`
+2. `http://<服务器>:3000/healthz` → `"app":"0.19.1"` 且 `"modPacks": 1`
+3. 游戏里：盟约一览能看到【东】（12 名成员 / 24 枚棋子），装备里能刷到「艺人见面抽选券」
+4. 想看数值：`/data/garrisons.json` 里黑角 `effectKey = "SERVER_POOL_CHAR"`、`bb = {"count":1,"check_count":4}`
+
+### 四、常见误解：这不是"脚本插件"，不需要 `SP_PLUGIN_SCRIPTS`
+
+> 有人在编辑器「**Forge 导入**」里装，然后反馈"脚本插件只在服主开启 `SP_PLUGIN_SCRIPTS=sandbox`（或受信任模式）并且房间选中它时才运行；导入时没有执行它"。
+
+那句话说的是 **`plugins/` 脚本插件**那条通道（「Forge 导入」会把包拆成插件），和本包无关：
+
+| 通道 | 本包用不用 | 要不要 `SP_PLUGIN_SCRIPTS` |
+|---|---|---|
+| 数据叠加层（`bonds/chess/garrisons/items`） | ✔ 用 | 不要 |
+| `server.battle`（【东】的追加攻击） | ✔ 用 | 不要 |
+| `server.modules`（黑角池子注入 + 抽选券的 `onSpend`） | ✔ 用 | 不要 |
+| `server.meta` | **不用**（1.2.26 起移除） | 不要 |
+| `plugins/`（脚本插件） | **不用** | 才需要 |
+
+- 工坊载荷（数据 / `server.battle` / `server.modules`）在 `server/index.js` 里是**无条件装载**的，不读 `SP_PLUGIN_SCRIPTS`；
+- 实测（进程里 `SP_PLUGIN_SCRIPTS` **未设置**）：包正常装载、黑角池子照常注入、抽选券花 15 金照常发 1 名【东】；
+- 所以只要 ① 包是**启用**状态（`var\mod-registry.json`）② 装完**重启服务器**，就会生效。
+- ⚠ **不要**用编辑器里的「Forge 导入」装本包 —— 那走的是插件通道。
+
+### 五、联机
+
+双方 `dongShip/pack.json` 里的 `version` 必须一致（本版 **1.2.29**）。
+
 ## 更新记录
 
-### 1.2.14（最新）
+### 1.2.29（最新）
+
+相对 1.2.21 的最终改动（完整清单见 [CHANGELOG-1.2.29.md](CHANGELOG-1.2.29.md)）：
+
+- **麒麟R夜刀**：移除【不屈】盟约（只剩【东】/【突袭】）；叠层上限 普通 **12** / 精锐 **24**（每次部署仍 +2 / +3）；
+- **白雪**：价格 → **2 金**；
+- **火龙S黑角**：**自身所在的那一排 ≥4 枚棋子** → 进入休整期获得 1 张【东】（精锐 2 张），等级不高于当前商店等级；
+- **艺人见面抽选券**（常驻装备）：每**消耗 15 资金**（精锐 **10**）→ 获得 1 名与携带者**已激活的盟约**相同的干员（≤当前调度中心等级）；与【变形同构体】同装时携带者视为【东】；
+- **安洁莉娜**：【东】特质改用引擎官方键；
+- 整包**不再包含 `server.meta`**，**不需要任何引擎补丁**；覆盖记录按数据 0.3.1 刷新。
+
+### 1.2.14（历史）
+
 
 **新增干员：赤冬**（`char_475_akafyu`，近卫 · 武者，东国）
 
@@ -63,12 +146,12 @@
 
 ### 核心盟约【东】
 
-- **13 名成员 / 24 枚棋子**（每名成员都有普通与精锐两版；精锐面板更高）；入口门槛 **3 名**、强化门槛 **6 名**不同【东】干员；
+- **12 名成员 / 24 枚棋子**（每名成员都有普通与精锐两版；精锐面板更高）；入口门槛 **3 名**、强化门槛 **6 名**不同【东】干员；
 - **效果一**：成员造成伤害时追加一次攻击，按目标弱点类型结算（物理 / 法术取更痛的那一种），
   **攻击力 × curve_k × 层数²**（`curve_k = 0.0000111111`）—— 300 层正好 100%；
 - **效果二**：在场 6 名不同【东】干员时，追加攻击同时积累目标的**神经损伤 30/次**（攒满触发官方神经爆发）。
 
-### 成员（13 名）
+### 成员（12 名）
 
 | 来源 | 干员 |
 |---|---|
@@ -84,12 +167,12 @@
 - **嵯峨**：【东】每叠加 3 层，本干员攻击力、生命值 +1.5%、攻击速度 +1（精锐 +3% / +2）
 - **赤冬**：【东】每叠加 3 层，本干员攻击力、生命值 +1.5%（普通与精锐同值）
 - **斩业星熊**：核心盟约每叠加 3 层，本干员攻击力和生命值 +1.5%
-- **麒麟R夜刀**：部署时使自身已激活的盟约层数 +2（每场作战至多 24；精锐 +3 / 至多 36）
-- **火龙S黑角**：进入休整期时，若棋盘上有 5 名以上【东】干员，获得 1 个等级不高于当前商店等级的【东】干员（精锐获得 2 个）
+- **麒麟R夜刀**：部署时使自身已激活的盟约层数 +2（每场作战至多 **12**；精锐 +3 / 至多 **24**）
+- **火龙S黑角**：进入休整期时，若**自身所在的那一排有 4 枚以上棋子**，获得 1 个等级不高于当前商店等级的【东】干员（精锐获得 2 个）
 
 ### 新装备
 
-- **艺人见面抽选券**（4 阶 · 3 金）：休整期结束时，使携带者**已激活的盟约层数 +2**（精锐 +3，每回合一次）；
+- **艺人见面抽选券**（4 阶 · 3 金，**常驻不销毁**）：每**消耗 15 资金**（精锐 **10**）→ 获得 1 名与携带者**已激活的盟约**相同的干员（不高于当前调度中心等级）；
 - 与「**变形同构体**」一同装备时，携带者**视为【东】盟约成员** —— 一件装备就能补上第 3 名东，或让非东干员吃满【东】的追加攻击。
 
 ### 干员模组
@@ -107,20 +190,6 @@
 - **7 条官方盟约的成员表已补全**：精准 · 远见 · 迅捷 · 助力 · 突袭 · 坚守 · 炎 —— 本包新增的干员在盟约界面里与官方成员一样可见；
 - **公告 8 节**：核心盟约 / 成员 / 棋子 / 专属特质 / 干员模组 / 新装备 / 默认技能 / 须知。
 
-## 怎么装
-
-1. 到 [Releases](https://github.com/CLAPXO/-modpack/releases) 下载 `dongShip-1.2.0.zip`；
-2. 把 zip **拖到 Forge 整合包根目录的 `安装工坊包.bat`** 上；或命令行：
-
-   ```bat
-   cd /d <Forge 目录>
-   node tools\workshop-pack.mjs import D:\tmp\dongShip-1.2.0.zip
-   ```
-
-   也可以手动解压：把 zip 里全部内容解到 `<Forge 目录>\app\workshop\dongShip\`（`pack.json` 必须在这一层）；
-3. 重启服务器（`启动游戏.bat`），浏览器 **Ctrl+Shift+R**。
-
-验收：`curl.exe -s http://127.0.0.1:3000/healthz` 里应有 `"modPacks":1`；游戏里盟约一览能看到【东】。
 
 ## 许可与素材
 
@@ -137,6 +206,6 @@
 - 游戏 Releases（整合包下载）：https://github.com/sganggs/Stronghold-Protocol/releases
 - Forge（引擎）：https://github.com/XiaMo233M/Stronghold-Protocol-Forge
 - Forge 版本下载：https://github.com/XiaMo233M/Stronghold-Protocol-Forge/releases
-- 本包实测所用 Forge 版本：https://github.com/XiaMo233M/Stronghold-Protocol-Forge/releases/tag/v0.18.3-0.2.5
+- 本包实测所用 Forge 版本：https://github.com/XiaMo233M/Stronghold-Protocol-Forge/releases
 - 工坊包仓库（Forge-Mods）：https://github.com/XiaMo233M/Stronghold-Protocol-Forge-Mods
 - 部署文档：https://github.com/XiaMo233M/Stronghold-Protocol-Forge/blob/main/docs/DEPLOY.md
