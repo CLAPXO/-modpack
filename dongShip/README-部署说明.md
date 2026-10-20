@@ -215,7 +215,7 @@ node tools\workshop-pack.mjs list                                        :: 应�
 | 【东】的追加攻击 / 神经损伤 | `server/battle/dong.mjs`（`pack.json.server.battle`） | 引擎的战场通道，**正常** |
 | 安洁莉娜的新增【东】特质（每刷新 1 次 → 已激活【东】+4/+8 层，上限 12/24） | `garrisons.json` 的 `SERVER_ADD_REFRESH_CNT_MULTIPLIER_BOND_LAYER` | 引擎**自带**的键（官方 `garrison_147_a` 同款），**纯数据、无依赖** |
 | 火龙S黑角的发牌（自身所在排 ≥4 枚棋子 → 每回合 1 张 / 精锐 2 张） | `server/meta/dong.mjs`（`pack.json.server.meta`） | 需要这一局装配出**包自己的 meta 注册表** |
-| 艺人见面抽选券（**常驻**：每消耗 15 资金 / 精锐 10 资金 → 抽一名【东】，≤商店等级；与【变形同构体】同装时携带者视为【东】） | `server/modules/dong.mjs` 在这一局注册表副本上装的 `onSpend` | 引擎没有 `onSpend` 的内置道具键 ⇒ 代码放在包的 `server.modules`（**不是 meta、不需要补丁**） |
+| 艺人见面抽选券（**常驻**：每消耗 15 资金 / 精锐 10 资金 → 抽一名与携带者**已激活盟约**相同的干员，≤商店等级；与【变形同构体】同装时携带者视为【东】） | `server/modules/dong.mjs` 在这一局注册表副本上装的 `onSpend` | 引擎没有 `onSpend` 的内置道具键 ⇒ 代码放在包的 `server.modules`（**不是 meta、不需要补丁**） |
 
 ### 7.1 已知上游问题（**本包已不再受影响**）
 

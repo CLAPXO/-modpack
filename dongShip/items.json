@@ -15,8 +15,8 @@
     "requiresBondId": null,
     "effectId": "eff_ws_artist_ticket",
     "effectName": "艺人见面抽选券",
-    "desc": "每消耗15资金，获得一个与携带者同盟约的干员（不高于当前调度中心等级）\n与【变形同构体】一同装备时，携带者视为【东】盟约成员",
-    "descRaw": "每消耗15资金，获得一个与携带者同盟约的干员（不高于当前调度中心等级）\n与【变形同构体】一同装备时，携带者视为【东】盟约成员",
+    "desc": "每消耗15资金，获得一个与携带者已激活的盟约相同的干员（不高于当前调度中心等级）\n与【变形同构体】一同装备时，携带者视为【东】盟约成员",
+    "descRaw": "每消耗15资金，获得一个与携带者已激活的盟约相同的干员（不高于当前调度中心等级）\n与【变形同构体】一同装备时，携带者视为【东】盟约成员",
     "buffs": [
       {
         "key": "custom_dong_ticket_spend",
@@ -33,8 +33,8 @@
     "category": "RECRUIT",
     "kind": "passive_player",
     "family": null,
-    "implFormula": "On every 15 funds spent (onSpend accumulated): grant 1 random chess sharing a bond with the carrier (tier <= shop level). Implemented by the pack's server.modules matchClass layer (registry fork + item:chess_item_ws_artist_ticket onSpend) — no server.meta, no engine edit.",
-    "note": "常驻装备；按\"消耗资金\"累计发放（15 金一张）；与【变形同构体】同装时携带者视为【东】。",
+    "implFormula": "On every 15 funds spent (onSpend accumulated): grant 1 random chess sharing an ACTIVATED bond of the carrier (tier <= shop level). Implemented by the pack's server.modules matchClass layer (registry fork + item:chess_item_ws_artist_ticket onSpend) — no server.meta, no engine edit.",
+    "note": "常驻装备；按\"消耗资金\"累计发放（15 金一张）；发放范围 = 携带者**已激活**的盟约；与【变形同构体】同装时携带者视为【东】。",
     "rangeGrid": [
       [
         0,
@@ -73,8 +73,8 @@
     "requiresBondId": null,
     "effectId": "eff_ws_artist_ticket",
     "effectName": "艺人见面抽选券",
-    "desc": "每消耗10资金，获得一个与携带者同盟约的干员（不高于当前调度中心等级）\n与【变形同构体】一同装备时，携带者视为【东】盟约成员",
-    "descRaw": "每消耗10资金，获得一个与携带者同盟约的干员（不高于当前调度中心等级）\n与【变形同构体】一同装备时，携带者视为【东】盟约成员",
+    "desc": "每消耗10资金，获得一个与携带者已激活的盟约相同的干员（不高于当前调度中心等级）\n与【变形同构体】一同装备时，携带者视为【东】盟约成员",
+    "descRaw": "每消耗10资金，获得一个与携带者已激活的盟约相同的干员（不高于当前调度中心等级）\n与【变形同构体】一同装备时，携带者视为【东】盟约成员",
     "buffs": [
       {
         "key": "custom_dong_ticket_spend",
@@ -91,8 +91,8 @@
     "category": "RECRUIT",
     "kind": "passive_player",
     "family": null,
-    "implFormula": "On every 10 funds spent (onSpend accumulated): grant 1 random chess sharing a bond with the carrier (tier <= shop level). Implemented by the pack's server.modules matchClass layer (registry fork + item:chess_item_ws_artist_ticket onSpend) — no server.meta, no engine edit.",
-    "note": "常驻装备；按\"消耗资金\"累计发放（10 金一张）；与【变形同构体】同装时携带者视为【东】。",
+    "implFormula": "On every 10 funds spent (onSpend accumulated): grant 1 random chess sharing an ACTIVATED bond of the carrier (tier <= shop level). Implemented by the pack's server.modules matchClass layer (registry fork + item:chess_item_ws_artist_ticket onSpend) — no server.meta, no engine edit.",
+    "note": "常驻装备；按\"消耗资金\"累计发放（10 金一张）；发放范围 = 携带者**已激活**的盟约；与【变形同构体】同装时携带者视为【东】。",
     "rangeGrid": [
       [
         0,

@@ -19,7 +19,6 @@ const POOL_ID = 'pool_char_dongShip';
 const POOL = Object.freeze({ kind: 'chess', bond: 'dongShip', maxTier: 'shopLevel', rule: 'shopEligible', assumed: true });
 const ITEM_KEY = 'item:chess_item_ws_artist_ticket';
 const TICKET_ID = 'chess_item_ws_artist_ticket_a';
-const DONG_BOND = 'dongShip';
 
 /** 与携带者"有相同盟约"的随机干员（引擎 rollSameBond 的同一口径，只是不 import）。 */
 function rollSameBond(ctx, bonds, maxTier) {
@@ -35,7 +34,7 @@ function rollSameBond(ctx, bonds, maxTier) {
 }
 
 const TICKET_HANDLER = {
-  /** <消耗资金时>每累计 params.gold 资金 → 获得 1 名与携带者同盟约的干员（等级不高于当前商店等级）。 */
+  /** <消耗资金时>每累计 params.gold 资金 → 获得 1 名与携带者**已激活**盟约相同的干员（等级不高于当前商店等级）。 */
   onSpend(ctx, ev) {
     const src = ctx.source || {};
     const rec = ctx.source && ctx.source.item ? ctx.gd.item(ctx.source.item.id) : null;
@@ -44,18 +43,18 @@ const TICKET_HANDLER = {
     if (!(need > 0) || !(amount > 0)) return;
     const uid = src.piece ? src.piece.uid : null;
     if (uid === null || uid === undefined) return;
+    // 发放范围 = 携带者**已激活**的盟约（没有已激活的盟约就不累计、不发放）
+    const holderUid = src.holder ? src.holder.uid : uid;
+    const bonds = (ctx.pieceBonds(holderUid) || []).filter((b) => ctx.bondActive(b));
+    if (!bonds.length) return;
+    const maxTier = Math.max(1, Math.min(6, ctx.shopLevel()));
     const key = 'dong_ticket_gold:' + uid;
     const spent = ctx.incCounter(key, amount);
     const times = Math.floor(spent / need);
     if (times <= 0) return;
     ctx.setCounter(key, spent - times * need);
-    const holderUid = src.holder ? src.holder.uid : uid;
-    const bonds = ctx.pieceBonds(holderUid);
-    const maxTier = Math.max(1, Math.min(6, ctx.shopLevel()));
-    // 东盟约的券：携带者算【东】时**只抽【东】**；否则退回引擎口径（与携带者任一盟约相同）
-    const preferDong = bonds.includes(DONG_BOND);
     for (let i = 0; i < Math.min(5, times); i++) {
-      const id = preferDong ? ctx.rollChess({ bond: DONG_BOND, maxTier }) : rollSameBond(ctx, bonds, maxTier);
+      const id = rollSameBond(ctx, bonds, maxTier);
       if (!id) return;
       if (!ctx.grantChess(id)) return;
     }
