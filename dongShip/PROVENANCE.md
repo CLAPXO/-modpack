@@ -136,6 +136,57 @@ node F:\wsxy\22\test-haruka-saga-modules.mjs # 遥 / 嵯峨 模组（默认 / �
 > ⚠️ **维护提示**：上游更新 `op-*.js` / `detmath.js` / `body.js` 时，这些内联副本**需要手工同步**。
 > 这是工坊白名单的直接代价，不是本包的选择。
 
+
+### 5.3 本轮（1.2.21，2026-10-18）：安洁莉娜改用引擎官方键；meta 依赖与上游 bug 写清楚
+
+| # | 1.2.20 的做法 | 1.2.21 的做法 | 为什么 |
+|---|---|---|---|
+| 35 | 安洁莉娜新增的【东】特质 `garrison_angelina_dong_a/_b` 由本包 `server/meta/dong.mjs` 的 `custom_dong_refresh_layers` 实现（自定义 effectKey） | `effectKey` / `effectType` 都改成引擎自带的 **`SERVER_ADD_REFRESH_CNT_MULTIPLIER_BOND_LAYER`**（官方 `garrison_147_a/_b` 用的就是它），`bb` / `bbStr` / `desc` 一个字没动；`pack.json.server.meta.registers` 去掉该键，模块里那段处理器删除 | ① 行为逐条相同（`refreshes × multiplier`，`max_layer` 封顶，`requireActiveOf(desc)` 读"已激活"）；② **纯数据 ⇒ 不依赖 `server.meta` 通道**，即使遇到下面那个上游 bug 也照常生效；③ 少一处自定义代码 = 少一处可能被上游改坏的地方 |
+| 36 | 黑角发牌 `custom_dong_prep_pool`、艺人见面抽选券 `item:chess_item_ws_artist_ticket` 都走 `server.meta` | 保持 `server.meta`（引擎没有等价能力），但把依赖与规避写进文件头、公告与 README | 黑角要的条件是"全场 5 名【东】"：引擎的 `rowCondition` 只认 `character_same_row`（同行人数）/ `character_target_inboard`，其余无条件；`SERVER_POOL_CHAR` 还需要 `choices.json` 的池子，而包的 `choices.json` 是按 id 的记录表、**加不了 `pools`**（实测合并后仍是官方 16 个池）。抽选券要"每回合给层"，引擎的内置道具键里给层的只有 `use_equip_reward_char_chess_bond_layer`，钩子是 `onEquip`（一次性） |
+| 37 | — | 记录**上游 bug**：`app/server/lobby.js` 在"房间声明了 mod 集合"时执行 `metaModules.filter((m) => roomIds.has(m.pack))`，而 `loadMetaModules()` 产出的对象字段是 `id`（无 `pack`）⇒ `roomIds` 非空时**所有包的 meta 模块被滤光**，`roomRegistry = null`，对局退回官方默认注册表，处理器不存在（表现为"特质不触发"、无任何报错） | 修法一行：`roomIds.has(m.pack)` → `roomIds.has(m.id)`（与同文件 `battleInstallers` 那处一致）。规避：建房时不声明 mod 集合；或用已修该行的 Forge。补丁与复现步骤见 `F:\wsxy\22\上游bug-lobby\` |
+
+### 5.4 本轮（1.2.22–1.2.24，2026-10-18）：黑角门槛改为「本排 ≥4 枚」、白雪 2 金、夜刀调整
+
+| # | 改前 | 改后 | 为什么 |
+|---|---|---|---|
+| 38 | 黑角：门槛 = 棋盘上 5 枚【东】棋子（数盟约成员），发 1 / 精锐 2 | 门槛 = **黑角所在那一排的棋子数 ≥ 4**（照引擎 `sameRowCount` 口径：只数棋盘 chess，token / 备战席 / 另一排不算）；发 `bb.count` 个（1 / 2），等级 ≤ 当前商店等级 | 作者定稿的新设计：门槛看"排"，【东】只决定**发给谁**。位置取 `ctx.piece(uid)`（在棋盘上才带 row/col），无位置即不触发 |
+| 39 | 黑角 `bbStr = { bond: "dongShip" }` | `bbStr = { bond: "dongShip", conditionkey: "character_target_inboard" }` | 让派发器按官方语义**跳过备战席**（与官方 `character_target_inboard` 一致），避免"备战席里的黑角也在数排" |
+| 40 | 白雪 `price: 1` | `price: 2`（`sellPrice` 保持 1） | 作者定稿；官方 `price=2` 的单位一律 `sellPrice=1` |
+| 41 | 夜刀 `bonds = [dongShip, raidShip, indomShip]`；叠层上限 24 / 36 | 去掉 `indomShip`（连同 `bonds.json` 的 `indomShip.members/visibleMembers`）；上限 **12 / 24** | 作者定稿；文字同步"每场作战至多 12 / 24 层" |
+
+另：本轮把 1.2.21 里误带的 7 个 `.tune-backup/` 调参备份从包里清掉（包内文件数 236 → 229）。
+
+### 5.5 本轮（1.2.25，2026-10-20）：黑角改成歌蕾蒂娅同款内置键 + matchClass 注入池子
+
+| # | 改前（1.2.24） | 改后 | 为什么 |
+|---|---|---|---|
+| 42 | 黑角用自己的 meta 处理器 `custom_dong_prep_pool`（自算"本排 ≥4 枚"） | `effectKey/effectType = SERVER_POOL_CHAR`（引擎内置，歌蕾蒂娅/焰尾同款）；`bb { count, check_count: 4 }`、`bbStr { pool: "pool_char_dongShip", conditionkey: "character_same_row" }` | 门槛/取牌都能用引擎现成的实现：`rowCondition` 的同行计数 + 池子的 `bond`/`maxTier: shopLevel`；`bb.count` 给 1 / 2 |
+| 43 | 池子无从提供（包加不了 `choices.pools`） | 新增 `server.modules`（`server/modules/pool.mjs`，`uses: ["matchClass"]`）：在**这一局**的 `data.choices.pools` 浅拷贝注入 `pool_char_dongShip`；没装本包的房间原样 `return super(opts)` | 不改引擎、不动进程级数据；`matchClass` 是 DESIGN §28.14 给包的正式挂载点（要求 `combat: true`） |
+| 44 | `server.meta.registers` = [黑角, 抽选券] | 只剩 [抽选券] | 黑角与安洁莉娜都走内置键；抽选券仍需要 meta（引擎没有"每回合给层"的内置道具键） |
+
+### 5.6 本轮（1.2.26，2026-10-20）：抽选券改纯数据；整包不再有 server.meta
+
+| # | 改前（1.2.25） | 改后 | 为什么 |
+|---|---|---|---|
+| 45 | 抽选券：meta 处理器 `item:chess_item_ws_artist_ticket`，每休整期结束 +2/3 层 | 纯数据：`buffs` = `use_equip_reward_special_goods_char_chess {refresh_cnt:3, choice_cnt:1}` + `equip_destory_gain_random_coin {min:1,max:2}`；`kind: consume_on_equip`、`category: RECRUIT` | 引擎没有"每回合给层"的内置道具键 ⇒ 那个效果必须 meta（于是必须打 lobby 补丁）；换成两个**都内置**的键之后不再依赖 meta。引擎的 `mergeHandlers` 会把同一条记录上的多个 buff 各跑一次，所以这是一件**组合效果**：没有官方装备同时给"三选一同盟约"和"返还资金" |
+| 46 | 包里有 `server.meta`（黑角早期版本也用过） | `pack.json.server` 只剩 `battle` + `modules`；删除 `server/meta/` | 既然三件效果全部走引擎内置键，meta 通道就是纯负担（还会被上游 bug 打掉） |
+| 47 | 抽选券 `giveBondId: "dongShip"`（常驻装备，配合变形同构体可授予【东】） | 改为 `consume_on_equip`、`giveBondId: null` | 装备即销毁，"常驻授予盟约"不再成立；描述与数据同步 |
+
+### 5.7 本轮（1.2.27，2026-10-20）：抽选券恢复常驻；效果换成「出售计数抽人」
+
+| # | 改前（1.2.26） | 改后 | 为什么 |
+|---|---|---|---|
+| 48 | 抽选券 `kind: consume_on_equip`（装备即销毁），`giveBondId: null`；效果=三选一 + 返钱 | `kind: passive_player`、`duration: -1`（**常驻不销毁**），`giveBondId: "dongShip"`（**保留与【变形同构体】配对授予【东】**）；效果=引擎内置键 `sell_char_count_gain_equip_owner_bond {count: 5}` | 业主：装备必须常驻，才能保留"与变形同构体同装 → 携带者视为【东】"这条。引擎里**常驻型**道具键只有两个（出售计数抽人 / 战斗后变形），后者是《突变细胞》的机制且会替换掉携带者、与变形同构体冲突 ⇒ 选前者 |
+| 49 | — | 门槛 5 次出售（官方《商业包装方案》是 8 / 精锐 7） | 同一机制里给本件一个更低的门槛，靠"授予盟约那一半"与本包语境区分；数据里只有 `count` 一个数字可调 |
+
+### 5.8 本轮（1.2.28，2026-10-20）：抽选券改成「每消耗资金」触发
+
+| # | 改前（1.2.27） | 改后 | 为什么 |
+|---|---|---|---|
+| 50 | 抽选券：引擎内置键 `sell_char_count_gain_equip_owner_bond {count: 5}`（每出售 5 名干员抽 1 名） | 改成「每**消耗 15 资金**（精锐 10）抽 1 名」：数据侧 `buffs[].key = custom_dong_ticket_spend`、`params.gold = 15 / 10`；行为由 `server/modules/dong.mjs` 在这一局注册表副本上注册的 `item:chess_item_ws_artist_ticket.onSpend` 实现 | 引擎内置道具键里**没有 onSpend**（20 个键全是 onEquip/onSold/onArt/onBattleResult/onBuy），所以"按消耗资金"只能自己写；放进 `server.modules` 就不需要 `server.meta`，也就不受 lobby 那个 bug 影响 |
+| 51 | — | 携带者算【东】时**只抽【东】**（否则退回引擎口径"与携带者任一盟约相同"） | 这是东盟约的券，用户期望发的是【东】；官方口径会把 deputShip/raidShip 的干员也抽进来。代码里 `preferDong = bonds.includes('dongShip')` |
+| 52 | — | 计数器按**每件道具实例**（`dong_ticket_gold:<uid>`）累计，跨多次消费保留余数 | 消费是零散的（买 2/3/4 金），"每 15 金一张"必须累计；按实例计数避免两张券互相打乱节奏 |
+
 ## 6. 自带素材来源（逐条）
 
 ### 6.1 清点 —— ⚠️ **本包含《明日方舟》官方游戏素材**

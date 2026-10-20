@@ -1,14 +1,14 @@
-# 东盟约（dongShip）v1.2.0 —— 部署说明（包内副本）
+# 东盟约（dongShip）v1.2.21 —— 部署说明（包内副本）
 
 一个可以直接拿到**别人的服务器**上用 Forge 装上就跑的完整工坊包（不需要改引擎、不需要额外素材）。
 
 | | |
 |---|---|
 | 包 id / 名称 | `dongShip` / **东盟约** |
-| 版本 | `1.2.0`（`pack.json` 的 `version`） |
-| 发布件 | `dong-pack-v1.2.zip`（zip 根就是包根，192 个文件 / 6.69 MB）；另有 `dong-pack-v1.2-repo.zip`（外面套一层 `dongShip/`） |
+| 版本 | `1.2.21`（`pack.json` 的 `version`） |
+| 发布件 | `dongShip-1.2.21.zip`（zip 根就是包根，236 个文件 / 8.6 MB） |
 | 哈希 / 指纹 | 见包内 `PROVENANCE.md`（发布件内容指纹）与发放时一起附的那份说明（zip 的 sha256） |
-| 引擎 | 卫戍协议：盟约 **v0.17.0**（`pack.json` 声明 `game: "0.2.x"`、`api: ">=1 <2"`、`combat: true`） |
+| 引擎 | Forge **0.19.0**（上游 **0.3.0**；`pack.json` 声明 `api: ">=1 <2"`、`combat: true`） |
 | 实测 | 在**全新工作坊目录**里导入 → 与源包**逐字节一致**；`workshop-validate` **0 error / VALID**；另起一台服务器（`PORT=3001` + `SP_WORKSHOP` 指向刚导入的目录）实测：`modPacks=1`，道具图标 / 语音 / Spine / 立绘 / 盟约图标 / 公告全部 200 |
 
 ---
@@ -205,8 +205,50 @@ node tools\workshop-pack.mjs list                                        :: 应�
 | 干员显示菱形占位 | `art` 没生效：确认 zip 完整（`assets\spine\**`）并已重启 |
 | 端口被占用 | 先 `-Stop`（或关掉前台窗口）再启动；换端口用 `-Port 8080` |
 | 路径带空格 / 中文 | 命令里加引号；安装目录尽量用 `C:\Stronghold-Protocol` 这种短路径 |
-## 六、须知（三件小事）
+
+## 七、这套实现依赖什么（重要）
+
+包里有**两种**实现路径，它们对引擎的要求不同：
+
+| 内容 | 实现位置 | 依赖 |
+|---|---|---|
+| 【东】的追加攻击 / 神经损伤 | `server/battle/dong.mjs`（`pack.json.server.battle`） | 引擎的战场通道，**正常** |
+| 安洁莉娜的新增【东】特质（每刷新 1 次 → 已激活【东】+4/+8 层，上限 12/24） | `garrisons.json` 的 `SERVER_ADD_REFRESH_CNT_MULTIPLIER_BOND_LAYER` | 引擎**自带**的键（官方 `garrison_147_a` 同款），**纯数据、无依赖** |
+| 火龙S黑角的发牌（自身所在排 ≥4 枚棋子 → 每回合 1 张 / 精锐 2 张） | `server/meta/dong.mjs`（`pack.json.server.meta`） | 需要这一局装配出**包自己的 meta 注册表** |
+| 艺人见面抽选券（**常驻**：每消耗 15 资金 / 精锐 10 资金 → 抽一名【东】，≤商店等级；与【变形同构体】同装时携带者视为【东】） | `server/modules/dong.mjs` 在这一局注册表副本上装的 `onSpend` | 引擎没有 `onSpend` 的内置道具键 ⇒ 代码放在包的 `server.modules`（**不是 meta、不需要补丁**） |
+
+### 7.1 已知上游问题（**本包已不再受影响**）
+
+Forge **0.19.0 / 0.19.1** 的 `app/server/lobby.js`（约 2340 行）在"房间声明了 mod 集合"时用
+`roomIds.has(m.pack)` 过滤 `server.meta` 模块，而模块对象的字段是 `id` —— 于是**所有包**的 meta 处理器
+都会被滤掉（`roomRegistry = null`，不报错）。
+
+**东盟约 1.2.26 起完全不含 `server.meta`**：黑角用引擎内置的 `SERVER_POOL_CHAR`（池子由 `server.modules`
+的 `matchClass` 包装注入）、安洁莉娜用官方的 `SERVER_ADD_REFRESH_CNT_MULTIPLIER_BOND_LAYER`、抽选券用两个
+内置道具键 —— 所以**这个 bug 对本包没有任何影响**，不需要补丁、也不需要"建房不声明 mod 集合"。
+
+（若你的服还装了别的走 meta 的包，它们仍会受这个 bug 影响；那一行修法依旧是 `m.pack` → `m.id`。）
+
+### 7.2 三件效果分别靠什么做到"不改引擎"
+
+| 内容 | 通道 |
+|---|---|
+| 【东】追加攻击 | `server.battle`（战场模块） |
+| 安洁莉娜加层 | 引擎内置键 `SERVER_ADD_REFRESH_CNT_MULTIPLIER_BOND_LAYER`（纯数据） |
+| 黑角发牌 | 引擎内置键 `SERVER_POOL_CHAR` + `server.modules` 在这一局的 `data.choices.pools` 里注入池子 |
+| 抽选券 | `server.modules` 在这一局的**注册表副本**上注册 `item:…` 的 `onSpend`（引擎没有 onSpend 的内置道具键） |
+
+两条 `server.modules` 的改动都只作用于**这一局**（浅拷贝 data / `registry.fork()`），没装本包的房间原样交给 Base。
+
+### 7.3 装完怎么确认哪条生效了
+
+1. `http://<host>:3000/healthz` 的 `modPacks` ≥ 1；
+2. 看 `/data/bonds.json` 里 `dongShip.bb` 的数值（正式版 `curve_k 0.0000111111`，特制版 `0.000025`）；
+3. 安洁莉娜 + 黑角 + 抽选券：**任何房间**都该生效（全部走引擎内置键）；
+4. 黑角 / 安洁莉娜 / 抽选券：全部是引擎内置键，**任何房间都生效**（与是否声明 mod 集合无关）。
+
+## 八、须知（三件小事）
 
 1. **不需要改引擎**：所有数据、行为脚本、素材都在包内；素材走引擎既有的 `/workshop-assets` 路由，客户端零改动。
-2. **校验器会报 8 条 `VOICE_UNKNOWN_OPERATOR`**（"这行永远播不出来"）—— 那是**工具的误报**：它拿 charId 去和"棋子 id 集合"比较，对任何包都成立不了。包里这 4 名干员的语音是**包自带**的（`pack.json` 的 `voices` / `voiceLangs`），实测中文与日文都能取到并播放（`/workshop-assets/dongShip/voice/<charId>/{jp,cn}/…` → 200 `audio/mpeg`）。其余 52 条警告是包内联 kits 的 bb 键（由 kits 自己读）与本包覆盖官方棋子记录时的既有项。
+2. **校验器会报 10 条 `VOICE_UNKNOWN_OPERATOR`**（"这行永远播不出来"）—— 那是**工具的误报**：它拿 charId 去和"棋子 id 集合"比较，对任何包都成立不了。包里这 5 名干员的语音是**包自带**的（`pack.json` 的 `voices` / `voiceLangs`），合并后 `assets.audio.voice` / `voiceLangs.cn` 都含这 5 个 charId（实测能播）。其余 52 条警告 = 45 条 `BB_UNKNOWN_KEY`（由 kits 自己读的 bb 键）+ 4 条 `CLASS_OVERRIDE`（本包刻意写的）+ 2 条 `TRIGGER_CUSTOM`（夜刀的 PASSIVE 技能）+ 1 条 `BAD_LEVEL`（赤冬证章模组 level=0），全是既有项、不影响加载。
 3. **版权**：随包的游戏素材（Spine、立绘、头像、技能图标、语音）版权归**上海鹰角网络科技有限公司 / Yostar 及其授权方**所有，本包为**非商业同人**内容，不主张任何权利；请勿用于售卖、付费分发、收费开服、广告、打赏等任何商业场景。细节见包内 `PROVENANCE.md` §6.3。

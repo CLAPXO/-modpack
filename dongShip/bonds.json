@@ -963,8 +963,7 @@
       "chess_char_4_07_a",
       "chess_char_5_06_a",
       "chess_char_5_13_a",
-      "chess_char_6_06_a",
-      "chess_char_9_yato_a"
+      "chess_char_6_06_a"
     ],
     "visibleMembers": [
       "chess_char_1_20_a",
@@ -973,8 +972,7 @@
       "chess_char_4_07_a",
       "chess_char_5_06_a",
       "chess_char_5_13_a",
-      "chess_char_6_06_a",
-      "chess_char_9_yato_a"
+      "chess_char_6_06_a"
     ],
     "spec": {
       "tiers": [
@@ -1050,22 +1048,22 @@
     "perStackParams": [],
     "members": [
       "chess_char_1_08_a",
+      "chess_char_1_21_a",
       "chess_char_2_17_a",
       "chess_char_3_17_a",
       "chess_char_4_09_a",
       "chess_char_4_18_a",
       "chess_char_5_11_a",
-      "chess_char_1_21_a",
       "chess_char_9_akafuyu_a"
     ],
     "visibleMembers": [
       "chess_char_1_08_a",
+      "chess_char_1_21_a",
       "chess_char_2_17_a",
       "chess_char_3_17_a",
       "chess_char_4_09_a",
       "chess_char_4_18_a",
       "chess_char_5_11_a",
-      "chess_char_1_21_a",
       "chess_char_9_akafuyu_a"
     ],
     "spec": {

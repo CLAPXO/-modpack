@@ -35,7 +35,7 @@
     "garrisonIds": [
       "garrison_yuki_a"
     ],
-    "price": 1,
+    "price": 2,
     "sellPrice": 1,
     "upgradeNum": 3,
     "upgradeChessId": "chess_char_1_21_b",
@@ -541,7 +541,7 @@
     "garrisonIds": [
       "garrison_yuki_b"
     ],
-    "price": 1,
+    "price": 2,
     "sellPrice": 1,
     "upgradeNum": 0,
     "upgradeChessId": null,
@@ -5286,8 +5286,7 @@
     "nationId": "higashi",
     "bonds": [
       "dongShip",
-      "raidShip",
-      "indomShip"
+      "raidShip"
     ],
     "garrisonIds": [
       "garrison_yato_dong_a"
@@ -5569,8 +5568,7 @@
     "nationId": "higashi",
     "bonds": [
       "dongShip",
-      "raidShip",
-      "indomShip"
+      "raidShip"
     ],
     "garrisonIds": [
       "garrison_yato_dong_b"
@@ -8479,7 +8477,8 @@
           "bbStr": {},
           "rangeGrid": null,
           "moduleDesc": "在集成战略中，在场时全场敌人重量额外-1",
-          "moduleDescRaw": "在<@ba.kw>集成战略</>中，在场时全场敌人重量额外-1"
+          "moduleDescRaw": "在<@ba.kw>集成战略</>中，在场时全场敌人重量额外-1",
+          "modeOnly": true
         },
         "talentChanges": [
           {
