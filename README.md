@@ -2,7 +2,7 @@
 
 [《卫戍协议：盟约》](https://github.com/sganggs/Stronghold-Protocol)（网页版）非官方同人**工坊包** —— 为核心盟约【东】而做。
 
-**最新版本：1.2.29** · 下载见 [Releases](https://github.com/CLAPXO/-modpack/releases/latest)（`dongShip-1.2.29.zip`）· 本版改动见 [CHANGELOG-1.2.29.md](CHANGELOG-1.2.29.md)
+**最新版本：1.2.30** · 下载见 [Releases](https://github.com/CLAPXO/-modpack/releases/latest)（`dongShip-1.2.30.zip`）· 本版改动见 [CHANGELOG-1.2.30.md](CHANGELOG-1.2.30.md)
 
 > ⚠ 本包是**工坊包**（放进 `app\workshop\`），**不是 `plugins\` 脚本插件**：不需要 `SP_PLUGIN_SCRIPTS`，也不需要"房间选中插件"。详见下面的「安装」。
 
@@ -23,7 +23,7 @@
 
 ### 一、下载
 
-到 [Releases](https://github.com/CLAPXO/-modpack/releases) 下载 **`dongShip-1.2.29.zip`**（约 8.5 MB）。
+到 [Releases](https://github.com/CLAPXO/-modpack/releases) 下载 **`dongShip-1.2.30.zip`**（约 8.5 MB）。
 这个 zip 的**根目录就是包根**（`pack.json` 在最外层），可以直接被 Forge 的导入工具识别。
 
 ### 二、装（三种方式，任选一种）
@@ -31,7 +31,7 @@
 **方式 A：编辑器导入（推荐）**
 
 1. 打开 Forge 编辑器；
-2. 「包管理」→「导入」→ 选中 `dongShip-1.2.29.zip`；
+2. 「包管理」→「导入」→ 选中 `dongShip-1.2.30.zip`；
 3. 确认包是**启用**状态，然后重启服务器。
 
 **方式 B：`安装工坊包.bat`**
@@ -83,16 +83,16 @@ node tools\workshop-pack.mjs import D:\路径\dongShip-1.2.29.zip
 
 ### 五、联机
 
-双方 `dongShip/pack.json` 里的 `version` 必须一致（本版 **1.2.29**）。
+双方 `dongShip/pack.json` 里的 `version` 必须一致（本版 **1.2.30**）。
 
 ## 更新记录
 
-### 1.2.29（最新）
+### 1.2.30（最新）
 
-相对 1.2.21 的最终改动（完整清单见 [CHANGELOG-1.2.29.md](CHANGELOG-1.2.29.md)）：
+相对 1.2.21 的最终改动（完整清单见 [CHANGELOG-1.2.30.md](CHANGELOG-1.2.30.md)）：
 
 - **麒麟R夜刀**：移除【不屈】盟约（只剩【东】/【突袭】）；叠层上限 普通 **12** / 精锐 **24**（每次部署仍 +2 / +3）；
-- **白雪**：价格 → **2 金**；
+- **白雪**：价格 → **3 金**；
 - **火龙S黑角**：**自身所在的那一排 ≥4 枚棋子** → 进入休整期获得 1 张【东】（精锐 2 张），等级不高于当前商店等级；
 - **艺人见面抽选券**（常驻装备）：每**消耗 15 资金**（精锐 **10**）→ 获得 1 名与携带者**已激活的盟约**相同的干员（≤当前调度中心等级）；与【变形同构体】同装时携带者视为【东】；
 - **安洁莉娜**：【东】特质改用引擎官方键；
