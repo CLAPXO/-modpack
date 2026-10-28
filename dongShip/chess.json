@@ -35,7 +35,7 @@
     "garrisonIds": [
       "garrison_yuki_a"
     ],
-    "price": 2,
+    "price": 3,
     "sellPrice": 1,
     "upgradeNum": 3,
     "upgradeChessId": "chess_char_1_21_b",
@@ -541,7 +541,7 @@
     "garrisonIds": [
       "garrison_yuki_b"
     ],
-    "price": 2,
+    "price": 3,
     "sellPrice": 1,
     "upgradeNum": 0,
     "upgradeChessId": null,
