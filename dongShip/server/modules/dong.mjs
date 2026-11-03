@@ -18,15 +18,6 @@
 const POOL_ID = 'pool_char_dongShip';
 const POOL = Object.freeze({ kind: 'chess', bond: 'dongShip', maxTier: 'shopLevel', rule: 'shopEligible', assumed: true });
 const ITEM_KEY = 'item:chess_item_ws_artist_ticket';
-// 潘格尼尼【定制铳械】的池子：6 名 4 阶以上【拉特兰】底座，权重一律 1（平分），不再按池子份数加权
-const LATER_POOL = 'pool_char_later';
-const LATER_EQUAL_POOL = Object.freeze({
-  kind: 'chess', golden: true,
-  weighted: Object.freeze([
-    ['chess_char_4_01_a', 1], ['chess_char_4_02_a', 1], ['chess_char_5_01_a', 1],
-    ['chess_char_6_01_a', 1], ['chess_char_6_09_a', 1], ['chess_char_6_13_a', 1],
-  ].map((x) => Object.freeze(x))),
-});
 const TICKET_ID = 'chess_item_ws_artist_ticket_a';
 
 /** 与携带者"有相同盟约"的随机干员（引擎 rollSameBond 的同一口径，只是不 import）。 */
@@ -79,10 +70,9 @@ export function registerServer(host) {
       const ours = data && data.chess && data.chess['chess_char_2_noirc2_a'];
       // 没装本包的房间：原样交给 Base（与没有这个模块逐字节相同）
       if (!pools || !ours) return super(opts);
-      // ① 【东】的池子 ③ 潘格尼尼的池子（平分权重）——都只在这一局生效
+      // ① 【东】的池子（只在这一局生效）
       const nextPools = { ...pools };
       if (!Object.prototype.hasOwnProperty.call(nextPools, POOL_ID)) nextPools[POOL_ID] = POOL;
-      if (nextPools[LATER_POOL]) nextPools[LATER_POOL] = LATER_EQUAL_POOL;
       const patched = { ...data, choices: { ...choices, pools: nextPools } };
       super(patched === data ? opts : { ...opts, data: patched });
 
