@@ -204,6 +204,18 @@ node F:\wsxy\22\test-haruka-saga-modules.mjs # 遥 / 嵯峨 模组（默认 / �
 
 1.2.31 曾在包内把 `pool_char_later` 换成 6 名平分；**1.2.32 撤回**，本包不再改动官方分队。该改动改以独立补丁形式提供（纯净版补丁，见交付目录）。
 
+### 5.12 本轮（1.2.33，2026-11-04）：麒麟R夜刀 S2 / S3 打不到正前方
+
+业主反馈：夜刀用二、三技能时面前的怪完全不掉血。用引擎自带的 battle harness 跑真战斗复现出三个问题：
+
+| # | 问题 | 根因 | 修法 |
+|---|---|---|---|
+| 57 | S2 乱舞一个敌人都打不到 | kit 用 `u.fwd` 算"前方一格"，但战斗单位上只有 `dir`（`'UP'\|`'RIGHT'`\|`'DOWN'`\|`'LEFT'`，前向量 `[dRow, dCol]`，见 `server/sim/dir.js`）⇒ 永远按"上一行"取格 | 新增 `DIR_VEC` / `dirVecOf(u)`，`frontTile(u, k)` 用 `dir` 算（x = 列，y = 行） |
+| 58 | S2 连技能都不放 | 数据里 S2 是 `PASSIVE`，kit 声明 `kind:'instant'` 却没写 `activateOnDeploy` ⇒ 引擎不会自动触发 | 加 `activateOnDeploy: true, spCost: 0, spType:'none', trigger:'NEVER'`（与 S1 同口径） |
+| 59 | S3 一刀都打不出 | S3 把伤害挂在"点弹道"（只给 `to`、没有 `target`）的 `onHit` 上；`server/sim/projectiles.js` 对点弹道传 `ctx.target = null` ⇒ 守卫直接 return | 改成沿朝向**逐格扫**（每格 `foesInRadius` 半径 0.9，每个敌人只结算一次），命中延长突进距离；弹道只留作视觉 |
+
+回归测试：新增 `test-yato-skills-battle.mjs`（真战斗，7 条断言：S2/S3 正面命中、背后不误伤、朝 UP 也对；S1 对照组）。
+
 ## 6. 自带素材来源（逐条）
 
 ### 6.1 清点 —— ⚠️ **本包含《明日方舟》官方游戏素材**

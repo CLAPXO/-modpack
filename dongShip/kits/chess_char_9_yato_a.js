@@ -94,10 +94,13 @@ function build(bb, chess, def) {
       // S2 乱舞：瞬发，对前方一格所有敌人 16 次斩击；攻击倍率提升；期间更容易被攻击
       [S2]: {
         kind: 'instant',
+        // 数据里 S2 是 PASSIVE（部署即结算一次）：必须显式 activateOnDeploy，否则引擎不会自己放技能
+        activateOnDeploy: true,
+        spCost: 0, spType: 'none', trigger: 'NEVER',
         onStart({ battle, unit }) {
           battle.addBuff(unit, { key: 'yato2:s2:taunt', duration: 2.5, mods: { tauntLevel: s2Taunt }, tags: ['skill'], source: unit });
           const f = frontTile(unit);
-          const foes = battle.foesInRadius(f.x, f.y, 0.6, true).filter((e) => e && e.alive && e.side === 'enemy');
+          const foes = battle.foesInRadius(f.x, f.y, 0.75, true).filter((e) => e && e.alive && e.side === 'enemy');
           for (let i = 0; i < s2Hits; i++) {
             battle.after(i * 0.06, () => {
               if (!unit.alive) return;
@@ -141,10 +144,14 @@ function build(bb, chess, def) {
   };
 }
 
-/** 干员正前方一格 */
-function frontTile(u) {
-  const f = u.fwd || [1, 0];
-  return { x: u.x + f[1], y: u.y + f[0] };
+/** 四方向的前向量 [dRow, dCol]（server/sim/dir.js 的 DIR_VEC；单位上只有 dir 字符串，没有 fwd） */
+const DIR_VEC = { UP: [1, 0], RIGHT: [0, 1], DOWN: [-1, 0], LEFT: [0, -1] };
+const dirVecOf = (u) => DIR_VEC[(u && u.dir) || 'RIGHT'] || DIR_VEC.RIGHT;
+
+/** 干员正前方第 k 格（x = 列，y = 行，与引擎一致） */
+function frontTile(u, k = 1) {
+  const [dr, dc] = dirVecOf(u);
+  return { x: u.x + dc * k, y: u.y + dr * k };
 }
 
 // =====================================================================
@@ -238,35 +245,43 @@ function run(battle, unit, opt, KEYS) {
     battle.addBuff(unit, { key: KEYS.invuln, flags: { invulnerable: true, unblockable: true }, tags: ['skill'], source: unit });
     battle.fx('vanish', { x: unit.x, y: unit.y, id: unit.id });
 
-    // ③ 弹道
-    const f = unit.fwd || [1, 0];
-    const dirR = f[0], dirC = f[1];
+    // ③ 突进斩：沿朝向逐格推进，每格对周围敌人各结算一次。
+    //    注意：点弹道（只给 to、不给 target）到达时 ctx.target 恒为 null，不能靠 onHit 打伤害。
+    const [dirR, dirC] = dirVecOf(unit);
     const hitIds = new Set();
     let thrust = opt.s3Base;
-
-    battle.addProjectile({
-      from: unit,
-      to: { x: unit.x + dirC * (opt.s3Base + 1), y: unit.y + dirR * (opt.s3Base + 1) },
-      source: unit,
-      visual: 'bolt',
-      speed: S3_SPEED,
-      maxAge: opt.flight,
-      onHit({ target }) {
-        if (!target || target.side !== 'enemy' || hitIds.has(target.id)) return;
-        hitIds.add(target.id);
-        battle.dealDamage(unit, target, {
+    let step = 0;
+    const SLASH_R = 0.9;              // 每格斩击半径（格）
+    const sweep = () => {
+      if (!unit.alive) return;
+      step += 1;
+      const px = unit.x + dirC * step, py = unit.y + dirR * step;
+      battle.fx('slash', { x: px, y: py, id: unit.id });
+      for (const e of battle.foesInRadius(px, py, SLASH_R, true)) {
+        if (!e || !e.alive || e.side !== 'enemy' || hitIds.has(e.id)) continue;
+        hitIds.add(e.id);
+        battle.dealDamage(unit, e, {
           amount: unit.s.atk * opt.s3Scale, type: 'phys', canDodge: false, isSkill: true,
           tags: ['skill', 'yato2:s3'],
         });
         // "攻击倍率同时应用于第一天赋"
-        battle.dealDamage(unit, target, {
+        battle.dealDamage(unit, e, {
           amount: unit.s.atk * opt.artsScale * opt.s3Scale, type: 'arts', canDodge: false, isSkill: true,
           tags: [TAG_ARTS, 'yato2:s3'],
         });
         thrust = Math.min(opt.s3Max, thrust + THRUST_PER_HIT);
-      },
-    });
+      }
+      // 突进距离随命中延长（最多 s3Max 格）
+      if (step < Math.min(opt.s3Max, Math.ceil(thrust))) battle.after(1 / S3_SPEED, sweep);
+    };
+    battle.after(1 / S3_SPEED, sweep);
 
+    // 纯视觉：一颗飞向最远点的光球（不负责伤害）
+    battle.addProjectile({
+      from: unit,
+      to: { x: unit.x + dirC * (opt.s3Base + 1), y: unit.y + dirR * (opt.s3Base + 1) },
+      source: unit, visual: 'bolt', speed: S3_SPEED, maxAge: opt.flight,
+    });
     // ④ 弹道结束 → 现身
     battle.after(opt.flight, () => {
       if (!unit.alive) return;
